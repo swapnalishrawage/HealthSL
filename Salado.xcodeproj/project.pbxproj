@@ -1,0 +1,543 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3255D7581ECC4FB800FEE2CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3255D7571ECC4FB800FEE2CA /* AppDelegate.swift */; };
+		3255D75A1ECC4FB800FEE2CA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3255D7591ECC4FB800FEE2CA /* ViewController.swift */; };
+		3255D75D1ECC4FB800FEE2CA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3255D75B1ECC4FB800FEE2CA /* Main.storyboard */; };
+		3255D7601ECC4FB800FEE2CA /* Salado.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3255D75E1ECC4FB800FEE2CA /* Salado.xcdatamodeld */; };
+		3255D7621ECC4FB800FEE2CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3255D7611ECC4FB800FEE2CA /* Assets.xcassets */; };
+		3255D7651ECC4FB800FEE2CA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3255D7631ECC4FB800FEE2CA /* LaunchScreen.storyboard */; };
+		3255D7701ECC4FB800FEE2CA /* SaladoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3255D76F1ECC4FB800FEE2CA /* SaladoTests.swift */; };
+		3255D77B1ECC4FB800FEE2CA /* SaladoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3255D77A1ECC4FB800FEE2CA /* SaladoUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3255D76C1ECC4FB800FEE2CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3255D74C1ECC4FB800FEE2CA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3255D7531ECC4FB800FEE2CA;
+			remoteInfo = Salado;
+		};
+		3255D7771ECC4FB800FEE2CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3255D74C1ECC4FB800FEE2CA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3255D7531ECC4FB800FEE2CA;
+			remoteInfo = Salado;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3255D7541ECC4FB800FEE2CA /* Salado.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Salado.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3255D7571ECC4FB800FEE2CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3255D7591ECC4FB800FEE2CA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3255D75C1ECC4FB800FEE2CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3255D75F1ECC4FB800FEE2CA /* Salado.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Salado.xcdatamodel; sourceTree = "<group>"; };
+		3255D7611ECC4FB800FEE2CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3255D7641ECC4FB800FEE2CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3255D7661ECC4FB800FEE2CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3255D76B1ECC4FB800FEE2CA /* SaladoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SaladoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3255D76F1ECC4FB800FEE2CA /* SaladoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaladoTests.swift; sourceTree = "<group>"; };
+		3255D7711ECC4FB800FEE2CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3255D7761ECC4FB800FEE2CA /* SaladoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SaladoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3255D77A1ECC4FB800FEE2CA /* SaladoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaladoUITests.swift; sourceTree = "<group>"; };
+		3255D77C1ECC4FB800FEE2CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3255D7511ECC4FB800FEE2CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3255D7681ECC4FB800FEE2CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3255D7731ECC4FB800FEE2CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3255D74B1ECC4FB800FEE2CA = {
+			isa = PBXGroup;
+			children = (
+				3255D7561ECC4FB800FEE2CA /* Salado */,
+				3255D76E1ECC4FB800FEE2CA /* SaladoTests */,
+				3255D7791ECC4FB800FEE2CA /* SaladoUITests */,
+				3255D7551ECC4FB800FEE2CA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3255D7551ECC4FB800FEE2CA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3255D7541ECC4FB800FEE2CA /* Salado.app */,
+				3255D76B1ECC4FB800FEE2CA /* SaladoTests.xctest */,
+				3255D7761ECC4FB800FEE2CA /* SaladoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3255D7561ECC4FB800FEE2CA /* Salado */ = {
+			isa = PBXGroup;
+			children = (
+				3255D7571ECC4FB800FEE2CA /* AppDelegate.swift */,
+				3255D7591ECC4FB800FEE2CA /* ViewController.swift */,
+				3255D75B1ECC4FB800FEE2CA /* Main.storyboard */,
+				3255D7611ECC4FB800FEE2CA /* Assets.xcassets */,
+				3255D7631ECC4FB800FEE2CA /* LaunchScreen.storyboard */,
+				3255D7661ECC4FB800FEE2CA /* Info.plist */,
+				3255D75E1ECC4FB800FEE2CA /* Salado.xcdatamodeld */,
+			);
+			path = Salado;
+			sourceTree = "<group>";
+		};
+		3255D76E1ECC4FB800FEE2CA /* SaladoTests */ = {
+			isa = PBXGroup;
+			children = (
+				3255D76F1ECC4FB800FEE2CA /* SaladoTests.swift */,
+				3255D7711ECC4FB800FEE2CA /* Info.plist */,
+			);
+			path = SaladoTests;
+			sourceTree = "<group>";
+		};
+		3255D7791ECC4FB800FEE2CA /* SaladoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				3255D77A1ECC4FB800FEE2CA /* SaladoUITests.swift */,
+				3255D77C1ECC4FB800FEE2CA /* Info.plist */,
+			);
+			path = SaladoUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3255D7531ECC4FB800FEE2CA /* Salado */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3255D77F1ECC4FB800FEE2CA /* Build configuration list for PBXNativeTarget "Salado" */;
+			buildPhases = (
+				3255D7501ECC4FB800FEE2CA /* Sources */,
+				3255D7511ECC4FB800FEE2CA /* Frameworks */,
+				3255D7521ECC4FB800FEE2CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Salado;
+			productName = Salado;
+			productReference = 3255D7541ECC4FB800FEE2CA /* Salado.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3255D76A1ECC4FB800FEE2CA /* SaladoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3255D7821ECC4FB800FEE2CA /* Build configuration list for PBXNativeTarget "SaladoTests" */;
+			buildPhases = (
+				3255D7671ECC4FB800FEE2CA /* Sources */,
+				3255D7681ECC4FB800FEE2CA /* Frameworks */,
+				3255D7691ECC4FB800FEE2CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3255D76D1ECC4FB800FEE2CA /* PBXTargetDependency */,
+			);
+			name = SaladoTests;
+			productName = SaladoTests;
+			productReference = 3255D76B1ECC4FB800FEE2CA /* SaladoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		3255D7751ECC4FB800FEE2CA /* SaladoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3255D7851ECC4FB800FEE2CA /* Build configuration list for PBXNativeTarget "SaladoUITests" */;
+			buildPhases = (
+				3255D7721ECC4FB800FEE2CA /* Sources */,
+				3255D7731ECC4FB800FEE2CA /* Frameworks */,
+				3255D7741ECC4FB800FEE2CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3255D7781ECC4FB800FEE2CA /* PBXTargetDependency */,
+			);
+			name = SaladoUITests;
+			productName = SaladoUITests;
+			productReference = 3255D7761ECC4FB800FEE2CA /* SaladoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3255D74C1ECC4FB800FEE2CA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = Rz;
+				TargetAttributes = {
+					3255D7531ECC4FB800FEE2CA = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+					3255D76A1ECC4FB800FEE2CA = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 3255D7531ECC4FB800FEE2CA;
+					};
+					3255D7751ECC4FB800FEE2CA = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 3255D7531ECC4FB800FEE2CA;
+					};
+				};
+			};
+			buildConfigurationList = 3255D74F1ECC4FB800FEE2CA /* Build configuration list for PBXProject "Salado" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3255D74B1ECC4FB800FEE2CA;
+			productRefGroup = 3255D7551ECC4FB800FEE2CA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3255D7531ECC4FB800FEE2CA /* Salado */,
+				3255D76A1ECC4FB800FEE2CA /* SaladoTests */,
+				3255D7751ECC4FB800FEE2CA /* SaladoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3255D7521ECC4FB800FEE2CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3255D7651ECC4FB800FEE2CA /* LaunchScreen.storyboard in Resources */,
+				3255D7621ECC4FB800FEE2CA /* Assets.xcassets in Resources */,
+				3255D75D1ECC4FB800FEE2CA /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3255D7691ECC4FB800FEE2CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3255D7741ECC4FB800FEE2CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3255D7501ECC4FB800FEE2CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3255D75A1ECC4FB800FEE2CA /* ViewController.swift in Sources */,
+				3255D7601ECC4FB800FEE2CA /* Salado.xcdatamodeld in Sources */,
+				3255D7581ECC4FB800FEE2CA /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3255D7671ECC4FB800FEE2CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3255D7701ECC4FB800FEE2CA /* SaladoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3255D7721ECC4FB800FEE2CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3255D77B1ECC4FB800FEE2CA /* SaladoUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3255D76D1ECC4FB800FEE2CA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3255D7531ECC4FB800FEE2CA /* Salado */;
+			targetProxy = 3255D76C1ECC4FB800FEE2CA /* PBXContainerItemProxy */;
+		};
+		3255D7781ECC4FB800FEE2CA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3255D7531ECC4FB800FEE2CA /* Salado */;
+			targetProxy = 3255D7771ECC4FB800FEE2CA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		3255D75B1ECC4FB800FEE2CA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3255D75C1ECC4FB800FEE2CA /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3255D7631ECC4FB800FEE2CA /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3255D7641ECC4FB800FEE2CA /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3255D77D1ECC4FB800FEE2CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		3255D77E1ECC4FB800FEE2CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3255D7801ECC4FB800FEE2CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Salado/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.realizertech.com.Salado;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		3255D7811ECC4FB800FEE2CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Salado/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.realizertech.com.Salado;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		3255D7831ECC4FB800FEE2CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = SaladoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.realizertech.com.SaladoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Salado.app/Salado";
+			};
+			name = Debug;
+		};
+		3255D7841ECC4FB800FEE2CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = SaladoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.realizertech.com.SaladoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Salado.app/Salado";
+			};
+			name = Release;
+		};
+		3255D7861ECC4FB800FEE2CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = SaladoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.realizertech.com.SaladoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = Salado;
+			};
+			name = Debug;
+		};
+		3255D7871ECC4FB800FEE2CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = SaladoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.realizertech.com.SaladoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = Salado;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3255D74F1ECC4FB800FEE2CA /* Build configuration list for PBXProject "Salado" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3255D77D1ECC4FB800FEE2CA /* Debug */,
+				3255D77E1ECC4FB800FEE2CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3255D77F1ECC4FB800FEE2CA /* Build configuration list for PBXNativeTarget "Salado" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3255D7801ECC4FB800FEE2CA /* Debug */,
+				3255D7811ECC4FB800FEE2CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		3255D7821ECC4FB800FEE2CA /* Build configuration list for PBXNativeTarget "SaladoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3255D7831ECC4FB800FEE2CA /* Debug */,
+				3255D7841ECC4FB800FEE2CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		3255D7851ECC4FB800FEE2CA /* Build configuration list for PBXNativeTarget "SaladoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3255D7861ECC4FB800FEE2CA /* Debug */,
+				3255D7871ECC4FB800FEE2CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3255D75E1ECC4FB800FEE2CA /* Salado.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3255D75F1ECC4FB800FEE2CA /* Salado.xcdatamodel */,
+			);
+			currentVersion = 3255D75F1ECC4FB800FEE2CA /* Salado.xcdatamodel */;
+			path = Salado.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 3255D74C1ECC4FB800FEE2CA /* Project object */;
+}
