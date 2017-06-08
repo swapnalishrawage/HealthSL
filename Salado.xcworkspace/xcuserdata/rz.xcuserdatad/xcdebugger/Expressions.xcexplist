@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "CrashDetailVC.(retrivedishes() -&gt; ()).(closure #1):CrashDetailVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "d">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MenuItemVC.(retrivedishes() -&gt; ()).(closure #1):MenuItemVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self._dishContent">
+            </PersistentString>
+            <PersistentString
+               value = "  self._dishIngredients">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ListOfDoctersVC.(retrivedetitiandata() -&gt; ()).(closure #1).(closure #1):ListOfDoctersVC.swift">
+      </ContextState>
+      <ContextState
+         contextName = "BookAppoitmentVC.collectionView(UICollectionView, cellForItemAt : IndexPath) -&gt; UICollectionViewCell:BookAppoitmentVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "slot">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "sample.init(map : Map) -&gt; sample?:sample.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "slot">
+            </PersistentString>
+            <PersistentString
+               value = "userId">
+            </PersistentString>
+            <PersistentString
+               value = "doctorId">
+            </PersistentString>
+            <PersistentString
+               value = "date">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "BookAppoitmentVC.viewDidLoad() -&gt; ():BookAppoitmentVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "date1">
+            </PersistentString>
+            <PersistentString
+               value = "time">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "StartDietVC.tableView(UITableView, didSelectRowAt : IndexPath) -&gt; ():StartDietVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "stdiet.programdays">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MenuItemVC.collectionView(UICollectionView, cellForItemAt : IndexPath) -&gt; UICollectionViewCell:MenuItemVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "m.count">
+            </PersistentString>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.(Loginclick(Any) -&gt; ()).(closure #3):LoginVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self._email">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MenuItemVC.clickonstepper(sender : UIStepper) -&gt; ():MenuItemVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "m._dishId">
+            </PersistentString>
+            <PersistentString
+               value = "value">
+            </PersistentString>
+            <PersistentString
+               value = "dishdata">
+            </PersistentString>
+            <PersistentString
+               value = "total">
+            </PersistentString>
+            <PersistentString
+               value = "cell.stepper.value">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ListOfDoctersVC.(getdoctorAvalability(ID : String) -&gt; ()).(closure #1):ListOfDoctersVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "docava">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CrashDetailVC.tableView(UITableView, cellForRowAt : IndexPath) -&gt; UITableViewCell:CrashDetailVC.swift">
+      </ContextState>
+      <ContextState
+         contextName = "orderDetail.tableView(UITableView, cellForRowAt : IndexPath) -&gt; UITableViewCell:orderDetail.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ListOfDoctersVC.retrivedetitiandata() -&gt; ():ListOfDoctersVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = " self._docid">
+            </PersistentString>
+            <PersistentString
+               value = "self._exper">
+            </PersistentString>
+            <PersistentString
+               value = "self._docdetaildes">
+            </PersistentString>
+            <PersistentString
+               value = "self._docthumb">
+            </PersistentString>
+            <PersistentString
+               value = "self._docfees">
+            </PersistentString>
+            <PersistentString
+               value = " self._docname">
+            </PersistentString>
+            <PersistentString
+               value = "self._docdes">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "StartDietVC.(retrivestandardDietprogram() -&gt; ()).(closure #1):StartDietVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "startdiet">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "sample.mapping(map : Map) -&gt; ():sample.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "slot">
+            </PersistentString>
+            <PersistentString
+               value = "userId">
+            </PersistentString>
+            <PersistentString
+               value = "doctorId">
+            </PersistentString>
+            <PersistentString
+               value = "date">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "orderDetail.viewDidLoad() -&gt; ():orderDetail.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "OrderMenu">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MyAccountVC.(getuserdata() -&gt; ()).(closure #1):MyAccountVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self._email">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MenuItemVC.orderclick(Any) -&gt; ():MenuItemVC.swift">
+      </ContextState>
+      <ContextState
+         contextName = "StartDietVC.tableView(UITableView, cellForRowAt : IndexPath) -&gt; UITableViewCell:StartDietVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "stdiet.count">
+            </PersistentString>
+            <PersistentString
+               value = "startdiet.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "BookAppoitmentVC.makeslot(start1 : String, end1 : String) -&gt; ():BookAppoitmentVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "slot">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ListOfDoctersVC.(getdoctorlocation(ID : String) -&gt; ()).(closure #1):ListOfDoctersVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "doclocation.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ListOfDoctersVC.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:ListOfDoctersVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "medicalpanel.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "orderDetail.clickonstepper(sender : UIStepper) -&gt; ():orderDetail.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "price0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "specialized _fatalErrorMessage(StaticString, StaticString, StaticString, UInt, flags : UInt32) -&gt; Never:(null)">
+         <PersistentStrings>
+            <PersistentString
+               value = "self._docfees">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ListOfDoctersVC.(retrivedetitiandata() -&gt; ()).(closure #1):ListOfDoctersVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "docava">
+            </PersistentString>
+            <PersistentString
+               value = "self._exper">
+            </PersistentString>
+            <PersistentString
+               value = "docava.count">
+            </PersistentString>
+            <PersistentString
+               value = "medicalpanel.count">
+            </PersistentString>
+            <PersistentString
+               value = "t.value">
+            </PersistentString>
+            <PersistentString
+               value = " doclocation">
+            </PersistentString>
+            <PersistentString
+               value = "self._docfees">
+            </PersistentString>
+            <PersistentString
+               value = "docholidays">
+            </PersistentString>
+            <PersistentString
+               value = "mp.value">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ListOfDoctersVC.(getdoctorAvalability(id : String) -&gt; ()).(closure #1):ListOfDoctersVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "docholidays.count">
+            </PersistentString>
+            <PersistentString
+               value = "id">
+            </PersistentString>
+            <PersistentString
+               value = "docava">
+            </PersistentString>
+            <PersistentString
+               value = "docava.count">
+            </PersistentString>
+            <PersistentString
+               value = "doclocation">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ListOfDoctersVC.tableView(UITableView, cellForRowAt : IndexPath) -&gt; UITableViewCell:ListOfDoctersVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "doct._doctorId">
+            </PersistentString>
+            <PersistentString
+               value = "docava">
+            </PersistentString>
+            <PersistentString
+               value = "dacava">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "BookAppoitmentVC.collectionView(UICollectionView, didSelectItemAt : IndexPath) -&gt; ():BookAppoitmentVC.swift">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

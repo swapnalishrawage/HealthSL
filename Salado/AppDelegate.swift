@@ -8,19 +8,227 @@
 
 import UIKit
 import CoreData
-
+import FBSDKCoreKit
+import FBSDKCoreKit
+import Firebase
+import FirebaseCore
+import FirebaseMessaging
+import FirebaseMessaging
+import FBSDKLoginKit
+import GGLSignIn
+import Google
+import GoogleSignIn
+import GoogleToolboxForMac
+import IQKeyboardManagerSwift
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate  {
 
     var window: UIWindow?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let navigationBarAppearace = UINavigationBar.appearance()
+        
+        navigationBarAppearace.tintColor = UIColor.white
+        navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
+        
+
+        IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.sharedManager().enableAutoToolbar=false
+
+           
+        
+            let nav:UINavigationController=UINavigationController.init()
+
+        //first time login
+        
+        let isUserLoggedIn:Bool = UserDefaults.standard.bool(forKey: "ISLOGGEDIN")
+       
+        print(isUserLoggedIn)
+        if(isUserLoggedIn==true) {
+            
+  
+          
+            
+            let mainstorybord:UIStoryboard=UIStoryboard(name: "Main", bundle: nil)
+            let des=mainstorybord.instantiateViewController(withIdentifier: "DashboardVC") as! DashboardVC
+            
+            
+            
+            
+            let protectedPageNav = UINavigationController(rootViewController: des)
+            protectedPageNav.navigationBar.tintColor=UIColor.white
+            protectedPageNav.navigationBar.barTintColor=UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1)
+            
+            self.window?.rootViewController = protectedPageNav
+            
+            
+        }
+        else {
+            let mainstorybord:UIStoryboard=UIStoryboard(name: "Main", bundle: nil)
+            let des=mainstorybord.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+         nav.pushViewController(des, animated: true)
+            
+        }
+        
+
+        
+        
+        
+        
+        
+        
+        //facebook
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        FIRApp.configure()
+        
+                FIRDatabase.database().persistenceEnabled = true
+        
+        
+        let all0 = FIRDatabase.database().reference(withPath:"User")
+        all0.keepSynced(true)
+        
+                let all = FIRDatabase.database().reference(withPath:"OrderFood")
+                all.keepSynced(true)
+        
+        
+        
+        let all2 = FIRDatabase.database().reference(withPath:"DoctorAppintments")
+              all2.keepSynced(true)
+        
+        
+        let all3 = FIRDatabase.database().reference(withPath:"Dish")
+               all3.keepSynced(true)
+        
+        let all4 = FIRDatabase.database().reference(withPath:"MedicalPanelData")
+           all4.keepSynced(true)
+
+        
+        let all1 = FIRDatabase.database().reference(withPath:"StandardDietProgram")
+                all1.keepSynced(true)
+        
+        
+        //gmail 
+        var configureError: NSError?
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        
+       // GIDSignIn.sharedInstance().clientID="524319677684-e2eo103dg1pr76h3nmc0bjfli7rugnu1.apps.googleusercontent.com"//FIRApp.defaultApp()?.options.clientID
+        GIDSignIn.sharedInstance().delegate = self
+        
+         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
+        
+
+
         return true
     }
+    func application(_ application: UIApplication,
+                      open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        return GIDSignIn.sharedInstance().handle(url,
+                                                    sourceApplication: sourceApplication,
+                                                    annotation: annotation)
+    }
+    
 
-    func applicationWillResignActive(_ application: UIApplication) {
+    
+    
+    
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if (error == nil) {
+            // Perform any operations on signed in user here.
+            //let userId = user.userID                  // For client-side use only!
+            //let idToken = user.authentication.idToken // Safe to send to the server
+            let name = user.profile.name
+            //let email = user.profile.email
+            
+            print("User name \(name)")
+            
+            
+            // [START_EXCLUDE]
+            NotificationCenter.default.post(
+                name: Notification.Name(rawValue: "ToggleAuthUINotification"),
+                object: nil,
+                userInfo: ["statusText": "Signed in user:\n\(name)"])
+            
+            
+            
+            
+            // [END_EXCLUDE]
+            
+            
+//            let mainstorybord:UIStoryboard=UIStoryboard(name: "Main", bundle: nil)
+//            let des=mainstorybord.instantiateViewController(withIdentifier: "DashboardVC") as! DashboardVC
+//            
+//            
+//            
+//            
+//            let protectedPageNav = UINavigationController(rootViewController: des)
+//            
+//            self.window?.rootViewController = protectedPageNav
+            
+            
+//            
+        } else {
+            print("\(error.localizedDescription)")
+            // [START_EXCLUDE silent]
+            NotificationCenter.default.post(
+                name: Notification.Name(rawValue: "ToggleAuthUINotification"), object: nil, userInfo: nil)
+            // [END_EXCLUDE]
+        }
+    }
+//    func signIn(_ signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!,
+//                withError error: NSError!) {
+//        if (error == nil) {
+//            // Perform any operations on signed in user here.
+//            //let userId = user.userID                  // For client-side use only!
+//            //let idToken = user.authentication.idToken // Safe to send to the server
+//            let name = user.profile.name
+//            //let email = user.profile.email
+//            
+//            print("User name \(name)")
+//            
+//            
+//            // [START_EXCLUDE]
+//            NotificationCenter.default.post(
+//                name: Notification.Name(rawValue: "ToggleAuthUINotification"),
+//                object: nil,
+//                userInfo: ["statusText": "Signed in user:\n\(name)"])
+//            
+//            
+//            
+//  
+//            // [END_EXCLUDE]
+//            
+//            
+//            let mainstorybord:UIStoryboard=UIStoryboard(name: "Main", bundle: nil)
+//            let des=mainstorybord.instantiateViewController(withIdentifier: "DashboardVC") as! DashboardVC
+//            
+//            
+//     
+//            
+//            let protectedPageNav = UINavigationController(rootViewController: des)
+//            
+//            self.window?.rootViewController = protectedPageNav
+//            
+//        } else {
+//            print("\(error.localizedDescription)")
+//            // [START_EXCLUDE silent]
+//            NotificationCenter.default.post(
+//                name: Notification.Name(rawValue: "ToggleAuthUINotification"), object: nil, userInfo: nil)
+//            // [END_EXCLUDE]
+//        }
+//    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        NotificationCenter.default.post(
+            name: Notification.Name(rawValue: "ToggleAuthUINotification"),
+            object: nil,
+            userInfo: ["statusText": "User has disconnected."])
+    }
+   func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
     }
@@ -36,6 +244,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+        
+        FBSDKAppEvents.activateApp()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -43,8 +254,52 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
     }
+    
+    
+    func applicationWillTerminate(application: UIApplication)
+    {
+        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        
+        let loginManager: FBSDKLoginManager = FBSDKLoginManager()
+        loginManager.logOut()
+    }
+    
+    
+    
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool
+    {
+        return FBSDKApplicationDelegate.sharedInstance().application(application, open: url as URL!, sourceApplication: sourceApplication, annotation: annotation)
+    }
 
-    // MARK: - Core Data stack
+  
+    
+
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        return GIDSignIn.sharedInstance().handle(url as URL!,
+                                                          sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
+                                                           annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+    }
+    
+    
+    
+//    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!,
+//              withError error: Error!) {
+//        // Perform any operations when the user disconnects from app here.
+//        // [START_EXCLUDE]
+//        NotificationCenter.default.post(
+//            name: Notification.Name(rawValue: "ToggleAuthUINotification"),
+//            object: nil,
+//            userInfo: ["statusText": "User has disconnected."])
+//        // [END_EXCLUDE]
+//    }
+    
+
+    
+
+    
+       // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {
         /*
