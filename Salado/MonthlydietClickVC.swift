@@ -79,14 +79,7 @@ class MonthlydietClickVC: UIViewController {
     }
     
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let destination=segue.destination as? ListOfDoctersVC{
-//            if let doc=sender as?  Docterdetail{
-//                print("open")
-//                destination.DoctDetail=doc
-//            }
-//        }
-//    }
+
     @IBAction func BackClick(_ sender: Any) {
        self.dismiss(animated: true, completion: nil)
         

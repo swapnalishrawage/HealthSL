@@ -106,8 +106,6 @@ class doctorAvalabilities:FIRDataSnapshot{
         }
     }
     
-    
-    
     init(_avaEn2Time:String,_avaEndTime:String,_avaStart2Time:String,_avaStartTime:String,_doctorId0:String,_locationId:String,_weekDayEnd:String,_weekDayStart:String)
     {
         availableEn2Time=_avaEn2Time

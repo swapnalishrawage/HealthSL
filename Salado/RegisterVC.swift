@@ -175,7 +175,7 @@ class RegisterVC: UIViewController {
             let cancelAction = UIAlertAction(title: "Ok", style: .default, handler:{
                 action in
                 
-                //self.dismiss(animated: true, completion: nil)
+              
                 
                 
             })

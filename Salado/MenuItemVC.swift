@@ -133,8 +133,7 @@ d.removeAll()
     cell.stepper.isHidden=false
         
        
-        
-//        let t = NSString(string: cell.lblprice.text!).doubleValue
+
        
         let m1=Int(cell.stepper.value) as Int
     

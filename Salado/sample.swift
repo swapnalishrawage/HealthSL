@@ -30,9 +30,7 @@ class sample: Mappable {
         doctorId <- map["doctorId"]
         slot <- map["slot"]
         userId <- map["userId"]
-       
-        
-                
+               
     }
     init()
     {
