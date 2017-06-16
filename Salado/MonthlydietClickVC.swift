@@ -83,12 +83,7 @@ class MonthlydietClickVC: UIViewController {
     @IBAction func BackClick(_ sender: Any) {
        self.dismiss(animated: true, completion: nil)
         
-//        let mainstorybord:UIStoryboard=UIStoryboard(name: "Main", bundle: nil)
-//        let des=mainstorybord.instantiateViewController(withIdentifier: "DashboardVC") as! DashboardVC
-//        //let frontview=UINavigationController.init(rootViewController:des)
-//        
-//       // self.navigationController?.pushViewController(des, animated: true)
-//        self.navigationController?.show(des, sender:nil )
+
         
     
     }

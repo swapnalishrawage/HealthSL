@@ -27,6 +27,50 @@ class StartDiet{
     private var _programinclude:String!
     private var _dayprogram:[dayProgram]!
     private var _id:String!
+    
+    
+    //userdiet
+    
+    private var _endDate:String!
+    private var _startDate:String!
+    private var _userId:String!
+    
+    
+    var startDate: String{
+        get {
+            return _startDate
+            
+        }
+        set
+        {
+            _startDate = newValue
+        }
+    }
+    
+    var endDate: String{
+        get {
+            return _endDate
+            
+        }
+        set
+        {
+            _endDate = newValue
+        }
+    }
+    
+    
+    
+    var userId: String{
+        get {
+            return _userId
+            
+        }
+        set
+        {
+            _userId = newValue
+        }
+    }
+    
     var ID: String{
         get {
             return _id
@@ -236,6 +280,31 @@ class StartDiet{
         _id=ID
       
     
+    }
+    
+    init(dinnerinclud:Bool,lunchinclud:Bool,programday:Int,programdes:String,programid:String,programName:String,programprice:String,programrating:String,programthub:String,programtype:String,programamount:String,
+         snackinclude:Bool,breakfastinclude:Bool,customise:Bool,ID:String,Enddate:String,StartDate:String,Userid:String)
+    {
+        
+        _dinnerinclude=dinnerinclud
+        _lunchinclude=lunchinclud
+        _programdays=programday
+        _programId=programid
+        _programPrice=programprice
+        _programName=programName
+        _programDescription=programdes
+        _programThumb=programthub
+        _programRating=programrating
+        _snackinclude=snackinclude
+        _programAmm=programamount
+        _breakfastinclude=breakfastinclude
+        _customise=customise
+        _id=ID
+        _endDate=Enddate
+        _startDate=StartDate
+        _userId=Userid
+        
+        
     }
     
 

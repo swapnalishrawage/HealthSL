@@ -16,6 +16,8 @@ class DashboardVC: UIViewController {
     @IBOutlet weak var btnback: UIBarButtonItem!
     @IBOutlet weak var scview: UIScrollView!
  
+    @IBOutlet weak var imgmydiet: UIImageView!
+    @IBOutlet weak var dietview: UIView!
     @IBOutlet weak var view1: UIView!
     @IBOutlet weak var svdaruu: UIStackView!
     @IBOutlet weak var vscrash: UIStackView!
@@ -100,6 +102,14 @@ view1.layer.cornerRadius=5
         
         view3.layer.cornerRadius=5
         
+        
+        
+        
+       dietview.layer.borderWidth=2
+         dietview.layer.borderColor=UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1).cgColor
+        
+         dietview.layer.cornerRadius=5
+        
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(DashboardVC.selectMonthlyDiet))
         singleTap.numberOfTapsRequired = 1 // you can change this value
        imgmonthlydiet.isUserInteractionEnabled = true
@@ -116,10 +126,18 @@ view1.layer.cornerRadius=5
         
 
         let singleTap2 = UITapGestureRecognizer(target: self, action: #selector(DashboardVC.selectDaaruChakhana))
-        singleTap.numberOfTapsRequired = 1 // you can change this value
+        singleTap2.numberOfTapsRequired = 1 // you can change this value
        imgdaruchakhna.isUserInteractionEnabled = true
       imgdaruchakhna.addGestureRecognizer(singleTap2)
         
+        
+        
+        
+        
+        let singleTap3 = UITapGestureRecognizer(target: self, action: #selector(DashboardVC.selectmydiet))
+        singleTap3.numberOfTapsRequired = 1 // you can change this value
+        imgmydiet.isUserInteractionEnabled = true
+        imgmydiet.addGestureRecognizer(singleTap3)
         
         // Do any additional setup after loading the view.
     }
@@ -207,6 +225,11 @@ view1.layer.cornerRadius=5
     {
         performSegue(withIdentifier: "squedaaruchakna", sender: nil)
     }
+    
+    func selectmydiet()
+    {
+        performSegue(withIdentifier: "squemydietplan", sender: nil)
+    }
     func setBorder(img:UIImageView)
     {
         img.layer.borderColor=UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1).cgColor
@@ -263,10 +286,7 @@ view1.layer.cornerRadius=5
         
         let transition = CATransition()
         transition.type = kCATransitionFade
-        /*
-         transition.type = kCATransitionPush
-         transition.subtype = kCATransitionFromRight
-         */
+      
        scrimg.layer.add(transition, forKey: kCATransition)
           scrimg.image = imgarr[index]
         

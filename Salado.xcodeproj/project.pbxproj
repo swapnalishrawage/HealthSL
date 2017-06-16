@@ -15,6 +15,10 @@
 		320D50261ED8131900F17013 /* PhotoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320D50251ED8131900F17013 /* PhotoDataManager.swift */; };
 		320D50281ED8134200F17013 /* TextToImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320D50271ED8134200F17013 /* TextToImage.swift */; };
 		320D502A1ED8182800F17013 /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320D50291ED8182800F17013 /* Dish.swift */; };
+		3213663A1EF130F100D4DA21 /* DayListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321366391EF130F100D4DA21 /* DayListVC.swift */; };
+		3213663C1EF1313100D4DA21 /* DaylistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3213663B1EF1313100D4DA21 /* DaylistCell.swift */; };
+		3213663E1EF13FD100D4DA21 /* DayShedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3213663D1EF13FD100D4DA21 /* DayShedule.swift */; };
+		321366401EF1487800D4DA21 /* Dayshedulecell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3213663F1EF1487800D4DA21 /* Dayshedulecell.swift */; };
 		3214D79E1ECDB6680044F71F /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3214D79D1ECDB6680044F71F /* DetailVC.swift */; };
 		3214D7A01ECDC2EB0044F71F /* StartDietVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3214D79F1ECDC2EB0044F71F /* StartDietVC.swift */; };
 		3214D7A21ECDD0B30044F71F /* CrashEaterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3214D7A11ECDD0B30044F71F /* CrashEaterVC.swift */; };
@@ -23,12 +27,18 @@
 		32180A2B1EE948AD006F7BA6 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32180A2A1EE948AD006F7BA6 /* StoreKit.framework */; };
 		32180A2D1EE948C2006F7BA6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32180A2C1EE948C2006F7BA6 /* SystemConfiguration.framework */; };
 		32180A2F1EE948D8006F7BA6 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32180A2E1EE948D8006F7BA6 /* AddressBook.framework */; };
+		324556EF1EF260C6004E5DEE /* ChangeMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324556EE1EF260C6004E5DEE /* ChangeMenuVC.swift */; };
+		324556F11EF261DE004E5DEE /* ChangemenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324556F01EF261DE004E5DEE /* ChangemenuCell.swift */; };
+		324556F31EF26976004E5DEE /* DishGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324556F21EF26976004E5DEE /* DishGroup.swift */; };
+		324556F61EF2A4E5004E5DEE /* DishItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324556F51EF2A4E5004E5DEE /* DishItem.swift */; };
 		324D7C641ED6AF0000605DA7 /* StartDiet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324D7C631ED6AF0000605DA7 /* StartDiet.swift */; };
 		324D7C661ED6B47C00605DA7 /* startdietcell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324D7C651ED6B47C00605DA7 /* startdietcell.swift */; };
 		324D7C681ED6C30000605DA7 /* dayProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324D7C671ED6C30000605DA7 /* dayProgram.swift */; };
 		324D7C6A1ED6F25D00605DA7 /* doctorAvalabilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324D7C691ED6F25D00605DA7 /* doctorAvalabilities.swift */; };
 		324D7C6C1ED6F4AF00605DA7 /* doctorHolidays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324D7C6B1ED6F4AF00605DA7 /* doctorHolidays.swift */; };
 		324D7C6E1ED6F58D00605DA7 /* doctorLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324D7C6D1ED6F58D00605DA7 /* doctorLocations.swift */; };
+		325221B61EF1067200AF9355 /* MyDietPlanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325221B51EF1067200AF9355 /* MyDietPlanVC.swift */; };
+		325221B81EF1070600AF9355 /* MyDietPlanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325221B71EF1070600AF9355 /* MyDietPlanCell.swift */; };
 		32528DA51EE6C8CB0052BF80 /* sample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32528DA41EE6C8CB0052BF80 /* sample.swift */; };
 		32528DA71EE6C93A0052BF80 /* samplevc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32528DA61EE6C93A0052BF80 /* samplevc.swift */; };
 		325365A81ED5869C00678E60 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325365A71ED5869C00678E60 /* User.swift */; };
@@ -96,6 +106,10 @@
 		320D50251ED8131900F17013 /* PhotoDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoDataManager.swift; sourceTree = "<group>"; };
 		320D50271ED8134200F17013 /* TextToImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextToImage.swift; sourceTree = "<group>"; };
 		320D50291ED8182800F17013 /* Dish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
+		321366391EF130F100D4DA21 /* DayListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayListVC.swift; sourceTree = "<group>"; };
+		3213663B1EF1313100D4DA21 /* DaylistCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaylistCell.swift; sourceTree = "<group>"; };
+		3213663D1EF13FD100D4DA21 /* DayShedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayShedule.swift; sourceTree = "<group>"; };
+		3213663F1EF1487800D4DA21 /* Dayshedulecell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dayshedulecell.swift; sourceTree = "<group>"; };
 		3214D79D1ECDB6680044F71F /* DetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		3214D79F1ECDC2EB0044F71F /* StartDietVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartDietVC.swift; sourceTree = "<group>"; };
 		3214D7A11ECDD0B30044F71F /* CrashEaterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrashEaterVC.swift; sourceTree = "<group>"; };
@@ -104,12 +118,18 @@
 		32180A2A1EE948AD006F7BA6 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		32180A2C1EE948C2006F7BA6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		32180A2E1EE948D8006F7BA6 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		324556EE1EF260C6004E5DEE /* ChangeMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeMenuVC.swift; sourceTree = "<group>"; };
+		324556F01EF261DE004E5DEE /* ChangemenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangemenuCell.swift; sourceTree = "<group>"; };
+		324556F21EF26976004E5DEE /* DishGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishGroup.swift; sourceTree = "<group>"; };
+		324556F51EF2A4E5004E5DEE /* DishItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DishItem.swift; sourceTree = "<group>"; };
 		324D7C631ED6AF0000605DA7 /* StartDiet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartDiet.swift; sourceTree = "<group>"; };
 		324D7C651ED6B47C00605DA7 /* startdietcell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = startdietcell.swift; sourceTree = "<group>"; };
 		324D7C671ED6C30000605DA7 /* dayProgram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dayProgram.swift; sourceTree = "<group>"; };
 		324D7C691ED6F25D00605DA7 /* doctorAvalabilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = doctorAvalabilities.swift; sourceTree = "<group>"; };
 		324D7C6B1ED6F4AF00605DA7 /* doctorHolidays.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = doctorHolidays.swift; sourceTree = "<group>"; };
 		324D7C6D1ED6F58D00605DA7 /* doctorLocations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = doctorLocations.swift; sourceTree = "<group>"; };
+		325221B51EF1067200AF9355 /* MyDietPlanVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDietPlanVC.swift; sourceTree = "<group>"; };
+		325221B71EF1070600AF9355 /* MyDietPlanCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDietPlanCell.swift; sourceTree = "<group>"; };
 		32528DA41EE6C8CB0052BF80 /* sample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sample.swift; sourceTree = "<group>"; };
 		32528DA61EE6C93A0052BF80 /* samplevc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = samplevc.swift; sourceTree = "<group>"; };
 		325365A71ED5869C00678E60 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -193,9 +213,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		324556F41EF2A4D7004E5DEE /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "New Group";
+			sourceTree = "<group>";
+		};
 		325365A61ED5868600678E60 /* Firebaseclass */ = {
 			isa = PBXGroup;
 			children = (
+				324556F41EF2A4D7004E5DEE /* New Group */,
 				325365A71ED5869C00678E60 /* User.swift */,
 				325365A91ED5969C00678E60 /* User1.swift */,
 				32052C421ED5A5AA00CE4FC9 /* MedicalPanel.swift */,
@@ -211,6 +239,8 @@
 				32CF9EA51EDC05D600F58DB4 /* OrderFood.swift */,
 				32DD0BC91EDFD6CA00CCE7AF /* DishData.swift */,
 				32528DA61EE6C93A0052BF80 /* samplevc.swift */,
+				324556F21EF26976004E5DEE /* DishGroup.swift */,
+				324556F51EF2A4E5004E5DEE /* DishItem.swift */,
 			);
 			name = Firebaseclass;
 			sourceTree = "<group>";
@@ -224,6 +254,10 @@
 				325529261ED3109C00C994A5 /* categorycell.swift */,
 				324D7C651ED6B47C00605DA7 /* startdietcell.swift */,
 				046175C31EDB0F51000BC3E2 /* timecellCollectionViewCell.swift */,
+				325221B71EF1070600AF9355 /* MyDietPlanCell.swift */,
+				3213663B1EF1313100D4DA21 /* DaylistCell.swift */,
+				3213663F1EF1487800D4DA21 /* Dayshedulecell.swift */,
+				324556F01EF261DE004E5DEE /* ChangemenuCell.swift */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -248,6 +282,10 @@
 				046175C11EDB0C3F000BC3E2 /* BookAppoitmentVC.swift */,
 				32DD0BCB1EDFFF7900CCE7AF /* RegisterVC.swift */,
 				32DD0BCD1EE0154900CCE7AF /* Utils.swift */,
+				325221B51EF1067200AF9355 /* MyDietPlanVC.swift */,
+				321366391EF130F100D4DA21 /* DayListVC.swift */,
+				3213663D1EF13FD100D4DA21 /* DayShedule.swift */,
+				324556EE1EF260C6004E5DEE /* ChangeMenuVC.swift */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -555,6 +593,7 @@
 				325B4C911EDC0262005984F1 /* foodorder.swift in Sources */,
 				046175C41EDB0F51000BC3E2 /* timecellCollectionViewCell.swift in Sources */,
 				32DD0BCA1EDFD6CA00CCE7AF /* DishData.swift in Sources */,
+				3213663C1EF1313100D4DA21 /* DaylistCell.swift in Sources */,
 				325365AA1ED5969C00678E60 /* User1.swift in Sources */,
 				320D50221ED7FD2700F17013 /* MedicalPanelData.swift in Sources */,
 				3255D75A1ECC4FB800FEE2CA /* LoginVC.swift in Sources */,
@@ -565,8 +604,12 @@
 				324D7C6A1ED6F25D00605DA7 /* doctorAvalabilities.swift in Sources */,
 				320D50281ED8134200F17013 /* TextToImage.swift in Sources */,
 				320D50261ED8131900F17013 /* PhotoDataManager.swift in Sources */,
+				3213663A1EF130F100D4DA21 /* DayListVC.swift in Sources */,
+				324556F61EF2A4E5004E5DEE /* DishItem.swift in Sources */,
 				325529291ED310EE00C994A5 /* CrashDetailVC.swift in Sources */,
 				3214D7A01ECDC2EB0044F71F /* StartDietVC.swift in Sources */,
+				324556EF1EF260C6004E5DEE /* ChangeMenuVC.swift in Sources */,
+				321366401EF1487800D4DA21 /* Dayshedulecell.swift in Sources */,
 				320D50241ED812D400F17013 /* DownloadImage.swift in Sources */,
 				3255BEEF1ECD87D300E891F7 /* ListOfDoctersVC.swift in Sources */,
 				324D7C6E1ED6F58D00605DA7 /* doctorLocations.swift in Sources */,
@@ -579,8 +622,10 @@
 				32D815AF1ECEC1CC007E1F75 /* MyAccountVC.swift in Sources */,
 				32528DA51EE6C8CB0052BF80 /* sample.swift in Sources */,
 				325365A81ED5869C00678E60 /* User.swift in Sources */,
+				325221B81EF1070600AF9355 /* MyDietPlanCell.swift in Sources */,
 				3214D79E1ECDB6680044F71F /* DetailVC.swift in Sources */,
 				046175C21EDB0C3F000BC3E2 /* BookAppoitmentVC.swift in Sources */,
+				3213663E1EF13FD100D4DA21 /* DayShedule.swift in Sources */,
 				32528DA71EE6C93A0052BF80 /* samplevc.swift in Sources */,
 				32DD0BCE1EE0154900CCE7AF /* Utils.swift in Sources */,
 				325529271ED3109C00C994A5 /* categorycell.swift in Sources */,
@@ -593,8 +638,11 @@
 				3214D7A41ECDD62B0044F71F /* MenucellCollectionViewCell.swift in Sources */,
 				32052C431ED5A5AA00CE4FC9 /* MedicalPanel.swift in Sources */,
 				3255D7581ECC4FB800FEE2CA /* AppDelegate.swift in Sources */,
+				325221B61EF1067200AF9355 /* MyDietPlanVC.swift in Sources */,
 				325529161ED2B85B00C994A5 /* orderitem.swift in Sources */,
+				324556F31EF26976004E5DEE /* DishGroup.swift in Sources */,
 				32DD0BCC1EDFFF7900CCE7AF /* RegisterVC.swift in Sources */,
+				324556F11EF261DE004E5DEE /* ChangemenuCell.swift in Sources */,
 				3255292D1ED3117D00C994A5 /* Category.swift in Sources */,
 				324D7C641ED6AF0000605DA7 /* StartDiet.swift in Sources */,
 			);

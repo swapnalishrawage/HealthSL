@@ -115,7 +115,6 @@ class MedicalPanel{
         }
     }
     
-        // return _LastMsgSender
         
     init(_doctorConsultationFess:String,_doctorDescription:String,_doctorDetailDescrption:String,_doctorExperience:String,_doctorId:String,_doctorName:String,_doctorThumbnail:String,_doctype:String,_Childkey:String)
         {

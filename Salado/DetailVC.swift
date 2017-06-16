@@ -115,7 +115,7 @@ class DetailVC: UIViewController {
         super.viewDidLoad()
         
         txtdetaildescription.scrollRangeToVisible(NSMakeRange(0, 0))
-      scview.contentSize = CGSize(width: scview.bounds.width, height: self.view3.frame.height+660     )//CGSize(self.view3.frame.width, self.view3.frame.height+100)
+      scview.contentSize = CGSize(width: scview.bounds.width, height: self.view3.frame.height+660     )//
         scview.contentSize = CGSize(width: self.scview.bounds.width, height: self.scview.bounds.height)
             view3.layer.cornerRadius=5
         view1.layer.cornerRadius=5

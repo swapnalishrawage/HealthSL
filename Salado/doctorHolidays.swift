@@ -28,7 +28,6 @@ class doctorHolidays{
         }
     }
     
-    
     var _holidayEndDate : String{
         get {
             return holidayEndDate

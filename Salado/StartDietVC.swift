@@ -148,13 +148,7 @@ class StartDietVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         let dataref=FIRDatabase.database().reference()
         
         
-//        dataref.child("StandardDietProgram").queryOrdered(byChild: "dayProgram").observe(.value, with: {(snapshot) in
-//        print(snapshot.value)
-//        
-//        
-//        
-//        })
-        
+
         
         
         dataref.child("StandardDietProgram").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -187,10 +181,6 @@ class StartDietVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
                             
                             
                             
-                            
-                            
-//                            if let value1 = dayprogram1["dayProgram"] as? [String:AnyObject]{
-//                                
                             
                                 
                                 

@@ -110,7 +110,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate  {
                 all1.keepSynced(true)
         
         
-        //gmail 
+        let al6 = FIRDatabase.database().reference(withPath:"UserDietProgram")
+        al6.keepSynced(true)
+        
+        
+
+        
+        let al5 = FIRDatabase.database().reference(withPath:"DishGroup")
+        al5.keepSynced(true)
+        
+        //gmail
         var configureError: NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
         assert(configureError == nil, "Error configuring Google services: \(configureError)")

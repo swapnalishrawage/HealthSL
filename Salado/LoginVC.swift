@@ -106,7 +106,7 @@ class ViewController: UIViewController,FBSDKLoginButtonDelegate,GIDSignInDelegat
         view.addGestureRecognizer(tap)
               GIDSignIn.sharedInstance().uiDelegate = self
         
-       // GIDSignIn.sharedInstance().signInSilently()
+       
         
         
         

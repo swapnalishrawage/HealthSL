@@ -19,7 +19,7 @@ import Foundation
 class category{
     private var _name:String!
     private var _image:String!
-    
+    private var _dishId:String!
     private var _detail:String!
    
     
@@ -34,7 +34,16 @@ class category{
         }
     }
     
-    
+    var dishId : String{
+        get {
+            return _dishId
+            
+        }
+        set
+        {
+            _dishId = newValue
+        }
+    }
     
     
     
@@ -74,6 +83,16 @@ class category{
         _name=Name
         _image=Image
         _detail=Detail
+        
+        
+        
+    }
+    init(Name:String,Image:String,Dishid:String)
+    {
+        
+        _name=Name
+        _image=Image
+    _dishId=Dishid
         
         
         

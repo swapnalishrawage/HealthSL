@@ -570,7 +570,7 @@ print(order)
             self.view.addSubview(self.loadingView)
             self.spinner.startAnimating()
             
-        //}
+      
         
     }
     func hideActivityIndicator() {

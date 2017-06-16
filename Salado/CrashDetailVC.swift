@@ -92,13 +92,7 @@ navigationItem.title=programdetail.programName
         retrivedishes()
         
 
-        
-        
-        
-        
-     
-
-        
+                
         tblistnew.dataSource=self
       tblistnew.delegate=self
         tblistnew.reloadData()

@@ -79,9 +79,7 @@ class docterlistcell: UITableViewCell {
     
     func showActivityIndicator() {
         
-        // UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        
-        // DispatchQueue.main.async {
+       
         
         
         self.loadingView = UIView()

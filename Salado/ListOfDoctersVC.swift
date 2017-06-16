@@ -108,9 +108,7 @@ class ListOfDoctersVC: UIViewController,UITableViewDelegate,UITableViewDataSourc
         
         
         retrivedetitiandata()
-        
-//
-        tbdocterlist.separatorColor=UIColor.clear
+              tbdocterlist.separatorColor=UIColor.clear
   tbdocterlist.tableFooterView=UIView()
         // Do any additional setup after loading the view.
     }
