@@ -13,16 +13,58 @@ import FontAwesome_swift
 
 class RegisterVC: UIViewController {
     @IBOutlet weak var imgclose: UIImageView!
+    @IBOutlet weak var viewgender: UIView!
     @IBOutlet weak var lblemailid: UITextField!
+    @IBOutlet weak var viewcategory: UIView!
     @IBOutlet weak var lblfname: UITextField!
 
     @IBOutlet weak var btnsignup: UIButton!
     @IBOutlet weak var txtmobile: UITextField!
     @IBOutlet weak var lblbirthdate: UITextField!
     @IBOutlet weak var lbllname: UITextField!
+    var category:String!
+    var gender:String!
+    var isradio1Chk:Bool!
+     var iscatChk:Bool!
+    @IBOutlet weak var imgf: UIImageView!
+    
+    @IBOutlet weak var imgm: UIImageView!
+    
+    @IBOutlet weak var imgNV: UIImageView!
+    
+    @IBOutlet weak var imgV: UIImageView!
+    @IBOutlet weak var imgBOTH: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        viewcategory.layer.cornerRadius=5
+        viewcategory.layer.borderWidth=2
+        viewcategory.layer.borderColor=UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1).cgColor
+        
+        
+        viewgender.layer.cornerRadius=5
+        viewgender.layer.borderWidth=2
+        viewgender.layer.borderColor=UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1).cgColor
+        
+        
+        
+        
+        imgf.image = UIImage.fontAwesomeIcon(name: .checkCircleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+        imgm.image = UIImage.fontAwesomeIcon(name: .circleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+        
+        
+        
+        
+        
+        
+        
+        imgV.image = UIImage.fontAwesomeIcon(name: .checkCircleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+        imgNV.image = UIImage.fontAwesomeIcon(name: .circleO, textColor:UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+        
+
+         imgBOTH.image = UIImage.fontAwesomeIcon(name: .circleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+        
         
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(RegisterVC.close))
         singleTap.numberOfTapsRequired = 1 // you can change this value
@@ -55,13 +97,9 @@ class RegisterVC: UIViewController {
         
         
         
+        viewgender.backgroundColor=UIColor.clear
         
-        lblbirthdate.backgroundColor=UIColor.clear
-        lblbirthdate.layer.borderColor=UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1).cgColor
-        lblbirthdate.layer.borderWidth=2
-        lblbirthdate.layer.cornerRadius=5
-        
-        
+        viewcategory.backgroundColor=UIColor.clear
         
        lblemailid.backgroundColor=UIColor.clear
         lblemailid.layer.borderColor=UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1).cgColor
@@ -83,8 +121,201 @@ class RegisterVC: UIViewController {
         
         
         view.addGestureRecognizer(tap)
+        
+        
+        
+        isradio1Chk = true
+        changeCheck(isr1Check: isradio1Chk)
+        
+        let singleTap2 = UITapGestureRecognizer(target: self, action: #selector(RegisterVC.didTapRadio1))
+        singleTap2.numberOfTapsRequired = 1 // you can change this value
+        imgf.isUserInteractionEnabled = true
+       imgf.addGestureRecognizer(singleTap2)
+        
+        let singleTap12 = UITapGestureRecognizer(target: self, action: #selector(RegisterVC.didTapRadio2))
+        singleTap12.numberOfTapsRequired = 1 // you can change this value
+      imgm.isUserInteractionEnabled = true
+        imgm.addGestureRecognizer(singleTap12)
+
+        
+        
+        
+        
+        
+        
+        iscatChk = true
+        changeCheckcat(isr1Check: iscatChk)
+        
+        let singleTap01 = UITapGestureRecognizer(target: self, action: #selector(RegisterVC.didTapIMGV))
+        singleTap01.numberOfTapsRequired = 1 // you can change this value
+        imgV.isUserInteractionEnabled = true
+        imgV.addGestureRecognizer(singleTap01)
+        
+        let singleTap02 = UITapGestureRecognizer(target: self, action: #selector(RegisterVC.didTapimgNV))
+        singleTap02.numberOfTapsRequired = 1 // you can change this value
+        imgNV.isUserInteractionEnabled = true
+        imgNV.addGestureRecognizer(singleTap02)
+
+        
+        
+        
+        let singleTap03 = UITapGestureRecognizer(target: self, action: #selector(RegisterVC.didTapimgBoth))
+        singleTap03.numberOfTapsRequired = 1 // you can change this value
+        imgBOTH.isUserInteractionEnabled = true
+        imgBOTH.addGestureRecognizer(singleTap03)
+        
+        
+        
+        
 
         // Do any additional setup after loading the view.
+    }
+    
+    func imgfclick()
+    {
+//        if(imgf.Image == UIImage.fontAwesomeIcon(name: .checkCircleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30)) )
+//        {
+//            // var m:String="Male"
+//            //btnradiofemale.setImage(#imageLiteral(resourceName: "unselect"), for:UIControlState.normal)
+//            //btnradiomale.setImage(#imageLiteral(resourceName: "unselect"), for:UIControlState.normal)
+//            
+//            
+//            imgf.Image==UIImage.fontAwesomeIcon(name: .circleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+//            imgm.image==UIImage.fontAwesomeIcon(name: .circleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+//        }
+//        else
+//        {
+//            btnradiomale.setImage(#imageLiteral(resourceName: "selected.jpg"), for:UIControlState.normal)
+//            if(btnradiofemale.currentImage==#imageLiteral(resourceName: "selected"))
+//            {
+//                btnradiofemale.setImage(#imageLiteral(resourceName: "unselect"), for:UIControlState.normal)
+//            }
+//        }
+//        btnradiomale.setTitle("Male", for:UIControlState.normal)
+//        btnradiomale.titleLabel?.isHidden=true
+    }
+    
+    
+    func imgmclick()
+    {
+        
+    }
+    
+    func didTapRadio1() {
+        
+        
+        if(isradio1Chk == false){
+            isradio1Chk = true
+            changeCheck(isr1Check: isradio1Chk)
+//            favPickerView.isHidden = true
+//            nameAddressSV.isHidden = false
+//            nameadrsMainView.isHidden = false
+//            addFriendTable.isHidden = true
+        }
+        
+    }
+    
+    func didTapRadio2() {
+        
+        if(isradio1Chk == true)
+        {
+            isradio1Chk = false
+            changeCheck(isr1Check: isradio1Chk)
+            
+//            favPickerView.isHidden = false
+//            nameAddressSV.isHidden = true
+//            nameadrsMainView.isHidden = true
+        }
+    }
+    
+    
+    func didTapIMGV() {
+        
+//        if(isradio1Chk == true)
+//        {
+//            isradio1Chk = false
+//            changeCheckcat(isr1Check: isradio1Chk)
+//            
+//            //            favPickerView.isHidden = false
+//            //            nameAddressSV.isHidden = true
+//            //            nameadrsMainView.isHidden = true
+//        }
+        if(imgV.image==UIImage.fontAwesomeIcon(name: .checkCircleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30)))
+        {
+            
+            
+            imgNV.image = UIImage.fontAwesomeIcon(name: .circleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+            imgBOTH.image = UIImage.fontAwesomeIcon(name: .circleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+            
+        }
+        else{
+            category="Veg"
+            imgV.image=UIImage.fontAwesomeIcon(name: .checkCircleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+            imgNV.image = UIImage.fontAwesomeIcon(name: .circleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+            imgBOTH.image = UIImage.fontAwesomeIcon(name: .circleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+        }
+    }
+    func didTapimgNV() {
+        
+//        if(isradio1Chk == true)
+//        {
+//            isradio1Chk = false
+//           changeCheckcat(isr1Check: isradio1Chk)
+//            
+//            //            favPickerView.isHidden = false
+//            //            nameAddressSV.isHidden = true
+//            //            nameadrsMainView.isHidden = true
+//        }
+        
+        
+        if(imgNV.image==UIImage.fontAwesomeIcon(name: .checkCircleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30)))
+        {
+            
+           
+            imgV.image = UIImage.fontAwesomeIcon(name: .circleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+            imgBOTH.image = UIImage.fontAwesomeIcon(name: .circleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+            
+        }
+        else{
+             category="NonVeg"
+            imgNV.image=UIImage.fontAwesomeIcon(name: .checkCircleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+            
+            imgV.image = UIImage.fontAwesomeIcon(name: .circleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+            
+            imgBOTH.image = UIImage.fontAwesomeIcon(name: .circleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+            
+        }
+    }
+
+    func didTapimgBoth() {
+//        
+//        if(isradio1Chk == true)
+//        {
+//            isradio1Chk = false
+//            changeCheckcat(isr1Check: isradio1Chk)
+//            
+//            //            favPickerView.isHidden = false
+//            //            nameAddressSV.isHidden = true
+//            //            nameadrsMainView.isHidden = true
+//        }
+        
+        if(imgBOTH.image==UIImage.fontAwesomeIcon(name: .checkCircleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30)))
+        {
+            
+           
+            imgV.image = UIImage.fontAwesomeIcon(name: .circleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+            imgNV.image = UIImage.fontAwesomeIcon(name: .circleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+            
+        }
+        else{
+             category="Both"
+            imgBOTH.image=UIImage.fontAwesomeIcon(name: .checkCircleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+            
+            imgV.image = UIImage.fontAwesomeIcon(name: .circleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+            
+            imgNV.image = UIImage.fontAwesomeIcon(name: .circleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+            
+        }
     }
     func close()
     {
@@ -94,8 +325,59 @@ class RegisterVC: UIViewController {
         //let frontview=UINavigationController.init(rootViewController:des)
         
         self.navigationController?.pushViewController(des, animated: true)
-        //self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
+    
+    
+    func changeCheck(isr1Check:Bool){
+        
+        if(isr1Check == true){
+             gender="Female"
+            imgf.image = UIImage.fontAwesomeIcon(name: .checkCircleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+            
+            
+            
+            
+          imgm.image = UIImage.fontAwesomeIcon(name: .circleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+            
+            
+        }else{
+            gender="Male"
+           imgm.image = UIImage.fontAwesomeIcon(name: .checkCircleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+           imgf.image = UIImage.fontAwesomeIcon(name: .circleO, textColor:UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+            
+            
+           
+        }
+        
+    }
+    
+    
+    
+    
+    func changeCheckcat(isr1Check:Bool){
+              
+        if(isr1Check == true){
+            imgV.image = UIImage.fontAwesomeIcon(name: .checkCircleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+            
+            
+            category="Veg"
+            
+            imgNV.image = UIImage.fontAwesomeIcon(name: .circleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+            imgBOTH.image = UIImage.fontAwesomeIcon(name: .circleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+            
+        
+        }else{
+            imgNV.image = UIImage.fontAwesomeIcon(name: .checkCircleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+             imgBOTH.image = UIImage.fontAwesomeIcon(name: .checkCircleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+            imgV.image = UIImage.fontAwesomeIcon(name: .circleO, textColor:UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))
+            
+            
+            
+        }
+        
+    }
+    
     func dismissKeyboard() {
         
         
@@ -162,14 +444,36 @@ class RegisterVC: UIViewController {
         
         
         let uid=NSUUID().uuidString
-
+       
+        
+        
+        
+        
+//        if(imgf.image==UIImage.fontAwesomeIcon(name: .checkCircleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))){
+//            g="Female"
+//        }
+//        if(imgf.image==UIImage.fontAwesomeIcon(name: .circleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30))){
+//            g="Male"
+//        }
+//        else /*if(imgm.image==UIImage.fontAwesomeIcon(name: .checkCircleO, textColor: UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 30, height: 30)))*/{
+//           g="Female"
+//            
+//        }
+//        
+        
+        
+        
+        
+        print(gender)
+        print(category)
+        
         let uname:String=lblfname.text!+" "+lbllname.text!
-                let register:[String:AnyObject]=["active":true as AnyObject ,"emailId":lblemailid.text! as AnyObject ,"firstLogin":true as AnyObject  ,"isActive":true as AnyObject  ,"isFirstLogin":true as AnyObject,"mobileNo":txtmobile.text! as AnyObject, "password":"123456" as AnyObject ,"userDietType":"" as AnyObject,"userId":uid as AnyObject,"userLoginID":lblemailid.text! as AnyObject, "userName":uname as AnyObject, "userType":"customer" as AnyObject]
+                let register:[String:AnyObject]=["active":true as AnyObject ,"emailId":lblemailid.text! as AnyObject ,"firstLogin":true as AnyObject  ,"gender":gender as AnyObject,"isActive":true as AnyObject  ,"isFirstLogin":true as AnyObject,"mobileNo":txtmobile.text! as AnyObject, "password":"123456" as AnyObject ,"userDietType":category as AnyObject,"userId":uid as AnyObject,"userLoginID":lblemailid.text! as AnyObject, "userName":uname as AnyObject, "userType":"customer" as AnyObject]
         
         
         
         
-        if(lbllname.text == "" || lbllname.text == "" || lblemailid.text == "" || lblbirthdate.text == "" || txtmobile.text == "")
+        if(lbllname.text == "" || lbllname.text == "" || lblemailid.text == ""   || txtmobile.text == "")
         {
             let register1 = UIAlertController(title: "Error!", message: "Please Enter all Information", preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "Ok", style: .default, handler:{
@@ -260,22 +564,22 @@ class RegisterVC: UIViewController {
                 
                 self.present(register1, animated: true, completion: {  })
             }
-            else if(lblbirthdate.text==""){
-                let register1 = UIAlertController(title: "Error!", message: "Please Enter Birth Date ", preferredStyle: .alert)
-                let cancelAction = UIAlertAction(title: "Ok", style: .default, handler:{
-                    action in
-                    
-                    //self.dismiss(animated: true, completion: nil)
-                    
-                    
-                })
-                
-                
-                
-                register1.addAction(cancelAction)
-                
-                self.present(register1, animated: true, completion: {  })
-            }
+//            else if(lblbirthdate.text==""){
+//                let register1 = UIAlertController(title: "Error!", message: "Please Enter Birth Date ", preferredStyle: .alert)
+//                let cancelAction = UIAlertAction(title: "Ok", style: .default, handler:{
+//                    action in
+//                    
+//                    //self.dismiss(animated: true, completion: nil)
+//                    
+//                    
+//                })
+//                
+//                
+//                
+//                register1.addAction(cancelAction)
+//                
+//                self.present(register1, animated: true, completion: {  })
+//            }
             else  if( (txtmobile.text?.characters.count)! < 10 || (txtmobile.text?.characters.count)! > 10 || !((mb?.containsNumbers())!) ||  (mb?.containsCharacters())!)
             {
                 let check = UIAlertController(title: "Error", message: "Please enter Mobile Number with 10 digit", preferredStyle: .alert )

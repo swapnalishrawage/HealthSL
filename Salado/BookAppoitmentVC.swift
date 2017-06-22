@@ -11,7 +11,10 @@ import Firebase
 import FirebaseDatabase
 
 class BookAppoitmentVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
-
+    var s:Int!
+    var e:Int!
+    var hide:Bool=true
+    var daystd=[String]()
     @IBOutlet weak var btnbook: UIButton!
     @IBOutlet weak var viewcoll: UIView!
     @IBOutlet weak var lblholiday: UILabel!
@@ -27,6 +30,7 @@ class BookAppoitmentVC: UIViewController,UICollectionViewDelegate,UICollectionVi
     var singletab:Bool=false
     var docava=[doctorAvalabilities]()
     
+    @IBOutlet weak var rightclick: UIBarButtonItem!
     @IBOutlet weak var lbldate6: UILabel!
     @IBOutlet weak var lblday6: UILabel!
     @IBOutlet weak var lbldate5: UILabel!
@@ -70,9 +74,13 @@ class BookAppoitmentVC: UIViewController,UICollectionViewDelegate,UICollectionVi
     var m=["9:00 AM","9:20 AM,9:40 AM,10:00 AM","10:20 AM","10:40 AM","11:00 AM","11:20 AM","11:40 AM,12:00 PM,12:20 PM,12:40 PM,1:00 PM,1:20 PM,1:40 PM"]
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        rightclick.image=UIImage.fontAwesomeIcon(name: .check, textColor: UIColor.white, size: CGSize(width: 25, height: 25))
+        daystd=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]
         self.navigationItem.backBarButtonItem?.title="< "
         self.navigationItem.title="BOOK APPOINTMENT"
-        btnbook.layer.cornerRadius=5
+        
         print(Date().dayofweek()!)
    print(formatDate(date: Date() as NSDate))
         slot.removeAll()
@@ -100,6 +108,30 @@ class BookAppoitmentVC: UIViewController,UICollectionViewDelegate,UICollectionVi
             print(tenDaysfromNow)
         }
         
+        let std:String=UserDefaults.standard.value(forKey: "Startday") as! String
+        let eday:String=UserDefaults.standard.value(forKey: "Endday") as! String
+        
+        
+        let sd=std.components(separatedBy: "d")[0]
+        let ed=eday.components(separatedBy: "d")[0]
+        
+        
+        
+        let index0 = sd.index(sd.startIndex, offsetBy: 3)
+        let st3:String=sd.substring(to: index0)  // Hello
+        print(st3)
+        
+        
+        let index1 = ed.index(ed.startIndex, offsetBy: 3)
+        let et3:String=ed.substring(to: index1)  // Hello
+        print(et3)
+        
+        
+        
+        
+       // UserDefaults.standard.set(self._WeekDayStart, forKey: "Startday")
+        //UserDefaults.standard.set(self._weekDayEnd, forKey: "Endday")
+        
         lblholiday.isHidden=true
         print(day)
         print(formateddate)
@@ -112,8 +144,8 @@ class BookAppoitmentVC: UIViewController,UICollectionViewDelegate,UICollectionVi
         lblday6.text=day[5]
         lblday7.text=day[6]
         
-        lbldate1.textColor=UIColor.black
-        lblday1.textColor=UIColor.black
+        lbldate1.textColor=UIColor.white
+        lblday1.textColor=UIColor.white
         
         lbldate1.text=formateddate[0]
         lbldate2.text=formateddate[1]
@@ -125,9 +157,10 @@ class BookAppoitmentVC: UIViewController,UICollectionViewDelegate,UICollectionVi
         print(self.date1)
         
         
+     
         
         
-        //holiday
+               //holiday
 //        if(lblday1.text=="Sun" || lblday2.text=="Sun" || lblday3.text=="Sun" || lblday4.text=="Sun" || lblday5.text=="Sun" || lblday6.text=="Sun" || lblday7.text=="Sun")
 //        {
 //            colltime.isHidden=true
@@ -262,7 +295,109 @@ class BookAppoitmentVC: UIViewController,UICollectionViewDelegate,UICollectionVi
         
         
         print(docid)
+        
          getdoctorAvalability(id: docid)
+        
+        print(day)
+        for i in 0...daystd.count-1{
+            if(daystd[i]==st3)
+            {
+                
+                s=i
+                //colltime.isHidden=true
+                
+            }
+            if(daystd[i]==et3){
+                e=i
+               //colltime.isHidden=true
+            }
+        }
+print(s)
+  print(e)
+        if(s<e){
+        for i in s...e{
+            
+            if(s>6)
+            {
+                s=0
+            }
+            print(i)
+            
+        }
+        }else if(s>e)
+        {
+           // var m=s-e
+            for i in e+1...s-1{
+               
+                print(i)
+                
+            }
+        }
+        
+        
+        
+        //default view
+        if(s<e){
+            for j in s...e{
+                
+                if(daystd[j]==lblday1.text)
+                {
+                    colltime.isHidden=false
+                    lblholiday.isHidden=true
+                    hide=false
+                    
+                }
+                
+                
+            }
+            
+            if(hide==true)
+            {
+                viewcoll.isHidden=true
+                lblholiday.isHidden=false
+            }
+            else{
+                colltime.isHidden=false
+                lblholiday.isHidden=true
+                hide=true
+            }
+        }
+            
+        else if(s>e){
+            hide=false
+           // var m=s-e
+            for j in e+1...s-1{
+                //
+                if(daystd[j]==lblday1.text)
+                {
+                    viewcoll.isHidden=true
+                    lblholiday.isHidden=false
+                    hide=true
+                    
+                }
+            }
+            
+            
+            
+            
+            if(hide==true)
+            {
+                viewcoll.isHidden=true
+                lblholiday.isHidden=false
+            }
+            else{
+                viewcoll.isHidden=false
+                lblholiday.isHidden=true
+                hide=false
+            }
+        }
+
+        
+        
+        
+        
+        
+        
         
         // Do any additional setup after loading the view.
     }
@@ -352,6 +487,8 @@ class BookAppoitmentVC: UIViewController,UICollectionViewDelegate,UICollectionVi
                 
                 
                 
+                
+              
                 
                 self.colltime.dataSource=self
                 self.colltime.delegate=self
@@ -590,6 +727,10 @@ class BookAppoitmentVC: UIViewController,UICollectionViewDelegate,UICollectionVi
         
         
         
+    
+        
+        
+        
     }
     func formattedDaysInThisWeek() -> [String] {
         // create calendar
@@ -635,8 +776,9 @@ class BookAppoitmentVC: UIViewController,UICollectionViewDelegate,UICollectionVi
             singletab=true
         }
         else{
-            lblday1.textColor=UIColor.black
-            lbldate1.textColor=UIColor.black
+            
+            lblday1.textColor=UIColor.white
+            lbldate1.textColor=UIColor.white
             view1.backgroundColor=UIColor(red: 83/255, green: 117/255, blue: 1/255, alpha: 1)
             view2.backgroundColor=UIColor.white
             view3.backgroundColor=UIColor.white
@@ -674,14 +816,92 @@ class BookAppoitmentVC: UIViewController,UICollectionViewDelegate,UICollectionVi
 //singletab=false
         }
         
-        if(lblday1.text=="Sun")
-        {
-            viewcoll.isHidden=true
-            lblholiday.isHidden=false
+//        if(lblday1.text=="Sun")
+//        {
+//            viewcoll.isHidden=true
+//            lblholiday.isHidden=false
+//        }
+//        else{
+//            viewcoll.isHidden=false
+//            lblholiday.isHidden=true
+//        }
+        
+        
+        
+        
+        
+        
+       
+//            if(day[i]==std)
+//            {
+//                colltime.isHidden=true
+//                lblholiday.isHidden=false
+//                
+//            }
+//            if(day[i]==eday){
+//                colltime.isHidden=true
+//                lblholiday.isHidden=false
+//            }
+            
+            print(s)
+            print(e)
+        if(s<e)
+        {            for j in s...e{
+                
+                if(daystd[j]==lblday1.text)
+                {
+                    colltime.isHidden=false
+                    lblholiday.isHidden=true
+                    hide=false
+
+                }
         }
-        else{
-            viewcoll.isHidden=false
-            lblholiday.isHidden=true
+        
+//                else{
+//                    colltime.isHidden=false
+//                    lblholiday.isHidden=true
+//                    
+//                }
+                if(hide==true)
+                {
+                    viewcoll.isHidden=true
+                    lblholiday.isHidden=false
+                }
+                else{
+                    viewcoll.isHidden=false
+                    lblholiday.isHidden=true
+                      hide=true
+                }
+                
+      
+        }
+        else if(s>e){
+           // var m=s-e
+            hide=false
+            for j in e+1...s-1{
+                //hide=false
+                if(daystd[j]==lblday1.text)
+                {
+                    viewcoll.isHidden=true
+                    lblholiday.isHidden=false
+                    hide=true
+                    
+                }
+            }
+            
+            
+            
+            
+            if(hide==true)
+            {
+                viewcoll.isHidden=true
+                lblholiday.isHidden=false
+            }
+            else{
+                viewcoll.isHidden=false
+                lblholiday.isHidden=true
+                hide=false
+            }
         }
         
     }
@@ -689,15 +909,16 @@ class BookAppoitmentVC: UIViewController,UICollectionViewDelegate,UICollectionVi
     {
         if(singletab==false)
         {
+           
             lblday2.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
-            lbldate2.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+           lbldate2.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
             
             view2.backgroundColor=UIColor.white
             singletab=true
         }
         else {
-            lblday2.textColor=UIColor.black
-            lbldate2.textColor=UIColor.black
+            lblday2.textColor=UIColor.white
+            lbldate2.textColor=UIColor.white
             view2.backgroundColor=UIColor(red: 83/255, green: 117/255, blue: 1/255, alpha: 1)
             view1.backgroundColor=UIColor.white
             view3.backgroundColor=UIColor.white
@@ -705,33 +926,121 @@ class BookAppoitmentVC: UIViewController,UICollectionViewDelegate,UICollectionVi
             view5.backgroundColor=UIColor.white
             view6.backgroundColor=UIColor.white
             view7.backgroundColor=UIColor.white
+            
+            
+            
+            
+            
+            lblday1.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate1.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+            
+            lblday3.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate3.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+            
+            lblday4.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate4.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+            
+            
+            lblday5.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate5.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+            
+            
+            lblday6.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate6.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+            lblday7.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate7.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+
           // singletab=false
         }
-        if(lblday2.text=="Sun")
+//        if(lblday2.text=="Sun")
+//        {
+//            viewcoll.isHidden=true
+//            lblholiday.isHidden=false
+//
+//            
+//        }
+//        else{
+//            viewcoll.isHidden=false
+//            lblholiday.isHidden=true
+//        }
+        
+        if(s<e){
+        for j in s...e{
+            
+            if(daystd[j]==lblday2.text)
+            {
+                colltime.isHidden=false
+                lblholiday.isHidden=true
+                hide=false
+                
+            }
+            
+            
+        }
+        
+        if(hide==true)
         {
             viewcoll.isHidden=true
             lblholiday.isHidden=false
-
-            
         }
         else{
             viewcoll.isHidden=false
             lblholiday.isHidden=true
+              hide=true
         }
+        }
+        
+        else if(s>e){
+            hide=false
+          //  var m=s-e
+            for j in e+1...s-1{
+                //
+                if(daystd[j]==lblday2.text)
+                {
+                    viewcoll.isHidden=true
+                    lblholiday.isHidden=false
+                    hide=true
+                    
+                }
+            }
+            
+            
+            
+            
+            if(hide==true)
+            {
+                viewcoll.isHidden=true
+                lblholiday.isHidden=false
+            }
+            else{
+                viewcoll.isHidden=false
+                lblholiday.isHidden=true
+                hide=false
+            }
+        }
+
+        
     }
     
     func view3click()
     {
         if(singletab==false)
         {
-            lblday3.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+                        lblday3.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
             lbldate3.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
             view3.backgroundColor=UIColor.white
             singletab=true
         }
         else{
-            lblday3.textColor=UIColor.black
-            lbldate3.textColor=UIColor.black
+            lblday3.textColor=UIColor.white
+            lbldate3.textColor=UIColor.white
+
             view3.backgroundColor=UIColor(red: 83/255, green: 117/255, blue: 1/255, alpha: 1)
             view1.backgroundColor=UIColor.white
             view2.backgroundColor=UIColor.white
@@ -739,19 +1048,103 @@ class BookAppoitmentVC: UIViewController,UICollectionViewDelegate,UICollectionVi
             view5.backgroundColor=UIColor.white
             view6.backgroundColor=UIColor.white
          view7.backgroundColor=UIColor.white
+            
+            lblday2.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate2.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+            
+            lblday1.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate1.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+            
+            lblday4.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate4.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+            
+            
+            lblday5.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate5.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+            
+            
+            lblday6.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate6.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+            lblday7.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate7.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+
            // singletab=false
         }
-        if(lblday3.text=="Sun")
+//        if(lblday3.text=="Sun")
+//        {
+//            viewcoll.isHidden=true
+//            lblholiday.isHidden=false
+//
+//            
+//        }
+//        else{
+//            viewcoll.isHidden=false
+//            lblholiday.isHidden=true
+//              hide=true
+//        }
+        
+        if(s<e){
+        
+        for j in s...e{
+            
+            if(daystd[j]==lblday3.text)
+            {
+                colltime.isHidden=false
+                lblholiday.isHidden=true
+                hide=false
+                
+            }
+            }
+            
+        
+        if(hide==true)
         {
             viewcoll.isHidden=true
             lblholiday.isHidden=false
-
-            
         }
         else{
             viewcoll.isHidden=false
             lblholiday.isHidden=true
+            hide=true
         }
+        } else if(s>e){
+            hide=false
+        //    var m=s-e
+            for j in e+1...s-1{
+                //hide=false
+                if(daystd[j]==lblday3.text)
+                {
+                    viewcoll.isHidden=true
+                    lblholiday.isHidden=false
+                    hide=true
+                    
+                }
+            }
+            
+            
+            
+            
+            if(hide==true)
+            {
+                viewcoll.isHidden=true
+                lblholiday.isHidden=false
+               
+            }
+            else{
+                viewcoll.isHidden=false
+                lblholiday.isHidden=true
+                hide=false
+            }
+        }
+
+        
+        
     }
     func view4click()
     {
@@ -763,8 +1156,8 @@ class BookAppoitmentVC: UIViewController,UICollectionViewDelegate,UICollectionVi
             singletab=true
         }
         else{
-            lblday4.textColor=UIColor.black
-            lbldate4.textColor=UIColor.black
+            lblday4.textColor=UIColor.white
+            lbldate4.textColor=UIColor.white
             view4.backgroundColor=UIColor(red: 83/255, green: 117/255, blue: 1/255, alpha: 1)
             view1.backgroundColor=UIColor.white
             view2.backgroundColor=UIColor.white
@@ -772,19 +1165,113 @@ class BookAppoitmentVC: UIViewController,UICollectionViewDelegate,UICollectionVi
             view5.backgroundColor=UIColor.white
             view6.backgroundColor=UIColor.white
           view7.backgroundColor=UIColor.white
+            lblday2.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate2.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+            
+            lblday3.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate3.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+            
+            lblday1.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate1.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+            
+            
+            lblday5.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate5.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+            
+            
+            lblday6.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate6.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+            lblday7.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate7.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+
             //singletab=false
         }
-        if(lblday4.text=="Sun")
+//        if(lblday4.text=="Sun")
+//        {
+//            viewcoll.isHidden=true
+//            lblholiday.isHidden=false
+//            
+//        }
+//        else{
+//            viewcoll.isHidden=false
+//            lblholiday.isHidden=true
+//        }
+        
+        
+        
+
+    
+    if(s<e)
+    {
+    
+        for j in s...e{
+    
+            if(daystd[j]==lblday4.text)
+            {
+    colltime.isHidden=false
+    lblholiday.isHidden=true
+    hide=false
+
+    
+            }
+        }
+    
+            
+            
+        
+    if(hide==true)
+    {
+    viewcoll.isHidden=true
+    lblholiday.isHidden=false
+    }
+    else{
+        
+    viewcoll.isHidden=false
+    lblholiday.isHidden=true
+          hide=true
+    }
+        }
+    else if(s>e){
+        hide=false
+       // var m=s-e
+        for j in e+1...s-1{
+            //hide=false
+            if(daystd[j]==lblday4.text)
+            {
+                viewcoll.isHidden=true
+                lblholiday.isHidden=false
+                hide=true
+                
+            }
+        }
+        
+        
+        
+        
+        if(hide==true)
         {
             viewcoll.isHidden=true
             lblholiday.isHidden=false
             
         }
         else{
-            viewcoll.isHidden=false
+             viewcoll.isHidden=false
             lblholiday.isHidden=true
+            hide=false
         }
+        }
+        
+
     }
+    
+    
+    
     func view5click()
     {
         if(singletab==false)
@@ -795,8 +1282,8 @@ class BookAppoitmentVC: UIViewController,UICollectionViewDelegate,UICollectionVi
             singletab=true
         }
         else{
-            lblday5.textColor=UIColor.black
-            lbldate5.textColor=UIColor.black
+            lblday5.textColor=UIColor.white
+            lbldate5.textColor=UIColor.white
             view5.backgroundColor=UIColor(red: 83/255, green: 117/255, blue: 1/255, alpha: 1)
             view1.backgroundColor=UIColor.white
             view3.backgroundColor=UIColor.white
@@ -804,17 +1291,92 @@ class BookAppoitmentVC: UIViewController,UICollectionViewDelegate,UICollectionVi
             view2.backgroundColor=UIColor.white
             view6.backgroundColor=UIColor.white
            view7.backgroundColor=UIColor.white
+            lblday2.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate2.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+            
+            lblday3.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate3.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+            
+            lblday4.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate4.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+            
+            
+            lblday1.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate1.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+            
+            
+            lblday6.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate6.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+            lblday7.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate7.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+
            // singletab=false
         }
-        if(lblday5.text=="Sun")
+       
+        
+        
+        if(s<e)
+        {
+        for j in s...e{
+            
+            if(daystd[j]==lblday5.text)
+            {
+                colltime.isHidden=false
+                lblholiday.isHidden=true
+                hide=false
+
+                
+            }
+           
+            }
+            
+        
+        if(hide==true)
         {
             viewcoll.isHidden=true
             lblholiday.isHidden=false
-            
         }
         else{
-            viewcoll.isHidden=false
+            
+             viewcoll.isHidden=false
             lblholiday.isHidden=true
+            hide=true
+        }
+        }
+        else if(s>e){
+            hide=false
+        //    var m=s-e
+            for j in e+1...s-1{
+                //hide=false
+                if(daystd[j]==lblday5.text)
+                {
+                    viewcoll.isHidden=true
+                    lblholiday.isHidden=false
+                    hide=true
+                    
+                }
+            }
+            
+            
+            
+            
+            if(hide==true)
+            {
+                viewcoll.isHidden=true
+                lblholiday.isHidden=false
+                
+            }
+            else{
+                viewcoll.isHidden=false
+                lblholiday.isHidden=true
+                hide=false
+            }
         }
     }
     func view6click()
@@ -827,8 +1389,8 @@ class BookAppoitmentVC: UIViewController,UICollectionViewDelegate,UICollectionVi
             singletab=true
         }
         else{
-            lblday6.textColor=UIColor.black
-            lbldate6.textColor=UIColor.black
+            lblday6.textColor=UIColor.white
+            lbldate6.textColor=UIColor.white
             view6.backgroundColor=UIColor(red: 83/255, green: 117/255, blue: 1/255, alpha: 1)
             view1.backgroundColor=UIColor.white
             view3.backgroundColor=UIColor.white
@@ -836,16 +1398,99 @@ class BookAppoitmentVC: UIViewController,UICollectionViewDelegate,UICollectionVi
             view5.backgroundColor=UIColor.white
             view2.backgroundColor=UIColor.white
           view7.backgroundColor=UIColor.white
+            
+            lblday2.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate2.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+            
+            lblday3.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate3.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+            
+            lblday4.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate4.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+            
+            
+            lblday5.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate5.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+            
+            
+            lblday1.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate1.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+            lblday7.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate7.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+
+            
             //singletab=false
         }
-        if(lblday6.text=="Sun")
+//        if(lblday6.text=="Sun")
+//        {
+//            viewcoll.isHidden=true
+//            lblholiday.isHidden=false
+//        }
+//        else{
+//            viewcoll.isHidden=false
+//            lblholiday.isHidden=true
+//        }
+        if(s<e){
+        for j in s...e{
+            
+            if(daystd[j] == lblday6.text)
+            {
+                colltime.isHidden=false
+                lblholiday.isHidden=true
+                hide=false
+
+                
+            }
+            
+            
+            
+        }
+        
+        if(hide==true)
         {
             viewcoll.isHidden=true
             lblholiday.isHidden=false
         }
         else{
+            
             viewcoll.isHidden=false
             lblholiday.isHidden=true
+            hide=true
+        }
+        } else if(s>e){
+          //  var m=s-e
+            hide=false
+            for j in e+1...s-1{
+                //hide=false
+                if(daystd[j]==lblday6.text)
+                {
+                    viewcoll.isHidden=true
+                    lblholiday.isHidden=false
+                    hide=true
+                    
+                }
+            }
+            
+            
+            
+            
+            if(hide==true)
+            {
+                viewcoll.isHidden=true
+                lblholiday.isHidden=false
+                
+            }
+            else{
+                 viewcoll.isHidden=false
+                lblholiday.isHidden=true
+                hide=false
+            }
         }
     }
     func view7click()
@@ -858,8 +1503,8 @@ class BookAppoitmentVC: UIViewController,UICollectionViewDelegate,UICollectionVi
             singletab=true
         }
         else{
-            lblday7.textColor=UIColor.black
-            lbldate7.textColor=UIColor.black
+            lblday7.textColor=UIColor.white
+            lbldate7.textColor=UIColor.white
             view7.backgroundColor=UIColor(red: 83/255, green: 117/255, blue: 1/255, alpha: 1)
             view1.backgroundColor=UIColor.white
             view3.backgroundColor=UIColor.white
@@ -867,17 +1512,100 @@ class BookAppoitmentVC: UIViewController,UICollectionViewDelegate,UICollectionVi
             view5.backgroundColor=UIColor.white
             view6.backgroundColor=UIColor.white
             view2.backgroundColor=UIColor.white
+            
+            
+            lblday2.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate2.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+            
+            lblday3.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate3.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+            
+            lblday4.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate4.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+            
+            
+            lblday5.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate5.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+            
+            
+            lblday6.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate6.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+            lblday1.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            lbldate1.textColor=UIColor(red:76/255, green: 76/255, blue: 76/255, alpha: 1)
+            
+
             //singletab=false
         }
-        if(lblday7.text=="Sun")
+//        if(lblday7.text=="Sun")
+//        {
+//            viewcoll.isHidden=true
+//            lblholiday.isHidden=false
+//            
+//        }
+//        else{
+//            viewcoll.isHidden=false
+//            lblholiday.isHidden=true
+//        }
+        
+        if(s<e){
+        for j in s...e{
+            
+            if(daystd[j] == lblday7.text)
+            {
+                viewcoll.isHidden=false
+                lblholiday.isHidden=true
+                hide=false
+            }
+           
+            
+            
+        }
+        
+        if(hide==true)
         {
             viewcoll.isHidden=true
             lblholiday.isHidden=false
-            
         }
         else{
-            viewcoll.isHidden=false
+            
+           viewcoll.isHidden=false
             lblholiday.isHidden=true
+            hide=true
+        }
+        }
+        else if(s>e){
+          //  var m=s-e
+            hide=false
+            for j in e+1...s-1{
+               // hide=false
+                if(daystd[j]==lblday7.text)
+                {
+                    viewcoll.isHidden=true
+                    lblholiday.isHidden=false
+                    hide=true
+                    
+                }
+            }
+            
+            
+            
+            
+            if(hide==true)
+            {
+                viewcoll.isHidden=true
+                lblholiday.isHidden=false
+                
+            }
+            else{
+              viewcoll.isHidden=false
+                lblholiday.isHidden=true
+                //hide=false
+            }
         }
     }
     func setview(view:UIView)
@@ -923,27 +1651,135 @@ class BookAppoitmentVC: UIViewController,UICollectionViewDelegate,UICollectionVi
         
         
       //  addToList.append(objectsArray[indexPath.row])
-        let cell = collectionView.cellForItem(at: indexPath)
+        let cell = collectionView.cellForItem(at: indexPath) as? timecellCollectionViewCell
         
-        
-
+        let p=slot[indexPath.row]
+    
+ print(p)
+        slotset=p
         cell?.layer.cornerRadius=5
-      
+        cell?.lbltime1.textColor=UIColor.white
+    // cell?.btntime.titleLabel?.textColor=UIColor.white
         cell?.layer.backgroundColor=UIColor(red: 83/255, green: 117/255, blue: 1/255, alpha: 1).cgColor
+        
     }
     
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
+        let cell = collectionView.cellForItem(at: indexPath) as? timecellCollectionViewCell
         
         
         
         cell?.layer.cornerRadius=5
+        cell?.lbltime1.textColor=UIColor.darkGray
+      
         
         cell?.layer.backgroundColor=UIColor.clear.cgColor
     }
   
     
+  
+    @IBAction func bookrightclick(_ sender: Any) {
+        
+        
+        
+        
+        
+        dataref=FIRDatabase.database().reference()
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "yyyy-mm-dd"
+        let d1:String=dateformatter.string(from: Date())
+        
+        let yr1:String=d1.components(separatedBy: "-")[0]
+        
+        let yr:String=" "+yr1
+        var d:String!
+        var slot:String!
+        let docid:String=UserDefaults.standard.value(forKey: "DocID") as! String
+        
+        let uid:String=UserDefaults.standard.value(forKey: "KEY") as! String
+        
+        
+        if(view1.backgroundColor==UIColor(red: 83/255, green: 117/255, blue: 1/255, alpha: 1))
+        {
+            
+            d=lbldate1.text!+yr
+            
+            
+        }
+        else if(view2.backgroundColor==UIColor(red: 83/255, green: 117/255, blue: 1/255, alpha: 1))
+        {
+            d=lbldate2.text!+yr
+        }
+        else if(view3.backgroundColor==UIColor(red: 83/255, green: 117/255, blue: 1/255, alpha: 1))
+        {
+            d=lbldate3.text!+yr
+        }
+        else if(view4.backgroundColor==UIColor(red: 83/255, green: 117/255, blue: 1/255, alpha: 1))
+        {
+            d=lbldate4.text!+yr
+        }
+        else if(view5.backgroundColor==UIColor(red: 83/255, green: 117/255, blue: 1/255, alpha: 1))
+        {
+            d=lbldate5.text!+yr
+        }
+        else if(view6.backgroundColor==UIColor(red: 83/255, green: 117/255, blue: 1/255, alpha: 1))
+        {
+            d=lbldate6.text!+yr
+        }
+            
+            
+        else if(view7.backgroundColor==UIColor(red: 83/255, green: 117/255, blue: 1/255, alpha: 1))
+        {
+            d=lbldate7.text!+yr
+        }
+        
+        
+        print(d)
+        
+        
+        
+        
+        
+        if(slotset == nil){
+            let passwordcheck = UIAlertController(title: "Appointment", message: "Please Select Time slot ", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Ok", style: .cancel, handler:nil)
+            
+            
+            
+            passwordcheck.addAction(cancelAction)
+            
+            
+            present(passwordcheck, animated: true, completion: {  })
+            
+            
+        }
+        else{
+            print(slotset!)
+            slot=slotset
+            let doctorapp:[String:AnyObject]=["date":d as AnyObject ,"doctorId":docid as AnyObject ,"slot":slot as AnyObject  ,"userId":uid as AnyObject  ]
+            
+            
+            dataref.child("DoctorAppintments").childByAutoId().setValue(doctorapp)
+            
+            
+            
+            let passwordcheck = UIAlertController(title: "Appointment", message: "Your Appointment Booked Successfully.You will received confirmation message on your registere mobile number shortly ", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Ok", style: .cancel, handler:nil)
+            
+            
+            
+            passwordcheck.addAction(cancelAction)
+            
+            
+            present(passwordcheck, animated: true, completion: {  })
+            
+        }
+        
+        
+        
+
+    }
     @IBAction func bookclick(_ sender: Any) {
         
         
@@ -998,25 +1834,46 @@ class BookAppoitmentVC: UIViewController,UICollectionViewDelegate,UICollectionVi
 
 
         print(d)
-        print(slotset)
-        slot=slotset
-        
-        let doctorapp:[String:AnyObject]=["date":d as AnyObject ,"doctorId":docid as AnyObject ,"slot":slot as AnyObject  ,"userId":uid as AnyObject  ]
-        
-        
-        dataref.child("DoctorAppintments").childByAutoId().setValue(doctorapp)
+      
         
         
         
-        let passwordcheck = UIAlertController(title: "Appointment", message: "Your Appointment Booked Successfully.You will received confirmation message on your registere mobile number shortly ", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Ok", style: .cancel, handler:nil)
         
-        
-        
-        passwordcheck.addAction(cancelAction)
-        
-        
-        present(passwordcheck, animated: true, completion: {  })
+        if(slotset == nil){
+            let passwordcheck = UIAlertController(title: "Appointment", message: "Please Select any one slot ", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Ok", style: .cancel, handler:nil)
+            
+            
+            
+            passwordcheck.addAction(cancelAction)
+            
+            
+            present(passwordcheck, animated: true, completion: {  })
+            
+
+        }
+        else{
+            print(slotset!)
+            slot=slotset
+            let doctorapp:[String:AnyObject]=["date":d as AnyObject ,"doctorId":docid as AnyObject ,"slot":slot as AnyObject  ,"userId":uid as AnyObject  ]
+            
+            
+            dataref.child("DoctorAppintments").childByAutoId().setValue(doctorapp)
+            
+            
+            
+            let passwordcheck = UIAlertController(title: "Appointment", message: "Your Appointment Booked Successfully.You will received confirmation message on your registere mobile number shortly ", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Ok", style: .cancel, handler:nil)
+            
+            
+            
+            passwordcheck.addAction(cancelAction)
+            
+            
+            present(passwordcheck, animated: true, completion: {  })
+            
+        }
+    
         
         
         

@@ -21,7 +21,7 @@ class category{
     private var _image:String!
     private var _dishId:String!
     private var _detail:String!
-   
+    private var _type:String!
     
     var name : String{
         get {
@@ -34,6 +34,16 @@ class category{
         }
     }
     
+    var type : String{
+        get {
+            return _type
+            
+        }
+        set
+        {
+            _type = newValue
+        }
+    }
     var dishId : String{
         get {
             return _dishId
@@ -77,13 +87,13 @@ class category{
 
     
     
-    init(Name:String,Detail:String,Image:String)
+    init(Name:String,Detail:String,Image:String,type:String)
     {
         
         _name=Name
         _image=Image
         _detail=Detail
-        
+        _type=type
         
         
     }

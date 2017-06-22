@@ -114,13 +114,14 @@ class DetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        btnbookappoint.layer.cornerRadius=5
         txtdetaildescription.scrollRangeToVisible(NSMakeRange(0, 0))
-      scview.contentSize = CGSize(width: scview.bounds.width, height: self.view3.frame.height+660     )//
+      scview.contentSize = CGSize(width: scview.bounds.width, height: self.view3.frame.height+700     )//
         scview.contentSize = CGSize(width: self.scview.bounds.width, height: self.scview.bounds.height)
             view3.layer.cornerRadius=5
         view1.layer.cornerRadius=5
         view2.layer.cornerRadius=5
-        btnbookappoint.layer.cornerRadius=5
+     
         infoview.layer.cornerRadius=5
         
         let address:String=UserDefaults.standard.value(forKey: "Address") as! String
@@ -197,9 +198,11 @@ class DetailVC: UIViewController {
                 
                 self._weekDayEnd=commentsDictionary["weekDayEnd"] as! String!
                 
+               
                 self._WeekDayStart=commentsDictionary["weekDayStart"] as! String!
                 
-                
+                 UserDefaults.standard.set(self._WeekDayStart, forKey: "Startday")
+                 UserDefaults.standard.set(self._weekDayEnd, forKey: "Endday")
                 
                 self._docid=commentsDictionary["doctorId"] as! String!
                 

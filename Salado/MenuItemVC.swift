@@ -35,17 +35,32 @@ var order=[OrderedFood]()
     var _dishThumbnail:String!
     var _dishType:String!
     var _foodPreparationTime:String!
-    
+    var pg:String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
              self.navigationItem.title="MENU"  
         
-d.removeAll()
-       self.showActivityIndicator()
+         d.removeAll()
+    
         
-     
+        
+        
+        pg=UserDefaults.standard.value(forKey: "Page") as! String
+     if(pg=="DC")
+     {
+        
+        
+        
+        
+        
+        
+        
+        }
+     else{
+          self.showActivityIndicator()
+        }
    
         
         
@@ -55,12 +70,24 @@ d.removeAll()
         // Do any additional setup after loading the view.
     }
     override func viewDidAppear(_ animated: Bool) {
-    
+    //showActivityIndicator()
     }
     override func viewWillAppear(_ animated: Bool) {
-       //showActivityIndicator()
-//
-        retrivedishes()
+        
+        
+        
+        self.retrivedishes()
+        pg=UserDefaults.standard.value(forKey: "Page") as! String
+        if(pg=="DC")
+        {
+            
+            
+            //self.showActivityIndicator()
+            
+            
+            
+        }
+             
     }
     @IBOutlet weak var clview: UICollectionView!
 
@@ -96,12 +123,12 @@ d.removeAll()
             else{
                 cell.imgcategory.image=#imageLiteral(resourceName: "veg")
             }
-            
-            
+           // cell.lblnumberofitem=String(Int(cell.stepper.value))
+            print(cell.stepper.value)
             cell.stepper.addTarget(self, action: #selector(MenuItemVC.clickonstepper(sender:)), for: .valueChanged)
            let s:String="T"
 
-            cell.updatecell(image: m._dishThumbnail, name:m._dishName , price:"Rs. "+m._dishPrice, Rating:m._dishRatings,stepper1:s,item:String(Int(cell.stepper.value)))
+            cell.updatecell(image: m._dishThumbnail, name:m._dishName , price:"₹. "+m._dishPrice, Rating:m._dishRatings,stepper1:s,item:String(Int(cell.stepper.value)))
 
 
             return cell
@@ -147,7 +174,7 @@ d.removeAll()
         
         var disid:Bool=false
         let price=intrate*m1
-   
+        var vl:Int=0
         
         
         
@@ -196,6 +223,7 @@ d.removeAll()
         var total:Int=0
         for i in 0...dishdata.count-1{
             total=total+dishdata[i].price
+            vl=vl+Int(dishdata[i].quantity)
         }
         
 //        var p1=0
@@ -213,7 +241,8 @@ d.removeAll()
 //        }
         
        
-        lblitemcount.text="\(value) Item in cart"
+        print(vl)
+        lblitemcount.text="\(vl) Item in cart"
         lblrate.text="₹ \(String(total))"
                        print("stepper click inside viewcontroller")
       
@@ -304,8 +333,17 @@ d.removeAll()
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination=segue.destination as? orderDetail{
             if let doc=sender as?  [OrderedFood]{
+                let array = ["horse", "cow", "camel", "sheep", "goat"]
+                print(order[0])
                 
-                print(doc)
+                let defaults = UserDefaults.standard
+                 print(doc)
+                defaults.setValue(array, forKey: "history")
+                
+                defaults.synchronize()
+
+               
+                
                destination.OrderMenu=doc
                 
                 print("new")
@@ -390,11 +428,7 @@ print(order)
     }
     func retrivedishes()
     {
-     //  self.showActivityIndicator()
-//  if(spinner.isAnimating==false)
-//  {
-//    showActivityIndicator()
-//  }
+
     
         dataref=FIRDatabase.database().reference()
         
@@ -530,16 +564,63 @@ print(order)
                         
                     }
                     
+                    
+                      self.pg=UserDefaults.standard.value(forKey: "Page") as! String
+                    if(self.pg=="CE")
+                    {
                       self.hideActivityIndicator()
+                    }
                 }
                 
                 
                 
-                self.clview.delegate=self
-                self.clview.dataSource=self
-                self.clview.reloadData()
+                
+                 self.pg=UserDefaults.standard.value(forKey: "Page") as! String
+                if(self.pg=="DC"){
+                
+                   
+                      self.showActivityIndicator()
+                    let alert = UIAlertController(title: "Information", message: "We do not promote drinking alcoholic beverages.How ever in order to reduce side effects of salty foods (chakna) consumed along with alcoholic beverages.We do suggest to have this healthy alternatives.", preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: "Ok", style: .cancel, handler:{
+                        action in
+                        
+                        UserDefaults.standard.set("N", forKey: "Page")
+                        self.clview.delegate=self
+                        self.clview.dataSource=self
+                        self.clview.reloadData()
+                      self.hideActivityIndicator()
+
+                    })
+                    
+                    
+                    
+                    alert.addAction(cancelAction)
+                    
+                    self.present(alert, animated: true, completion: {  })
+
+                    
+                    
+                    
+                    
+                    
+                    
+                
+                }
+                else{
+                    self.clview.delegate=self
+                    self.clview.dataSource=self
+                    self.clview.reloadData()
+                    self.hideActivityIndicator()
+                }
+                
+                
               
+
+                
             }
+        
+ 
+        
         })
         
                         

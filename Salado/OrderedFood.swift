@@ -14,6 +14,17 @@ import Foundation
     private var dishimage:String!
     private var price:String!
     private var dishtype:String!
+    private var orderid:String!
+    var _orderid:String{
+        get{
+            
+            return orderid
+            
+        }
+        set{
+            orderid=newValue
+        }
+    }
     var _dishId:String{
         get{
             
@@ -86,5 +97,15 @@ import Foundation
         price=_price
         dishtype=_dishtype
     }
-    
+    init(_dishid:String,_dishQuantity:String,_dishname:String,_dishimage:String,_price:String,_dishtype:String,orderId:String)
+    {
+        dishId=_dishid
+        dishQuantity=_dishQuantity
+        dishname=_dishname
+        dishimage=_dishimage
+        price=_price
+        dishtype=_dishtype
+        orderid=orderId
+    }
+
 }

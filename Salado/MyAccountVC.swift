@@ -39,6 +39,7 @@ class MyAccountVC: UIViewController {
         super.viewDidLoad()
            self.navigationItem.title="MY ACCOUNT"
     btndone.isHidden=true
+        UserDefaults.standard.set("MA", forKey: "BackClick")
         btnmyorder.layer.cornerRadius=5
         btnmymonthlyplan.layer.cornerRadius=5
         

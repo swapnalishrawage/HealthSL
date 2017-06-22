@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 class orderDetail: UIViewController,UITableViewDelegate,UITableViewDataSource {
+    @IBOutlet weak var btnpay: UIButton!
     @IBOutlet weak var lbltotalgrand: UILabel!
     @IBOutlet weak var lbladdress: UILabel!
     @IBOutlet weak var lbltax: UILabel!
@@ -17,7 +18,7 @@ class orderDetail: UIViewController,UITableViewDelegate,UITableViewDataSource {
     @IBOutlet weak var lblprice: UILabel!
     var dataref: FIRDatabaseReference!
     private var   _ordermenu:[OrderedFood]!
-    
+    var pg:String = UserDefaults.standard.value(forKey: "Click") as! String
     
     var  OrderMenu : [OrderedFood]{
         get {
@@ -37,7 +38,9 @@ var price0=[Int]()
     var p=[Int]()
     override func viewDidLoad() {
         super.viewDidLoad()
-         self.navigationItem.title="CONFIRM ORDER" 
+        print(pg)
+        
+         self.navigationItem.title="CONFIRM ORDER"
         print(OrderMenu.count)
         
         
@@ -61,7 +64,32 @@ var price0=[Int]()
             let p1:Int=Int(OrderMenu[j]._price)!
             p.append(p1)
         }
-        
+        if(pg=="VD")
+        {
+            p.removeAll()
+            tbordermenu.isUserInteractionEnabled=false
+            btnpay.isUserInteractionEnabled=false
+            
+            for j in 0...OrderMenu.count-1{
+                let p1:Int=Int(OrderMenu[j]._price)! * Int(OrderMenu[j]._dishQuantity)!
+                p.append(p1)
+                
+            }
+            
+        }
+        if(pg=="RO"){
+            p.removeAll()
+            //tbordermenu.isUserInteractionEnabled=false
+            //btnpay.isUserInteractionEnabled=false
+            
+            for j in 0...OrderMenu.count-1{
+                let p1:Int=Int(OrderMenu[j]._price)! * Int(OrderMenu[j]._dishQuantity)!
+                p.append(p1)
+                
+            }
+
+        }
+
         for j in 0...p.count-1{
         total=p[j]+total
         
@@ -76,6 +104,15 @@ var price0=[Int]()
         print(i)
         let m0:Int=67+i
         lbltotalgrand.text="GrandTotal:₹ \(String(m0)) "
+        
+        
+        
+        
+        if(pg=="VD" || pg=="RO")
+        {
+            lblprice.text=String(total)
+            lbltotalgrand.text="GrandTotal:₹ \(String(total+67)) "
+        }
 //        var o1=orderitem(Name: "Roasted Vegetables Medley", Category: "V", Image: "", Price: "Rs 300")
 //        
 //         var o2=orderitem(Name: "Herbed Chicken", Category: "NV", Image: "", Price: "Rs 200")
@@ -89,23 +126,41 @@ var price0=[Int]()
 //        order.append(o4)
         
         
+                UserDefaults.standard.set("1", forKey: "Move")
         tbordermenu.delegate=self
         tbordermenu.dataSource=self
         tbordermenu.reloadData()
 
         // Do any additional setup after loading the view.
     }
-
+//    override func viewWillAppear(_ animated: Bool) {
+//        tbordermenu.delegate=self
+//        tbordermenu.dataSource=self
+//        tbordermenu.reloadData()
+//    }
     @IBAction func barbtnclick(_ sender: Any) {
         
         
-        let mainstorybord:UIStoryboard=UIStoryboard(name: "Main", bundle: nil)
-        let des=mainstorybord.instantiateViewController(withIdentifier: "MenuItemVC") as! MenuItemVC
-        
-        
-
-        
-        self.navigationController?.pushViewController(des, animated: true)
+       
+        if(pg=="RO" || pg=="VD")
+        {
+            let mainstorybord:UIStoryboard=UIStoryboard(name: "Main", bundle: nil)
+            let des=mainstorybord.instantiateViewController(withIdentifier: "MyorderVC") as! MyorderVC
+            
+            
+            
+            
+            self.navigationController?.pushViewController(des, animated: true)
+        }
+        else{
+            let mainstorybord:UIStoryboard=UIStoryboard(name: "Main", bundle: nil)
+            let des=mainstorybord.instantiateViewController(withIdentifier: "MenuItemVC") as! MenuItemVC
+            
+            
+            
+            
+            self.navigationController?.pushViewController(des, animated: true)
+        }
         
       
     }
@@ -122,7 +177,7 @@ var price0=[Int]()
            let ord1=order[indexPath.row]
             
             
-            
+      
 
             
             cell.stepper.value=Double(OrderMenu[(indexPath.row)]._dishQuantity)!
@@ -175,8 +230,9 @@ var price0=[Int]()
         var m:[String:AnyObject]!
         for i in 0...order.count-1
         {
+      print(OrderMenu[i]._dishname)
          
-           m=["dishId":OrderMenu[i]._dishId as AnyObject,"dishQuantity":/*OrderMenu[i]._dishQuantity as AnyObject*/String(order[i].count) as AnyObject]
+           m=["dishId":OrderMenu[i]._dishId as AnyObject,"dishName":OrderMenu[i]._dishname as AnyObject,"dishQuantity":/*OrderMenu[i]._dishQuantity as AnyObject*/String(order[i].count) as AnyObject]
             
             myArray.append(m)
             

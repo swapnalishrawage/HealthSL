@@ -554,7 +554,7 @@ class ViewController: UIViewController,FBSDKLoginButtonDelegate,GIDSignInDelegat
         
         
         
-        DispatchQueue.main.async {
+       // DispatchQueue.main.async {
             self.loadingView = UIView()
             self.loadingView.frame = CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0)
             self.loadingView.center = self.view.center
@@ -571,15 +571,15 @@ class ViewController: UIViewController,FBSDKLoginButtonDelegate,GIDSignInDelegat
             self.view.addSubview(self.loadingView)
             self.spinner.startAnimating()
             
-        }
+        //}
         
     }
     func hideActivityIndicator() {
         
-        DispatchQueue.main.async {
+       // DispatchQueue.main.async {
             self.spinner.stopAnimating()
             self.loadingView.removeFromSuperview()
-        }
+        //}
     }
     
     }

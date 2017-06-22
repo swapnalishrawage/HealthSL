@@ -38,7 +38,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate  {
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().enableAutoToolbar=false
 
-           
+        UserDefaults.standard.set("D", forKey: "Click")
+        UserDefaults.standard.set("D", forKey: "BackClick")
+   
         
             let nav:UINavigationController=UINavigationController.init()
 

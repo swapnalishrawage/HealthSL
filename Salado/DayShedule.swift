@@ -14,6 +14,9 @@ class DaySheduleVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
     private var   _programdetail:dayProgram!
     var dataref: FIRDatabaseReference!
     var dish=[Dish]()
+    var spinner = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+    var loadingView: UIView = UIView()
+ var category0=[category]()
     var  programdetail : dayProgram{
         get {
             return _programdetail
@@ -56,6 +59,7 @@ class DaySheduleVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 //        }
 //    }
 
+    @IBOutlet weak var img: UIImageView!
     var daypro=[dayProgram]()
     var category1=[category]()
     var category1sorted=[category]()
@@ -64,12 +68,13 @@ class DaySheduleVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         super.viewDidLoad()
         print(programdetail.day)
         print(programdetail)
+        //showActivityIndicator()
    retrivedishesforday()
-    navigationItem.title=programdetail.day
+    navigationItem.title=programdetail.title
         
         
         
-        
+        img.image=UIImage.fontAwesomeIcon(name:.refresh , textColor: UIColor(red: 128/255, green: 82/255, blue: 10/255, alpha: 1), size: CGSize(width: 35, height: 35))
         print( programdetail.imgcheckuncheck)
         //("uc", forKey: "img")
             let all3 = FIRDatabase.database().reference(withPath:"Dish")
@@ -109,28 +114,15 @@ class DaySheduleVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return category1.count
+        return category0.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell=tableView.dequeueReusableCell(withIdentifier: "Dayshedulecell", for: indexPath) as? Dayshedulecell{
             
-//            if((UserDefaults.standard.value(forKey: "NewDishId") as! String) != nil
-//                ){
-//            var newdishid:String=UserDefaults.standard.value(forKey: "NewDishId") as! String
-//            var newimage:String=UserDefaults.standard.value(forKey: "NewDishImage") as! String
-//            var newdishname:String=UserDefaults.standard.value(forKey: "NewDishName") as! String
-//            
-//            var gpname:String=UserDefaults.standard.value(forKey: "GroupName") as! String
-//
-//        
-//            
-//            }
-                var m=category1[indexPath.row]
+
+                let m=category0[indexPath.row]
             
-//            UserDefaults.standard.set(dish.dishId, forKey: "NewDishId")
-//            UserDefaults.standard.set(dish.name, forKey: "NewDishName")
-//            UserDefaults.standard.set(dish.image, forKey: "NewDishImage")
-//            UserDefaults.standard.set(selectgroupid.groupName, forKey: "GroupName")
+
             
             
             if(programdetail.imgcheckuncheck=="c")
@@ -141,6 +133,7 @@ class DaySheduleVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
             else if(programdetail.imgcheckuncheck=="uc")
             {
                 cell.btnchange.isHidden=false
+                //cell.img.isHidden=false
             }
             
             cell.updatecell(image: m.image, name: m.name, desc: m.detail,CU:programdetail.imgcheckuncheck,dat:programdetail.dat)
@@ -149,8 +142,26 @@ class DaySheduleVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
                 cell.isUserInteractionEnabled=false
             }
             
+            cell.setSelected(false, animated: true)
             
             
+            
+            
+            
+            
+            
+            
+            
+            
+//            let singleTap3 = UITapGestureRecognizer(target: self, action: #selector(DaySheduleVC.clickonbutton))
+//            singleTap3.numberOfTapsRequired = 1 // you can change this value
+//         cell.img.isUserInteractionEnabled = true
+//            cell.img.addGestureRecognizer(singleTap3)
+
+            
+            
+            
+           
             cell.btnchange.addTarget(self, action: #selector(DaySheduleVC.clickonbutton(sender:)), for: .allEvents)
             // cell.stepper.addTarget(self, action: #selector(orderDetail.clickonstepper(sender:)), for: .valueChanged)
             return cell
@@ -179,7 +190,7 @@ class DaySheduleVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         
         //let ord1=order[(indexPath?.row)!]
        print(cell.lblname.text!)
-        var c:String=cell.lblname.text!.components(separatedBy: ":")[0]
+        let c:String=cell.lblname.text!.components(separatedBy: ":")[0]
         print(c)
       var dg=[DishGroup]()
         //dg.removeAll()
@@ -245,8 +256,9 @@ class DaySheduleVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
     }
     func getprodetailforday()
     {
+        //showActivityIndicator()
         // UserDefaults.standard.set(programdetail.ID, forKey: "DietProgramKey")
-        var dietprokey:String=UserDefaults.standard.value(forKey: "DietProgramKey") as! String
+        let dietprokey:String=UserDefaults.standard.value(forKey: "DietProgramKey") as! String
         print(dietprokey)
         
         daypro.removeAll()
@@ -254,18 +266,18 @@ class DaySheduleVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
        // print(programdetail.ID)
         //print(programdetail.programdays)
         
-        var ds=programdetail.day.components(separatedBy: " ")[1]
+        let ds=programdetail.day.components(separatedBy: " ")[1]
         print(ds)
-        var d:Int=Int(ds)!-1
+        let d:Int=Int(ds)!-1
         print(d)
-        var day:String=String(d)
+        let day:String=String(d)
         dataref=FIRDatabase.database().reference()
         dataref.child("UserDietProgram").child(dietprokey).child("dietProgram").child("dayProgram").child(day).observe(.value, with: {(snapshot) in
             
             
             print(snapshot)
             
-            
+           // self.showActivityIndicator()
                 self._brakfastid=snapshot.childSnapshot(forPath: "breakfastDishID").value! as! String
             if(self.programdetail.breakfastDishId==self._brakfastid)
             {
@@ -344,25 +356,25 @@ class DaySheduleVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
                                     if(self.d[m]._dishId==t)
                                     {
             
-                                        self.category1.append(category(Name: "Breakfast:\(self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image: self.d[m]._dishThumbnail))
+                                        self.category1.append(category(Name: "Breakfast:\(self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image: self.d[m]._dishThumbnail,type: "Breakfast"))
             
                                     }
                                     if(self.d[m]._dishId==dinn)
                                     {
             
-                                        self.category1.append(category(Name:"Dinner:\( self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image: self.d[m]._dishThumbnail))
+                                        self.category1.append(category(Name:"Dinner:\( self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image: self.d[m]._dishThumbnail,type: "Dinner"))
             
                                     }
                                     if(self.d[m]._dishId==lunchid)
                                     {
             
-                                        self.category1.append(category(Name:"Lunch: \(self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image:self.d[m]._dishThumbnail))
+                                        self.category1.append(category(Name:"Lunch: \(self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image:self.d[m]._dishThumbnail,type:"Lunch"))
             
                                     }
                                     if(self.d[m]._dishId==snackid)
                                     {
             
-                                        self.category1.append(category(Name:"Snack:\(self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image: self.d[m]._dishThumbnail))
+                                        self.category1.append(category(Name:"Snack:\(self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image: self.d[m]._dishThumbnail,type:"Snack"))
                                         
                                     }
                                     
@@ -382,59 +394,48 @@ class DaySheduleVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
                         }
  
             print(self.category1.count)
-//            
-//            if(self.category1.count>1){
-//         for i in 0...self.category1.count-1
-//         {
-//            if(self.category1[i].name.contains("Breakfast")==true){
-//                
-//                
-//                self.category1sorted.insert(self.category1[i], at: 0)
-//              //  self.category1sorted.append(self.category1[0])
-//               }
-//            if(self.category1[i].name.contains("Lunch")==true){
-//                 self.category1sorted.insert(self.category1[i], at: 1)
-//              //  self.category1sorted.append(self.category1[1])
-//            }
-//            if(self.category1[i].name.contains("Snack")==true){
-//                 self.category1sorted.insert(self.category1[i], at: 2)
-//               // self.category1sorted.append(self.category1[2])
-//            }
-//            if(self.category1[i].name.contains("Dinner")==true){
-//                 //self.category1sorted.insert(self.category1[i], at: 3)
-//               // self.category1sorted.append(self.category1[3])
-//            }
-//
-//            }
-//            }
-//            print(self.category1sorted.count)
-//            print(self.category1sorted)
+
+            
+            
+            
+            
+            self.category0.removeAll()
+            print(self.category0)
+            for i in 0...self.category1.count-1{
+                if(self.category1[i].type=="Breakfast")
+                {
+                    self.category0.insert(self.category1[i], at: 0)
+                }
+            }
+            
+            
+            for i in 0...self.category1.count-1{
+                if(self.category1[i].type=="Lunch")
+                {
+                    self.category0.insert(self.category1[i], at: 1)
+                }
+            }
+            for i in 0...self.category1.count-1{
+                if(self.category1[i].type=="Snack")
+                {
+                    self.category0.insert(self.category1[i], at: 2)
+                }
+            }
+            for i in 0...self.category1.count-1{
+                if(self.category1[i].type=="Dinner")
+                {
+                    self.category0.insert(self.category1[i], at: 3)
+                }
+            }
+            print(self.category0)
+          
             self.tbdaysshedule.dataSource=self
                 self.tbdaysshedule.delegate=self
             self.tbdaysshedule.reloadData()
-            
+            self.hideActivityIndicator()
           
             
-//            if(snapshot.childrenCount==0)
-//            {
-//                //self.tbdocterlist.isHidden=true
-//                
-//            }
-//            else{
-//                if let snapDict = snapshot.value  {
-//                    
-//                    
-//                    print(snapDict)
-//                    
-//                    
-//                    
-//                    
-//                   
-//                    self.tbdaysshedule.dataSource=self
-//                    self.tbdaysshedule.delegate=self
-//                    self.tbdaysshedule.reloadData()
-//                }
-//            }
+
         })
         
         
@@ -451,12 +452,12 @@ class DaySheduleVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
     {
         
         d.removeAll()
-        
-        var ds=programdetail.day.components(separatedBy: " ")[1]
+      showActivityIndicator()
+        let ds=programdetail.day.components(separatedBy: " ")[1]
          print(ds)
-        var d1:Int=Int(ds)!
+        let d1:Int=Int(ds)!
         print(d1)
-        var day:String=String(d1)
+       // var day:String=String(d1)
         dataref=FIRDatabase.database().reference()
         
         let all3 = FIRDatabase.database().reference(withPath:"Dish")
@@ -589,14 +590,14 @@ class DaySheduleVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
                 
                 
             }
-            
+            self.hideActivityIndicator()
             
             self.getprodetailforday()
             print(self.daypro.count)
           
 //                for i in 0...d1-1
 //                {
-                var i=1
+               // var i=1
                     self.category1.removeAll()
                     
                    print(d1)
@@ -652,12 +653,13 @@ class DaySheduleVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 //            
 //            
 //            }
+             self.hideActivityIndicator()
             print(self.category1.count)
             print(self.category1)
             self.tbdaysshedule.delegate=self
             self.tbdaysshedule.dataSource=self
             self.tbdaysshedule.reloadData()
-            
+            self.hideActivityIndicator()
         })
         
         
@@ -665,13 +667,44 @@ class DaySheduleVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         
         
         
-        
+         self.hideActivityIndicator()
         
      
         
         
     }
 
-    
+    func showActivityIndicator() {
+        
+        
+        
+        // DispatchQueue.main.async {
+        self.loadingView = UIView()
+        self.loadingView.frame = CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0)
+        self.loadingView.center = self.view.center
+        self.loadingView.backgroundColor = UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1)
+        self.loadingView.alpha = 0.7
+        self.loadingView.clipsToBounds = true
+        self.loadingView.layer.cornerRadius = 10
+        
+        self.spinner = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        self.spinner.frame = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 80.0)
+        self.spinner.center = CGPoint(x:self.loadingView.bounds.size.width / 2, y:self.loadingView.bounds.size.height / 2)
+        
+        self.loadingView.addSubview(self.spinner)
+        self.view.addSubview(self.loadingView)
+        self.spinner.startAnimating()
+        
+        
+        
+    }
+    func hideActivityIndicator() {
+        
+        // DispatchQueue.main.async {
+        loadingView.backgroundColor=UIColor.clear
+        self.spinner.stopAnimating()
+        self.loadingView.removeFromSuperview()
+        //}
+    }
 
 }

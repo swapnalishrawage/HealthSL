@@ -15,7 +15,10 @@ import FirebaseMessaging
 
 class StartDietVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
+    var spinner = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+    var loadingView: UIView = UIView()
     
+
     
     var _proname:String!
     var _proamm:String!
@@ -58,6 +61,7 @@ class StartDietVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
         navigationItem.backBarButtonItem?.title="< "
          navigationItem.title="DIET PROGRAM"
+        showActivityIndicator()
         retrivestandardDietprogram()
         
     
@@ -128,6 +132,8 @@ class StartDietVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
                 
                 
             print(doc.programDescription)
+                   print(doc.programType)
+                 print(doc.programdays)
                 destination.programdetail=doc
                 
                 print("new")
@@ -278,6 +284,7 @@ class StartDietVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
                     self.tbstartdiet.dataSource=self
                     self.tbstartdiet.delegate=self
                     self.tbstartdiet.reloadData()
+                    self.hideActivityIndicator()
                     if(self.startdiet.count>3)
                     {
                         self.tbstartdiet.isScrollEnabled=true
@@ -296,6 +303,7 @@ class StartDietVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
                 
         
             }
+self.hideActivityIndicator()
             
         }) { (error) in
             print(error.localizedDescription)
@@ -328,6 +336,37 @@ class StartDietVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         //  performSegue(withIdentifier: "squedetailclick", sender: nil)
     }
  
-    
+    func showActivityIndicator() {
+        
+        
+        
+        // DispatchQueue.main.async {
+        self.loadingView = UIView()
+        self.loadingView.frame = CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0)
+        self.loadingView.center = self.view.center
+        self.loadingView.backgroundColor = UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1)
+        self.loadingView.alpha = 0.7
+        self.loadingView.clipsToBounds = true
+        self.loadingView.layer.cornerRadius = 10
+        
+        self.spinner = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        self.spinner.frame = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 80.0)
+        self.spinner.center = CGPoint(x:self.loadingView.bounds.size.width / 2, y:self.loadingView.bounds.size.height / 2)
+        
+        self.loadingView.addSubview(self.spinner)
+        self.view.addSubview(self.loadingView)
+        self.spinner.startAnimating()
+        
+        
+        
+    }
+    func hideActivityIndicator() {
+        
+        // DispatchQueue.main.async {
+        loadingView.backgroundColor=UIColor.clear
+        self.spinner.stopAnimating()
+        self.loadingView.removeFromSuperview()
+        //}
+    }
     
 }

@@ -189,6 +189,24 @@ class dayProgram{
     }
     
     
+    
+    init(breakfastDishId:String,day:String,dinnerDishId:String,lunchDishId:String,snacksDishId:String,breakfastGID:String,lunchGID:String,dinnerGID:String,SnackGID:String,Title:String,Desc:String)
+    {
+        
+        _breakfastDishId=breakfastDishId
+        _day=day
+        _lunchDishId=lunchDishId
+        _dinnerDishId=dinnerDishId
+        _snacksDishId=snacksDishId
+        _breakfastGroupID=breakfastGID
+        _lunchGroupID=lunchGID
+        _dinnerGroupID=dinnerGID
+        _snacksGroupID=SnackGID
+        _title=Title
+        _desc=Desc
+
+    }
+    
     init(breakfastDishId:String,day:String,dinnerDishId:String,lunchDishId:String,snacksDishId:String,breakfastGID:String,lunchGID:String,dinnerGID:String,SnackGID:String,Title:String,Desc:String,ImgCU:String,dt:String)
     {
         

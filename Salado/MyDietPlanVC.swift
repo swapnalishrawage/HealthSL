@@ -11,7 +11,9 @@ import FirebaseDatabase
 import FirebaseStorage
 class MyDietPlanVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
-    
+    var spinner = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+    var loadingView: UIView = UIView()
+
     @IBOutlet weak var tbdiet: UITableView!
     var _proname:String!
     var _proamm:String!
@@ -42,9 +44,10 @@ class MyDietPlanVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        tbdiet.isScrollEnabled=true
         navigationItem.backBarButtonItem?.title="< "
-        navigationItem.title="MY DIET PROGRAM"
+        navigationItem.title="MY PROGRAM"
+        showActivityIndicator()
         retrivestandardDietprogram()
 
         // Do any additional setup after loading the view.
@@ -53,6 +56,13 @@ class MyDietPlanVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    override func viewWillAppear(_ animated: Bool) {
+       // showActivityIndicator()
+       //retrivestandardDietprogram()
+        tbdiet.reloadData()
+        tbdiet.delegate=self
+        tbdiet.dataSource=self
     }
     
 
@@ -93,9 +103,11 @@ class MyDietPlanVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
             //cell.layer.borderWidth=2
            // cell.updatecell(name: stdiet.programName, amount: stdiet.programPrice, rating: stdiet.programRating, thum: stdiet.programThumb, programinclude: "Program Include")
             
+            //stdiet.programdays
             
+            print(stdiet.programType)
             
-            cell.updatecell(name: stdiet.programName, day: stdiet.programdays, rating: stdiet.programRating, thum: stdiet.programThumb, programinclude: "Program Include")
+            cell.updatecell(name: stdiet.programName, day: stdiet.programdays, rating: stdiet.programRating, thum: stdiet.programThumb, programinclude: stdiet.programDescription,type:stdiet.programType)
             
             return cell
         }
@@ -141,8 +153,8 @@ class MyDietPlanVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         
         
         dataref.child("UserDietProgram").observeSingleEvent(of: .value, with: { (snapshot) in
-            
-         
+            self.hideActivityIndicator()
+         print(snapshot)
             if(snapshot.childrenCount==0)
             {
                 //self.tbdocterlist.isHidden=true
@@ -163,9 +175,9 @@ class MyDietPlanVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
                     
                         
 
-                      print(snapshot.childSnapshot(forPath: ID).childSnapshot(forPath: "userId").value)
                       
-                        var loginuser:String=UserDefaults.standard.value(forKey: "KEY") as! String
+                      
+                        let loginuser:String=UserDefaults.standard.value(forKey: "KEY") as! String
                         
                          // UserDefaults.standard.set(child.key, forKey: "KEY")
                         if let dayprogram1 = child.value as? [String:AnyObject]{
@@ -206,7 +218,7 @@ class MyDietPlanVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
                                 
                                 
                                 self._proamm=value1["programPrice"] as! String!
-                                     print(self._proamm)
+                                    print(self._proamm)
                                 self._prodes = value1["programDescription"] as! String!
                                 
                                 print(  self._prodes)
@@ -214,30 +226,43 @@ class MyDietPlanVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
                                 
                                 self._prorating = value1["programRatings"] as! String!
                                 
+                                print(self._prorating)
+                                print(self._proid)
                                 self._proimage = value1["programThumbnailUrl"] as! String!
+                                print(self._proimage)
                                 self._protype = value1["programType"] as! String!
                                 
-                                
+                                print(self._protype)
                                 self._proday = value1["programDays"] as! Int!
-                                self._dinnerinclude=value1["dinnerInclude"] as! Bool!
+                                
+                               print(self._proday)
+                        self._dinnerinclude=value1["dinnerInclude"] as! Bool!
                                 
                                 
-                                self._lunchinclude=value1["lunchInclude"] as! Bool!
+                                print(self._dinnerinclude)
+                        self._lunchinclude=value1["lunchInclude"] as! Bool!
                                 
-                                self._snacinclude=value1["snacksInclude"] as! Bool!
                                 
-                                self._breakfastinclude=value1["breakfastInclude"] as! Bool!
+                               print(self._lunchinclude)
+                        self._snacinclude=value1["snacksInclude"] as! Bool!
+                                
+                               print(self._snacinclude)
+                                
+                                
+                self._breakfastinclude=value1["breakfastInclude"] as! Bool!
                                 
                                 
                                 
                                 
                                
-                                self._customized=value1["customized"] as! Bool!
+                                // print(self._breakfastinclude)
+                        self._customized=value1["customized"] as! Bool!
                                 
+                                   //print(self._customized)
                                 if let value0 = value1["dayProgram"] as? [String:AnyObject]{
                                     
                                     self._day=value0["day"] as! String!
-                                    
+                                    print(  self._day)
                                     
                                 }
                                 
@@ -258,7 +283,7 @@ class MyDietPlanVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
                             
                             
                             
-                            let m = StartDiet(dinnerinclud: self._dinnerinclude, lunchinclud: self._lunchinclude, programday: self._proday, programdes: self._prodes, programid: self._proid, programName: self._proname, programprice: self._proamm, programrating: self._prorating, programthub: self._proimage, programtype: self._protype, programamount: self._proamm, snackinclude: self._snacinclude, breakfastinclude: self._breakfastinclude, customise: self._customized,ID:ID,Enddate:self._endDate,StartDate:self._startDate,Userid:self._userId1)
+                            let m = StartDiet(dinnerinclud: self._dinnerinclude, lunchinclud: self._lunchinclude, programday: self._proday, programdes: self._prodes, programid: self._proid, programName: self._proname, programprice:self._proamm, programrating: self._prorating, programthub:self._proimage, programtype:self._protype, programamount:self._proamm, snackinclude:self._snacinclude, breakfastinclude: self._breakfastinclude, customise: self._customized,ID:ID,Enddate:self._endDate,StartDate:self._startDate,Userid:self._userId1)
                             
                             
                             self.startdiet.append(m)
@@ -301,7 +326,8 @@ class MyDietPlanVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
                     self.tbdiet.dataSource=self
                     self.tbdiet.delegate=self
                     self.tbdiet.reloadData()
-                    if(self.startdiet.count>3)
+                    self.hideActivityIndicator()
+                    if(self.startdiet.count==3)
                     {
                         self.tbdiet.isScrollEnabled=true
                     }
@@ -319,6 +345,7 @@ class MyDietPlanVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
                 
                 
             }
+            self.hideActivityIndicator()
             
         }) { (error) in
             print(error.localizedDescription)
@@ -330,4 +357,37 @@ class MyDietPlanVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         
     }
 
+    
+    func showActivityIndicator() {
+        
+        
+        
+        // DispatchQueue.main.async {
+        self.loadingView = UIView()
+        self.loadingView.frame = CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0)
+        self.loadingView.center = self.view.center
+        self.loadingView.backgroundColor = UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1)
+        self.loadingView.alpha = 0.7
+        self.loadingView.clipsToBounds = true
+        self.loadingView.layer.cornerRadius = 10
+        
+        self.spinner = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        self.spinner.frame = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 80.0)
+        self.spinner.center = CGPoint(x:self.loadingView.bounds.size.width / 2, y:self.loadingView.bounds.size.height / 2)
+        
+        self.loadingView.addSubview(self.spinner)
+        self.view.addSubview(self.loadingView)
+        self.spinner.startAnimating()
+        
+        
+        
+    }
+    func hideActivityIndicator() {
+        
+        // DispatchQueue.main.async {
+        loadingView.backgroundColor=UIColor.clear
+        self.spinner.stopAnimating()
+        self.loadingView.removeFromSuperview()
+        //}
+    }
 }

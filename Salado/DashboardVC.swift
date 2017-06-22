@@ -43,7 +43,7 @@ class DashboardVC: UIViewController {
         super.viewDidLoad()
         scview.isScrollEnabled=false
                btnback.isEnabled=false
-    navigationItem.title="HEALTHY LIFESTYLE"
+    navigationItem.title="Sallado"
         navigationItem.leftBarButtonItem?.title=" "
        // navigationController?.navigationItem.backBarButtonItem?.title="< Back"
 //scrimg.image = imgarr[index+1]
@@ -217,12 +217,15 @@ view1.layer.cornerRadius=5
     }
     func selectcrashEaters()
     {
+         UserDefaults.standard.set("CE", forKey: "Page")
         performSegue(withIdentifier: "squedaaruchakna", sender: nil)
        // performSegue(withIdentifier: "squecrasheater", sender: nil)
         
     }
     func selectDaaruChakhana()
     {
+        
+        UserDefaults.standard.set("DC", forKey: "Page")
         performSegue(withIdentifier: "squedaaruchakna", sender: nil)
     }
     
@@ -259,6 +262,16 @@ view1.layer.cornerRadius=5
     
     @IBAction func myaccountclick(_ sender: Any) {
         performSegue(withIdentifier: "squemyacccount", sender: nil)
+    }
+    @IBAction func Myorderclick(_ sender: Any) {
+        
+        let mainstorybord:UIStoryboard=UIStoryboard(name: "Main", bundle: nil)
+        let des=mainstorybord.instantiateViewController(withIdentifier: "MyorderVC") as! MyorderVC
+        
+        
+        
+        
+        self.navigationController?.pushViewController(des, animated: true)
     }
     
     @IBAction func aboutclick(_ sender: Any) {

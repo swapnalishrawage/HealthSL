@@ -30,7 +30,7 @@ class DaylistCell: UITableViewCell {
 
     
     
-    func updatecell(image:String,Day:String,Desc:String,date1:String)
+    func updatecell(image:String,Day:String,Desc:String,date1:String,title:String)
     {
         //lblhide.isHidden=true
         lbldate.text=date1
@@ -39,7 +39,7 @@ class DaylistCell: UITableViewCell {
         btnday.setTitle(Day, for: UIControlState.normal)
         btnday.layer.cornerRadius=5
         view1.layer.cornerRadius=5
-        lblday.text=Day
+        lblday.text=title
         lbldescription.text=Desc
         imgday.isHidden=false
         
@@ -49,16 +49,17 @@ class DaylistCell: UITableViewCell {
         let date = Date()
         print(date)
         let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "dd/MM/yyyy"
+        dateformatter.dateFormat = "dd MMM yyyy"
         let d:String=dateformatter.string(from: date)
         
         
         dateformatter.amSymbol="AM"
         dateformatter.pmSymbol="PM"
-        dateformatter.dateFormat="dd/MM/yyyy"
+        dateformatter.dateFormat="dd MMM yyyy"
         print(d)
        let m=dateformatter.date(from: date1)
-        var j:String=date1.components(separatedBy: "/")[0]
+        print(m!)
+        let j:String=date1.components(separatedBy: "/")[0]
         if(j=="30" || j>"30")
         {
             
@@ -70,7 +71,7 @@ class DaylistCell: UITableViewCell {
         
        
        if date.compare(m!) == ComparisonResult.orderedDescending {
-        imgday.image = UIImage.fontAwesomeIcon(name:.check, textColor: UIColor.blue, size: CGSize(width: 35, height: 35))
+        imgday.image = UIImage.fontAwesomeIcon(name:.checkCircle, textColor:UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 35, height: 35))
             imgday.isHidden=false
        UserDefaults.standard.set("c", forKey: "img")
         if(d==date1)

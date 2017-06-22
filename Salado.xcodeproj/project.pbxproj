@@ -69,6 +69,8 @@
 		3255D7C61ECC6A7C00FEE2CA /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3255D7C51ECC6A7C00FEE2CA /* DashboardVC.swift */; };
 		325B4C8D1EDBFDF5005984F1 /* OrderedFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325B4C8C1EDBFDF5005984F1 /* OrderedFood.swift */; };
 		325B4C911EDC0262005984F1 /* foodorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325B4C901EDC0262005984F1 /* foodorder.swift */; };
+		325DEA271EFB987C00AA987A /* MyorderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325DEA261EFB987C00AA987A /* MyorderVC.swift */; };
+		325DEA291EFB9CE800AA987A /* MyOrdercell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325DEA281EFB9CE800AA987A /* MyOrdercell.swift */; };
 		32CF9EA61EDC05D600F58DB4 /* OrderFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CF9EA51EDC05D600F58DB4 /* OrderFood.swift */; };
 		32D815AF1ECEC1CC007E1F75 /* MyAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D815AE1ECEC1CC007E1F75 /* MyAccountVC.swift */; };
 		32D815B11ECF2461007E1F75 /* MenuItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D815B01ECF2461007E1F75 /* MenuItemVC.swift */; };
@@ -169,6 +171,8 @@
 		3255D7C51ECC6A7C00FEE2CA /* DashboardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardVC.swift; sourceTree = "<group>"; };
 		325B4C8C1EDBFDF5005984F1 /* OrderedFood.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderedFood.swift; sourceTree = "<group>"; };
 		325B4C901EDC0262005984F1 /* foodorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = foodorder.swift; sourceTree = "<group>"; };
+		325DEA261EFB987C00AA987A /* MyorderVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyorderVC.swift; sourceTree = "<group>"; };
+		325DEA281EFB9CE800AA987A /* MyOrdercell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyOrdercell.swift; sourceTree = "<group>"; };
 		32CF9EA51EDC05D600F58DB4 /* OrderFood.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderFood.swift; sourceTree = "<group>"; };
 		32D815AE1ECEC1CC007E1F75 /* MyAccountVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAccountVC.swift; sourceTree = "<group>"; };
 		32D815B01ECF2461007E1F75 /* MenuItemVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItemVC.swift; sourceTree = "<group>"; };
@@ -258,6 +262,7 @@
 				3213663B1EF1313100D4DA21 /* DaylistCell.swift */,
 				3213663F1EF1487800D4DA21 /* Dayshedulecell.swift */,
 				324556F01EF261DE004E5DEE /* ChangemenuCell.swift */,
+				325DEA281EFB9CE800AA987A /* MyOrdercell.swift */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -286,6 +291,7 @@
 				321366391EF130F100D4DA21 /* DayListVC.swift */,
 				3213663D1EF13FD100D4DA21 /* DayShedule.swift */,
 				324556EE1EF260C6004E5DEE /* ChangeMenuVC.swift */,
+				325DEA261EFB987C00AA987A /* MyorderVC.swift */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -617,6 +623,7 @@
 				324D7C6C1ED6F4AF00605DA7 /* doctorHolidays.swift in Sources */,
 				320D502A1ED8182800F17013 /* Dish.swift in Sources */,
 				3255D7C61ECC6A7C00FEE2CA /* DashboardVC.swift in Sources */,
+				325DEA291EFB9CE800AA987A /* MyOrdercell.swift in Sources */,
 				32D815B11ECF2461007E1F75 /* MenuItemVC.swift in Sources */,
 				32CF9EA61EDC05D600F58DB4 /* OrderFood.swift in Sources */,
 				32D815AF1ECEC1CC007E1F75 /* MyAccountVC.swift in Sources */,
@@ -627,6 +634,7 @@
 				046175C21EDB0C3F000BC3E2 /* BookAppoitmentVC.swift in Sources */,
 				3213663E1EF13FD100D4DA21 /* DayShedule.swift in Sources */,
 				32528DA71EE6C93A0052BF80 /* samplevc.swift in Sources */,
+				325DEA271EFB987C00AA987A /* MyorderVC.swift in Sources */,
 				32DD0BCE1EE0154900CCE7AF /* Utils.swift in Sources */,
 				325529271ED3109C00C994A5 /* categorycell.swift in Sources */,
 				3255BEF41ECD885100E891F7 /* docterlistcell.swift in Sources */,

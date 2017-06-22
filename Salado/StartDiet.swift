@@ -278,6 +278,7 @@ class StartDiet{
             _breakfastinclude=breakfastinclude
         _customise=customise
         _id=ID
+        _programType=programtype
       
     
     }
@@ -303,6 +304,7 @@ class StartDiet{
         _endDate=Enddate
         _startDate=StartDate
         _userId=Userid
+        _programType=programtype
         
         
     }

@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import FontAwesome_swift
 
 class Dayshedulecell: UITableViewCell {
+    @IBOutlet weak var img: UIImageView!
 
     @IBOutlet weak var btnchange: UIButton!
     @IBOutlet weak var lbldesc: UILabel!
@@ -28,18 +30,21 @@ class Dayshedulecell: UITableViewCell {
     
     func updatecell(image:String,name:String,desc:String,CU:String,dat:String)
     {
-        
+       
+      
         let date = Date()
         print(date)
         let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "dd/MM/yyyy"
+        dateformatter.dateFormat = "dd MMM yyyy"
         let d:String=dateformatter.string(from: date)
         
-        btnchange.layer.cornerRadius=5
+        //btnchange.layer.cornerRadius=5
         lblname.text=name
         lbldesc.text=desc
         
         
+      
+        btnchange.setImage(UIImage.fontAwesomeIcon(name: .refresh,textColor:UIColor(red: 106/255, green: 97/255, blue: 6/255, alpha: 1), size: CGSize(width: 30, height: 30)), for: UIControlState.normal)
         
         
         if(CU=="c")
@@ -51,7 +56,8 @@ class Dayshedulecell: UITableViewCell {
             
             
             if(dat==d){
-        var n1:String=name.components(separatedBy: ":")[0]
+                
+        let n1:String=name.components(separatedBy: ":")[0]
         
         let hour = Calendar.current.component(.hour, from: Date())
          let min = Calendar.current.component(.minute, from: Date())
@@ -60,11 +66,24 @@ class Dayshedulecell: UITableViewCell {
     if(min>0 && hour==7)
     {
         btnchange.isHidden=true
+        
+        
+        if(n1=="Lunch" || n1=="Snack" || n1=="Dinner" )
+        {
+            btnchange.isHidden=false
+        }
+        
+        
+        
             }
     else{
         btnchange.isHidden=false
+        if(n1=="Lunch" || n1=="Dinner" || n1=="Snack"){
+            btnchange.isHidden=false
+     
             }
                         print("Breakfast time")
+        }
         }
         else if(hour>7 && hour<=11 && (n1=="Lunch" || n1=="Dinner" || n1=="Snack"))
         {
@@ -72,10 +91,24 @@ class Dayshedulecell: UITableViewCell {
             
             if(min>0 && hour==11)
             {
+                
                 btnchange.isHidden=true
+                
+                if( n1=="Snack" || n1=="Dinner" )
+                {
+                    btnchange.isHidden=false
+                }
+
+                
+                
             }
             else{
+                
                 btnchange.isHidden=false
+                if(n1=="Lunch" || n1=="Snack" || n1=="Dinner" )
+                {
+                    btnchange.isHidden=false
+                }
             }
             
            print("Lunch time")
@@ -86,10 +119,17 @@ class Dayshedulecell: UITableViewCell {
             
             if(min>0 && hour==14)
             {
-                btnchange.isHidden=false
+                btnchange.isHidden=true
+                if(n1=="Dinner"){
+                    btnchange.isHidden=false
+                }
             }
             else{
-                btnchange.isHidden=true
+                btnchange.isHidden=false
+                if(n1=="Snack" || n1=="Dinner")
+                {
+                  btnchange.isHidden=false
+                }
             }
             print("snack time")
             

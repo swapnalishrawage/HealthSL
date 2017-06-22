@@ -31,13 +31,13 @@ class MyDietPlanCell: UITableViewCell {
     
     
     
-    func updatecell(name:String,day:Int,rating:String,thum:String,programinclude:String)
+    func updatecell(name:String,day:Int,rating:String,thum:String,programinclude:String,type:String)
     {
         
         
        lblproname.text=name
-        lblrate.text=rating
-        lblday.text="Day "+String(day)
+        lblrate.text=String(day)
+        lblday.text=type//"Day "+String(day)
         lblproinclude.text=programinclude
         
         

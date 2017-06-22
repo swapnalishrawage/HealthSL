@@ -52,6 +52,9 @@ class MenucellCollectionViewCell: UICollectionViewCell {
         (_ sender: Any) {
         stepper.isHidden=false
         btnadd.isHidden=true
+        
+        //stepper.value=stepper.value+1
+        
        // stepper.addTarget(self, action:#selector(MenuItemVC.clickonstepper, for:UIControlEvents.valueChanged)
         
         

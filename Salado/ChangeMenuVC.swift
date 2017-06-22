@@ -17,7 +17,9 @@ class ChangeMenuVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
     @IBOutlet weak var changemenuview: UIView!
     
     @IBOutlet weak var btncancle: UIButton!
-    
+    var spinner = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+    var loadingView: UIView = UIView()
+
     @IBOutlet weak var btndone: UIButton!
     var _grname:String!
     var _grpid:String!
@@ -42,7 +44,7 @@ class ChangeMenuVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 var dg1=[DishGroup]()
     override func viewDidLoad() {
         super.viewDidLoad()
-
+showActivityIndicator()
         print(selectgroupid.groupID)
          print(selectgroupid.groupName)
         changemenuview.layer.cornerRadius=5
@@ -79,7 +81,7 @@ var dg1=[DishGroup]()
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let cell=tableView.dequeueReusableCell(withIdentifier: "ChangemenuCell", for: indexPath) as? ChangemenuCell{
-            var dish=category1[indexPath.row]
+            let dish=category1[indexPath.row]
             
             cell.updatecell(image: dish.image, name: dish.name)
             //var m=dg[indexPath.row]
@@ -93,16 +95,32 @@ var dg1=[DishGroup]()
         return UITableViewCell()
     }
     
+   
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
-        var dish=category1[indexPath.row]
+       print(indexPath.row)
+        let dish=category1[indexPath.row]
      
+        
+          if let cell = tableView.cellForRow(at: indexPath as IndexPath) {
+             cell.accessoryType = .checkmark
+        
+           }
+
+        let indexPath = tableView.indexPathForSelectedRow //optional, to get from any UIButton for example
+    
+        let currentCell = tableView.cellForRow(at: indexPath!) as! ChangemenuCell
+    
+     // currentCell.imgcheck.image = UIImage.fontAwesomeIcon(name:.checkCircle, textColor:UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1), size: CGSize(width: 35, height: 35))
+        currentCell.backgroundColor=UIColor.white
+        currentCell.backgroundColor=UIColor.white
+       //imgcheck.image = UIImage.fontAwesomeIcon(name:.check, textColor: UIColor.white, size: CGSize(width: 35, height: 35))
        UserDefaults.standard.set(dish.dishId, forKey: "NewDishId")
         UserDefaults.standard.set(dish.name, forKey: "NewDishName")
-        UserDefaults.standard.set(dish.image, forKey: "NewDishImage")
+       UserDefaults.standard.set(dish.image, forKey: "NewDishImage")
         UserDefaults.standard.set(selectgroupid.groupName, forKey: "GroupName")
-        
-        
+    
+    
        // let dish1=Dish(_dContent: "1", _dDescription: "" ,_dId: self._dishId, _dIngredients:"1", _dName: self._dishName, _dRating:"99%", _dPrice: "", _dThumbnail: self._dishThumbnail, _dType: "Veg", _fPreparationTime: "1")
         
         
@@ -110,16 +128,30 @@ var dg1=[DishGroup]()
 
         
     }
+   func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    if let cell = tableView.cellForRow(at: indexPath as IndexPath) {
+        cell.accessoryType = .none
+        
+    }
+//        let indexPath = tableView.indexPathForSelectedRow //optional, to get from any UIButton for example
+//        
+//        let currentCell = tableView.cellForRow(at: indexPath!) as! ChangemenuCell
+//        currentCell.imgcheck.isHidden=true
+//        currentCell.imgcheck.image = UIImage.fontAwesomeIcon(name:.checkCircle, textColor:UIColor.white, size: CGSize(width: 35, height: 35))
+//        currentCell.backgroundColor=UIColor.white
+
+    }
+
     @IBAction func doneclick(_ sender: Any) {
 
-        var days:String=UserDefaults.standard.value(forKey: "Day") as! String
-        var n:String=days.components(separatedBy: " ")[1]
+        let days:String=UserDefaults.standard.value(forKey: "Day") as! String
+        let n:String=days.components(separatedBy: " ")[1]
         print(n)
         
-        var d1:Int=Int(n)!-1
+        let d1:Int=Int(n)!-1
         
-        var sd1:String=String(d1)
-        var Ndishid:String=UserDefaults.standard.value(forKey: "NewDishId") as! String
+        let sd1:String=String(d1)
+        let Ndishid:String=UserDefaults.standard.value(forKey: "NewDishId") as! String
         
         
         
@@ -142,8 +174,7 @@ var dg1=[DishGroup]()
         {
             userRef.updateChildValues(["breakfastDishID": Ndishid])
             
-            // userRef.setValue(Ndishid, forUndefinedKey: "breakfastDishID")
-        }
+                   }
         else if(selectgroupid.groupName=="Snack")
         {
             userRef.updateChildValues(["snacksDishId": Ndishid])
@@ -261,6 +292,7 @@ var dg1=[DishGroup]()
                                     self.tbchangemenu.delegate=self
                                     self.tbchangemenu.dataSource=self
                                     self.tbchangemenu.reloadData()
+                                    self.hideActivityIndicator()
                                 }
                                 
                                 
@@ -507,7 +539,7 @@ var dg1=[DishGroup]()
                     print(snapshot.childSnapshot(forPath: "0").childSnapshot(forPath: "dishID").value!)
                     
                     for child in snapDict{
-                        var ID = child.key as! String
+                        let ID = child.key 
                         //let shotKey = snapshot.children.nextObject() as! NSObject
                         
                         if let dayprogram1 = child.value as? [String:AnyObject]{
@@ -553,7 +585,7 @@ var dg1=[DishGroup]()
 
                             
                             print(self._grname.contains(self.selectgroupid.groupName))
-                            var m:Bool=self._grname.contains(self.selectgroupid.groupName)
+                            //var m:Bool=self._grname.contains(self.selectgroupid.groupName)
                             
                             if(self._grpid==self.selectgroupid.groupID)
                             {
@@ -607,5 +639,37 @@ var dg1=[DishGroup]()
         // Pass the selected object to the new view controller.
     }
     */
+    func showActivityIndicator() {
+        
+        
+        
+        // DispatchQueue.main.async {
+        self.loadingView = UIView()
+        self.loadingView.frame = CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0)
+        self.loadingView.center = self.view.center
+        self.loadingView.backgroundColor = UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1)
+        self.loadingView.alpha = 0.7
+        self.loadingView.clipsToBounds = true
+        self.loadingView.layer.cornerRadius = 10
+        
+        self.spinner = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        self.spinner.frame = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 80.0)
+        self.spinner.center = CGPoint(x:self.loadingView.bounds.size.width / 2, y:self.loadingView.bounds.size.height / 2)
+        
+        self.loadingView.addSubview(self.spinner)
+        self.view.addSubview(self.loadingView)
+        self.spinner.startAnimating()
+        
+        
+        
+    }
+    func hideActivityIndicator() {
+        
+        // DispatchQueue.main.async {
+        loadingView.backgroundColor=UIColor.clear
+        self.spinner.stopAnimating()
+        self.loadingView.removeFromSuperview()
+        //}
+    }
 
 }

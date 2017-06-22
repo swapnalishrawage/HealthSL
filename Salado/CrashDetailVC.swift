@@ -22,7 +22,10 @@ class CrashDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource 
     var _dishIngredients:String!
     var _dishName:String!
     var _dishThumbnail:String!
+    var spinner = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+    var loadingView: UIView = UIView()
     
+
     
     @IBOutlet weak var dayview: UIView!
     var _brakfastid:String!
@@ -30,6 +33,14 @@ class CrashDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource 
     var _lunchid:String!
     var _dinnerid:String!
     var _snackid:String!
+    
+    var _breakfastGroupID:String!
+    var _dinnerGroupID:String!
+    var _lunchGroupID:String!
+    var _snacksGroupID:String!
+    var _title:String!
+    var _desc:String!
+    
     @IBOutlet weak var btnnext: UIButton!
     @IBOutlet weak var lblday: UILabel!
     
@@ -57,11 +68,15 @@ class CrashDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSource 
     @IBOutlet weak var txtdetail: UITextView!
     
   var category1=[category]()
+    var category0=[category]()
    var d=[Dish]()
     var dayPro=[dayProgram]()
     override func viewDidLoad() {
         super.viewDidLoad()
 navigationItem.title=programdetail.programName
+        
+        print(programdetail.programType)
+        print(programdetail.programdays)
         txtdetail.setContentOffset(.zero, animated: false)
         txtdetail.scrollsToTop=true
                view1.layer.cornerRadius=5
@@ -88,17 +103,24 @@ navigationItem.title=programdetail.programName
        
    
    
-        getdayprogram()
-        retrivedishes()
+        //getdayprogram()
+        //retrivedishes()
         
 
                 
-        tblistnew.dataSource=self
-      tblistnew.delegate=self
-        tblistnew.reloadData()
+//        tblistnew.dataSource=self
+//      tblistnew.delegate=self
+//        tblistnew.reloadData()
         // Do any additional setup after loading the view.
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        getdayprogram()
+        retrivedishes()
+//        tblistnew.dataSource=self
+//        tblistnew.delegate=self
+//        tblistnew.reloadData()
+    }
     @IBAction func backclick(_ sender: Any) {
         
         let mainstorybord:UIStoryboard=UIStoryboard(name: "Main", bundle: nil)
@@ -114,51 +136,118 @@ navigationItem.title=programdetail.programName
         
         
         dataref=FIRDatabase.database().reference()
+        let uid:String=(UserDefaults.standard.value(forKey: "KEY") as? String)!
+       // UserDefaults.standard.set(child.key, forKey: "KEY")
+        let pid=NSUUID().uuidString
         
         
-        dataref.child("DoctorAppintments").observeSingleEvent(of: .value, with: { (snapshot) in
+        
+        
+        var daypro1 = [[ : ]]
+    
+        var dp:[String:AnyObject]!
+        for i in 0...dayPro.count-1
+        {
+        
+            dp=["breakfastDishID":dayPro[i].breakfastDishId as AnyObject," breakfastGroupID":/*OrderMenu[i]._dishQuantity as AnyObject*/dayPro[i].breakfastGroupID as AnyObject,"day":dayPro[i].day as AnyObject,"desc":dayPro[i].desc as AnyObject,"dinnerDishId":dayPro[i].dinnerDishId as AnyObject,"dinnerGroupID":dayPro[i].dinnerGroupID as AnyObject,"lunchDishID":dayPro[i].lunchDishId as AnyObject,"lunchGroupID":dayPro[i].lunchGroupID as AnyObject,"snacksDishId":dayPro[i].snacksDishId as AnyObject,"snacksGroupID":dayPro[i].snacksGroupID as AnyObject,"title":dayPro[i].title as AnyObject]
             
-            print(snapshot)
-          //
+            daypro1.append(dp)
             
-            
-           // let r=Mapper<sample>().map
-            
-               // let res = Mapper<ThreadDetailModel>().map(JSONObject: dict)
-            
-            
-           
-            
-            
-            
-            if(snapshot.childrenCount==0)
-            {
-                //self.tbdocterlist.isHidden=true
-                
-            }
-            else{
-                if let snapDict = snapshot.value as? [String:AnyObject] {
-                    
-                    print(snapshot.value!)
-                    
-                   
-                    for child in snapDict{
-                        //let ID = child.key
                         
-                        print(child)
-                        
-                       print(child.value)
-                      
-                        let res = Mapper<sample>().map(JSONObject: child.value)
-                        print(res!)
-              
-                    }
-                    
-                }
-            }
+        }
+        
+        
+ //   print(daypro1)
+        
+        
+        
+        
+        var m:[String:AnyObject]!
+        
+        
+    
+
+        print(daypro1)
+        
+        
+        m=["breakfastInclude":programdetail.breakfastinclude as AnyObject ,"customized":programdetail.customise as AnyObject ,"dayProgram":daypro1 as AnyObject  ,"dinnerInclude":programdetail.dinnerinclude as AnyObject,"lunchInclude":programdetail.lunchincluden as AnyObject,"programDays":programdetail.programdays as AnyObject, "programDescription":programdetail.programDescription as AnyObject ,"programId":pid as AnyObject,"programName":programdetail.programName as AnyObject,"programPrice":programdetail.programPrice as AnyObject, "programRatings":programdetail.programRating as AnyObject, "programThumbnailUrl":programdetail.programThumb as AnyObject,"programType":programdetail.programType as AnyObject,"snacksInclude":programdetail.snackinclude as AnyObject]
+        
+        //myArray.append(m)
+
+        let bookplan:[String:AnyObject]=["dietProgram":m as AnyObject,"endDate":"25/6/2017" as AnyObject,"startDate":"10/6/2017" as AnyObject,"userId":uid as AnyObject]
+        
+        
+        dataref.child("UserDietProgram").childByAutoId().setValue(bookplan)
+        
+    
+        let register1 = UIAlertController(title: "Book Plan", message: "You booked Plan Successfully. Enjoy the Healthy and Tasty Food. ", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Ok", style: .default, handler:{
+            action in
+            
+            //self.dismiss(animated: true, completion: nil)
+            
             
         })
+       
         
+        register1.addAction(cancelAction)
+        
+        self.present(register1, animated: true, completion: {  })
+        
+        
+        
+        //dataref.child("UserDietProgram").observeSingleEvent(of: .value, with: { (snapshot) in
+//            
+//            print(snapshot)
+//          //
+//            
+//            
+//           // let r=Mapper<sample>().map
+//            
+//               // let res = Mapper<ThreadDetailModel>().map(JSONObject: dict)
+//            
+//            
+//           
+//            
+//            
+//            
+////            if(snapshot.childrenCount==0)
+////            {
+////                //self.tbdocterlist.isHidden=true
+////                
+////            }
+////            else{
+////                if let snapDict = snapshot.value as? [String:AnyObject] {
+////                    
+////                    print(snapshot.value!)
+////                    
+////                   
+////                    for child in snapDict{
+////                        //let ID = child.key
+////                        
+////                        print(child)
+////                        
+////                       print(child.value)
+////                      
+////                        let res = Mapper<sample>().map(JSONObject: child.value)
+////                        print(res!)
+////              
+////                    }
+////                    
+////                }
+////            }
+//            
+//            
+//            
+//            
+//            
+//            
+//            
+//            
+//            
+//            
+//        })
+//        
 
         
         
@@ -187,7 +276,7 @@ navigationItem.title=programdetail.programName
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return category1.count
+        return category0.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -197,10 +286,11 @@ navigationItem.title=programdetail.programName
             
             
             //let m=dayPro[indexPath.row]
-            let m=category1[indexPath.row]
+            
+           // let m=category1[indexPath.row]
             
             
-            
+            let m=category0[indexPath.row]
             
             
           cell.updatecell(name: m.name, detail: m.detail, image:m.image)
@@ -263,9 +353,81 @@ navigationItem.title=programdetail.programName
                 self._brakfastid=snapshot.childSnapshot(forPath: m).childSnapshot(forPath: "breakfastDishID").value! as! String
                 
                 
+                
+                
+                
+                
+                let m0=self.nullToNil(value: snapshot.childSnapshot(forPath: m).childSnapshot(forPath: "breakfastGroupID").value as AnyObject?)
+                print(m0)
+                if(m0 != nil){
+                    self._breakfastGroupID=m0 as! String
+                }
+                else{
+                    self._breakfastGroupID=""
+                }
+
+                
+                
+                
+                
                 self._lunchid=snapshot.childSnapshot(forPath: m).childSnapshot(forPath: "lunchDishID").value! as! String
                 
+                
+                
+                
+                
+                self._lunchGroupID=snapshot.childSnapshot(forPath: m).childSnapshot(forPath: "lunchGroupID").value! as! String
+                
+
+                
+                
                 self._dinnerid=snapshot.childSnapshot(forPath: m).childSnapshot(forPath: "dinnerDishId").value! as! String
+                
+                
+                
+                
+                
+                
+                
+                
+                self._dinnerGroupID=snapshot.childSnapshot(forPath: m).childSnapshot(forPath: "dinnerGroupID").value! as! String
+                
+                
+                
+//                
+//                let m1=self.nullToNil(value: snapshot.childSnapshot(forPath: m).childSnapshot(forPath: "snacksDishId").value as AnyObject?)
+//                print(m1)
+//                if(m1 != nil){
+//                    self._snackid=m1 as! String
+//                }
+//                else{
+//                    self._snackid=""
+//                }
+                
+                
+                
+               
+                
+                
+                
+                self._snacksGroupID=snapshot.childSnapshot(forPath: m).childSnapshot(forPath: "snacksGroupID").value! as! String
+                
+                
+                
+                
+                
+                self._title=snapshot.childSnapshot(forPath: m).childSnapshot(forPath: "title").value! as! String
+                
+                
+                
+                
+                self._desc=snapshot.childSnapshot(forPath: m).childSnapshot(forPath: "desc").value! as! String
+                
+                
+                
+                
+                
+                
                 
                 
                 
@@ -275,7 +437,20 @@ navigationItem.title=programdetail.programName
                 
                 print( self._snackid)
                 
-                self.dayPro.append(dayProgram(breakfastDishId: self._brakfastid, day: self._day1, dinnerDishId: self._dinnerid, lunchDishId: self._lunchid, snacksDishId: self._snackid))
+                print(self._snacksGroupID)
+                print(self._desc)
+                print(self._title)
+                print(self._dinnerGroupID)
+                print(self._breakfastGroupID)
+                
+                self.dayPro.append(dayProgram(breakfastDishId: self._brakfastid, day: self._day1, dinnerDishId: self._dinnerid, lunchDishId: self._lunchid, snacksDishId: self._snackid,breakfastGID:self._breakfastGroupID,lunchGID:self._lunchGroupID,dinnerGID:self._dinnerGroupID,SnackGID:self._snacksGroupID,Title:self._title,Desc:self._desc))
+                
+                
+                
+                
+                
+                
+                
                 //self.dayPro.append(dayProgram(breakfastDishId: snapshot.childSnapshot(forPath: m).childSnapshot(forPath: "breakfastDishID").value! as! String, day: snapshot.childSnapshot(forPath: m).childSnapshot(forPath: "day").value! as! String, dinnerDishId: snapshot.childSnapshot(forPath: m).childSnapshot(forPath: "dinnerDishId").value! as! String, lunchDishId: snapshot.childSnapshot(forPath: m).childSnapshot(forPath: "lunchDishId").value! as! String, snacksDishId: snapshot.childSnapshot(forPath: m).childSnapshot(forPath: "snacksDishId").value! as! String))
                 
                 
@@ -392,19 +567,19 @@ print(dayInt)
                     {
                         
                         lblprogram.text="Breakfast:"
-                        self.category1.append(category(Name: "\(lblprogram.text!)\(self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image: self.d[m]._dishThumbnail))
+                        self.category1.append(category(Name: "\(lblprogram.text!)\(self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image: self.d[m]._dishThumbnail,type:"Breakfast"))
                         
                     }
                     if(self.d[m]._dishId==lunchid)
                     {
                         lblprogram.text="Lunch:"
-                        self.category1.append(category(Name:"\(lblprogram.text!) \(self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image:self.d[m]._dishThumbnail))
+                        self.category1.append(category(Name:"\(lblprogram.text!) \(self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image:self.d[m]._dishThumbnail,type:"Lunch"))
                         
                     }
                     if(self.d[m]._dishId==dinn)
                     {
                         lblprogram.text="Dinner:"
-                        self.category1.append(category(Name:"\(lblprogram.text!)\( self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image: self.d[m]._dishThumbnail))
+                        self.category1.append(category(Name:"\(lblprogram.text!)\( self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image: self.d[m]._dishThumbnail,type:"Dinner"))
                         
                     }
                     
@@ -412,7 +587,7 @@ print(dayInt)
                     {
                         lblprogram.text="Snack:"
 
-                        self.category1.append(category(Name:" \(lblprogram.text!)\(self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image: self.d[m]._dishThumbnail))
+                        self.category1.append(category(Name:" \(lblprogram.text!)\(self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image: self.d[m]._dishThumbnail,type:"Snack"))
                         
                     }
                     
@@ -426,11 +601,46 @@ print(dayInt)
                 
                 print(self.category1.count)
                 print(self.category1)
-                self.tblistnew.delegate=self
-                self.tblistnew.dataSource=self
-                self.tblistnew.reloadData()
+                
+                
+                
+//                self.tblistnew.delegate=self
+//                self.tblistnew.dataSource=self
+//                self.tblistnew.reloadData()
                 
             }
+            category0.removeAll()
+            print(category0)
+            for i in 0...category1.count-1{
+                if(category1[i].type=="Breakfast")
+                {
+                    category0.insert(category1[i], at: 0)
+                }
+            }
+            
+            
+            for i in 0...category1.count-1{
+                if(category1[i].type=="Lunch")
+                {
+                    category0.insert(category1[i], at: 1)
+                }
+            }
+            for i in 0...category1.count-1{
+                if(category1[i].type=="Snack")
+                {
+                    category0.insert(category1[i], at: 2)
+                }
+            }
+            for i in 0...category1.count-1{
+                if(category1[i].type=="Dinner")
+                {
+                    category0.insert(category1[i], at: 3)
+                }
+            }
+            print(category0)
+            self.tblistnew.delegate=self
+            self.tblistnew.dataSource=self
+            self.tblistnew.reloadData()
         }
     }
     func clickpre()
@@ -475,25 +685,25 @@ print(dayInt)
                     if(self.d[m]._dishId==t)
                     {
                         
-                        self.category1.append(category(Name: "Breakfast:\(self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image: self.d[m]._dishThumbnail))
+                        self.category1.append(category(Name: "Breakfast:\(self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image: self.d[m]._dishThumbnail,type:"Breakfast"))
                         
                     }
                     if(self.d[m]._dishId==dinn)
                     {
                         
-                        self.category1.append(category(Name:"Dinner:\( self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image: self.d[m]._dishThumbnail))
+                        self.category1.append(category(Name:"Dinner:\( self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image: self.d[m]._dishThumbnail,type:"Dinner"))
                         
                     }
                     if(self.d[m]._dishId==lunchid)
                     {
                         
-                        self.category1.append(category(Name:"Lunch: \(self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image: self.d[m]._dishThumbnail))
+                        self.category1.append(category(Name:"Lunch: \(self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image: self.d[m]._dishThumbnail,type:"Lunch"))
                         
                     }
                     if(self.d[m]._dishId==snackid)
                     {
                         
-                        self.category1.append(category(Name:" Snack:\(self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image: self.d[m]._dishThumbnail))
+                        self.category1.append(category(Name:" Snack:\(self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image: self.d[m]._dishThumbnail,type:"Snack"))
                         
                     }
                     
@@ -507,12 +717,49 @@ print(dayInt)
                 
                 print(self.category1.count)
                 print(self.category1)
-                self.tblistnew.delegate=self
-                self.tblistnew.dataSource=self
-                self.tblistnew.reloadData()
+                
+             
+//                self.tblistnew.delegate=self
+//                self.tblistnew.dataSource=self
+//                self.tblistnew.reloadData()
                 
             }
+            
+            
+            category0.removeAll()
+            for i in 0...category1.count-1{
+                if(category1[i].type=="Breakfast")
+                {
+                    category0.insert(category1[i], at: 0)
+                }
+            }
+            
+            
+            for i in 0...category1.count-1{
+                if(category1[i].type=="Lunch")
+                {
+                    category0.insert(category1[i], at: 1)
+                }
+            }
+            for i in 0...category1.count-1{
+                if(category1[i].type=="Snack")
+                {
+                    category0.insert(category1[i], at: 2)
+                }
+            }
+            for i in 0...category1.count-1{
+                if(category1[i].type=="Dinner")
+                {
+                    category0.insert(category1[i], at: 3)
+                }
+            }
+            
+            print(category0)
+            self.tblistnew.delegate=self
+            self.tblistnew.dataSource=self
+            self.tblistnew.reloadData()
         }
+        
     }
     
     func retrivedishes()
@@ -685,25 +932,25 @@ print(dayInt)
                         if(self.d[m]._dishId==t)
                         {
                             
-                            self.category1.append(category(Name: "Breakfast:\(self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image: self.d[m]._dishThumbnail))
+                            self.category1.append(category(Name: "Breakfast:\(self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image: self.d[m]._dishThumbnail,type:"Breakfast"))
                             
                         }
                         if(self.d[m]._dishId==dinn)
                         {
                             
-                            self.category1.append(category(Name:"Dinner:\( self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image: self.d[m]._dishThumbnail))
+                            self.category1.append(category(Name:"Dinner:\( self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image: self.d[m]._dishThumbnail,type:"Dinner"))
                             
                         }
                         if(self.d[m]._dishId==lunchid)
                         {
                             
-                            self.category1.append(category(Name:"Lunch: \(self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image:self.d[m]._dishThumbnail))
+                            self.category1.append(category(Name:"Lunch: \(self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image:self.d[m]._dishThumbnail,type:"Lunch"))
                             
                         }
                         if(self.d[m]._dishId==snackid)
                         {
                             
-                            self.category1.append(category(Name:" Snack:\(self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image: self.d[m]._dishThumbnail))
+                            self.category1.append(category(Name:" Snack:\(self.d[m]._dishName)", Detail: self.d[m]._dishIngredients, Image: self.d[m]._dishThumbnail,type:"Snack"))
                             
                         }
                     
@@ -717,11 +964,48 @@ print(dayInt)
                     
                     print(self.category1.count)
                     print(self.category1)
-                    self.tblistnew.delegate=self
-                    self.tblistnew.dataSource=self
-                    self.tblistnew.reloadData()
+               
+                    print(self.category0)
+//                    self.tblistnew.delegate=self
+//                    self.tblistnew.dataSource=self
+//                    self.tblistnew.reloadData()
                     
                 }
+                
+                self.category0.removeAll()
+                for i in 0...self.category1.count-1{
+                    if(self.category1[i].type=="Breakfast")
+                    {
+                        self.category0.insert(self.category1[i], at: 0)
+                    }
+                }
+                
+                
+                for i in 0...self.category1.count-1{
+                    if(self.category1[i].type=="Lunch")
+                    {
+                        self.category0.insert(self.category1[i], at: 1)
+                    }
+                }
+                for i in 0...self.category1.count-1{
+                    if(self.category1[i].type=="Snack")
+                    {
+                        self.category0.insert(self.category1[i], at: 2)
+                    }
+                }
+                for i in 0...self.category1.count-1{
+                    if(self.category1[i].type=="Dinner")
+                    {
+                        self.category0.insert(self.category1[i], at: 3)
+                    }
+                }
+                
+                print(self.category0)
+                
+                self.tblistnew.delegate=self
+                self.tblistnew.dataSource=self
+                self.tblistnew.reloadData()
+
             }
             
             
@@ -741,6 +1025,14 @@ print(dayInt)
         
         
     }
+    
+    func nullToNil(value : AnyObject?) -> AnyObject? {
+        if value is NSNull {
+            return nil
+        } else {
+            return value
+        }
+    }
  
     /*
     // MARK: - Navigation
@@ -751,5 +1043,38 @@ print(dayInt)
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func showActivityIndicator() {
+        
+        
+        
+        // DispatchQueue.main.async {
+        self.loadingView = UIView()
+        self.loadingView.frame = CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0)
+        self.loadingView.center = self.view.center
+        self.loadingView.backgroundColor = UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1)
+        self.loadingView.alpha = 0.7
+        self.loadingView.clipsToBounds = true
+        self.loadingView.layer.cornerRadius = 10
+        
+        self.spinner = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        self.spinner.frame = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 80.0)
+        self.spinner.center = CGPoint(x:self.loadingView.bounds.size.width / 2, y:self.loadingView.bounds.size.height / 2)
+        
+        self.loadingView.addSubview(self.spinner)
+        self.view.addSubview(self.loadingView)
+        self.spinner.startAnimating()
+        
+        
+        
+    }
+    func hideActivityIndicator() {
+        
+        // DispatchQueue.main.async {
+        loadingView.backgroundColor=UIColor.clear
+        self.spinner.stopAnimating()
+        self.loadingView.removeFromSuperview()
+        //}
+    }
 
 }
