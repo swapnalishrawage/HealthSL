@@ -37,6 +37,8 @@
 		324D7C6A1ED6F25D00605DA7 /* doctorAvalabilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324D7C691ED6F25D00605DA7 /* doctorAvalabilities.swift */; };
 		324D7C6C1ED6F4AF00605DA7 /* doctorHolidays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324D7C6B1ED6F4AF00605DA7 /* doctorHolidays.swift */; };
 		324D7C6E1ED6F58D00605DA7 /* doctorLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324D7C6D1ED6F58D00605DA7 /* doctorLocations.swift */; };
+		324FEA201F00CDB400E982F3 /* Rechability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324FEA1F1F00CDB400E982F3 /* Rechability.swift */; };
+		324FEA221F00E15F00E982F3 /* ExtraSignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324FEA211F00E15F00E982F3 /* ExtraSignUpVC.swift */; };
 		325221B61EF1067200AF9355 /* MyDietPlanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325221B51EF1067200AF9355 /* MyDietPlanVC.swift */; };
 		325221B81EF1070600AF9355 /* MyDietPlanCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325221B71EF1070600AF9355 /* MyDietPlanCell.swift */; };
 		32528DA51EE6C8CB0052BF80 /* sample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32528DA41EE6C8CB0052BF80 /* sample.swift */; };
@@ -130,6 +132,8 @@
 		324D7C691ED6F25D00605DA7 /* doctorAvalabilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = doctorAvalabilities.swift; sourceTree = "<group>"; };
 		324D7C6B1ED6F4AF00605DA7 /* doctorHolidays.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = doctorHolidays.swift; sourceTree = "<group>"; };
 		324D7C6D1ED6F58D00605DA7 /* doctorLocations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = doctorLocations.swift; sourceTree = "<group>"; };
+		324FEA1F1F00CDB400E982F3 /* Rechability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rechability.swift; sourceTree = "<group>"; };
+		324FEA211F00E15F00E982F3 /* ExtraSignUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtraSignUpVC.swift; sourceTree = "<group>"; };
 		325221B51EF1067200AF9355 /* MyDietPlanVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDietPlanVC.swift; sourceTree = "<group>"; };
 		325221B71EF1070600AF9355 /* MyDietPlanCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDietPlanCell.swift; sourceTree = "<group>"; };
 		32528DA41EE6C8CB0052BF80 /* sample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sample.swift; sourceTree = "<group>"; };
@@ -292,6 +296,8 @@
 				3213663D1EF13FD100D4DA21 /* DayShedule.swift */,
 				324556EE1EF260C6004E5DEE /* ChangeMenuVC.swift */,
 				325DEA261EFB987C00AA987A /* MyorderVC.swift */,
+				324FEA1F1F00CDB400E982F3 /* Rechability.swift */,
+				324FEA211F00E15F00E982F3 /* ExtraSignUpVC.swift */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -646,6 +652,8 @@
 				3214D7A41ECDD62B0044F71F /* MenucellCollectionViewCell.swift in Sources */,
 				32052C431ED5A5AA00CE4FC9 /* MedicalPanel.swift in Sources */,
 				3255D7581ECC4FB800FEE2CA /* AppDelegate.swift in Sources */,
+				324FEA201F00CDB400E982F3 /* Rechability.swift in Sources */,
+				324FEA221F00E15F00E982F3 /* ExtraSignUpVC.swift in Sources */,
 				325221B61EF1067200AF9355 /* MyDietPlanVC.swift in Sources */,
 				325529161ED2B85B00C994A5 /* orderitem.swift in Sources */,
 				324556F31EF26976004E5DEE /* DishGroup.swift in Sources */,
@@ -747,7 +755,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -790,7 +798,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

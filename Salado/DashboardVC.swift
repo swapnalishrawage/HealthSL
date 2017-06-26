@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 class DashboardVC: UIViewController {
     @IBOutlet weak var scrimg: UIImageView!
@@ -45,6 +47,10 @@ class DashboardVC: UIViewController {
                btnback.isEnabled=false
     navigationItem.title="Sallado"
         navigationItem.leftBarButtonItem?.title=" "
+        UserDefaults.standard.set("D", forKey: "Click")
+        UserDefaults.standard.set("D", forKey: "BackClick")
+        
+
        // navigationController?.navigationItem.backBarButtonItem?.title="< Back"
 //scrimg.image = imgarr[index+1]
        // animateImageView()
@@ -307,12 +313,19 @@ view1.layer.cornerRadius=5
         
         index = index < imgarr.count - 1 ? index + 1 : 0
     }
-
+    func logout() {
+        FBSDKLoginManager().logOut()
+    }
     @IBAction func logoutclick(_ sender: Any) {
         let appDomain = Bundle.main.bundleIdentifier
         UserDefaults.standard.removePersistentDomain(forName: appDomain!)
         print("session end")
-
+        let manager = FBSDKLoginManager()
+        manager.logOut()
+        
+        logout()
+        FBSDKAccessToken.setCurrent(nil)
+        FBSDKProfile.setCurrent(nil)
         let mainstorybord:UIStoryboard=UIStoryboard(name: "Main", bundle: nil)
         let des=mainstorybord.instantiateViewController(withIdentifier: "ViewController") as! ViewController
         //let frontview=UINavigationController.init(rootViewController:des)

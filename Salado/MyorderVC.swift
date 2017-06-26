@@ -11,6 +11,8 @@ import FirebaseDatabase
 
 class MyorderVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
     var dataref: FIRDatabaseReference!
+    var spinner = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+    var loadingView: UIView = UIView()
 
     var _orderDate:String!
     var _orderId:String!
@@ -69,7 +71,7 @@ class MyorderVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-       
+      // hideActivityIndicator()
     }
     
     //tableview delegation
@@ -78,11 +80,12 @@ class MyorderVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return orderfood.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell=tableView.dequeueReusableCell(withIdentifier: "MyOrdercell", for: indexPath) as? MyOrdercell{
-            var m=orderfood[indexPath.row]
+            let m=orderfood[indexPath.row]
             
             
             print(m._orderLastUpdate)
@@ -125,16 +128,12 @@ class MyorderVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
      {
         
         
-        
-        UserDefaults.standard.set("VD", forKey: "Click")//        if((UserDefaults.standard.array(forKey: "history")) != nil){
-//            let historyWords = (UserDefaults.standard.array(forKey: "history") as? [OrderedFood])!
-//            print(historyWords)
-//        }
-        
+        self.showActivityIndicator()
+        UserDefaults.standard.set("VD", forKey: "Click")//
        
         let pos = sender.convert(CGPoint.zero, to: tborder)
         let indexPath = tborder.indexPathForRow(at: pos)
-        let cell: MyOrdercell=tborder.cellForRow(at: indexPath!) as! MyOrdercell
+        //let cell: MyOrdercell=tborder.cellForRow(at: indexPath!) as! MyOrdercell
         
         let m=orderfood[(indexPath?.row)!]
         print(m._orderId)
@@ -144,10 +143,7 @@ class MyorderVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         {
             if(m._orderId==orderset[i]._orderid)
             {
-//               orderset[i]._dishId
-//                orderset[i]._dishimage
-//                orderset[i]._dishtype
-//                orderset[i]._dishQuantity
+
                 print(orderset[i])
                 ordersend.append(OrderedFood(_dishid: orderset[i]._dishId, _dishQuantity: orderset[i]._dishQuantity, _dishname: orderset[i]._dishname, _dishimage: orderset[i]._dishimage, _price: orderset[i]._price, _dishtype: orderset[i]._dishtype, orderId: orderset[i]._orderid))
                
@@ -160,6 +156,7 @@ class MyorderVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         
         
         if((UserDefaults.standard.value(forKey: "Move")) as! String == "0" ){
+            self.showActivityIndicator()
            performSegue(withIdentifier: "squeorderclick1", sender: self.ordersend)
         }
        else if((UserDefaults.standard.value(forKey: "Move")) as! String == "1")
@@ -173,7 +170,10 @@ class MyorderVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         print("viewdetail")
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "squeorderclick1" {
         if let destination=segue.destination as? orderDetail{
+            
             if let doc=sender as?  [OrderedFood]{
                 
                 
@@ -184,15 +184,16 @@ class MyorderVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
                 print("new")
             }
         }
-
+        }
     }
     func btnreorder(sender:UIButton)
     {
+        showActivityIndicator()
         UserDefaults.standard.set("RO", forKey: "Click")//
         
         let pos = sender.convert(CGPoint.zero, to: tborder)
         let indexPath = tborder.indexPathForRow(at: pos)
-        let cell: MyOrdercell=tborder.cellForRow(at: indexPath!) as! MyOrdercell
+       // let cell: MyOrdercell=tborder.cellForRow(at: indexPath!) as! MyOrdercell
         
         let m=orderfood[(indexPath?.row)!]
         print(m._orderId)
@@ -240,7 +241,7 @@ class MyorderVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
                 if let snapDict = snapshot.value as? [String:AnyObject] {
                     
                     for child in snapDict{
-                        var id=child.key as String
+                        let id=child.key as String
                         if let orderdate = child.value as? [String:AnyObject]{
                             
                             self._orderDate = orderdate["orderDate"] as! String!
@@ -420,11 +421,12 @@ let m0=self.nullToNil(value: snapshot.childSnapshot(forPath:id).childSnapshot(fo
                          print(self._orderDate)
                         print(self.orderedfood)
                         var name:String=""
+                        var price:String=""
+                        
                         for i in 0...self.orderedfood.count-1
                         {
                             
-                            
-                            
+                         
                             
             
                             name=name+self.orderedfood[i]._dishname+" "+"("+self.orderedfood[i]._dishQuantity+")"
@@ -444,10 +446,69 @@ let m0=self.nullToNil(value: snapshot.childSnapshot(forPath:id).childSnapshot(fo
                         print(name)
                         
                         self.orderfood.append(OrderFood(_orderDate: self._orderDate, _orderId: self._orderId, _orderLastUpdate: self._orderLastUpdate, _orderStatus: "", _orderTax: "", _orderTotalPrice: self._orderTotalPrice, _orderedFoodName:name, _userID: uid))
+                        
+                        
+                        
+                        
+                     
+                        
+                        
+                        
+                        
+//                        convertedArray.sort(by: {$0.compare($1) == .orderedAscending})
+//                        
+//                        //Another approach
+//                        convertedArray.sorted(by: {$0.timeIntervalSince1970 < $1.timeIntervalSince1970})
+                        
+                       // print(convertedArray)
                         self.orderedfood.removeAll()
                     }
                 }
 print(self.orderedfood)
+                
+                
+                
+                
+                var convertedArray: [OrderFood] = []
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "dd/MM/yyyy h:mm a"
+                dateFormatter.amSymbol="AM"
+                dateFormatter.pmSymbol="PM"
+                
+                for dat in 0...self.orderfood.count-1 {
+                    print(self.orderfood[dat]._orderDate)
+                    let date = dateFormatter.date(from: self.orderfood[dat]._orderDate)
+                    print(date!)
+                    
+                    
+                    convertedArray.append(OrderFood(_orderDate: date!, _orderId: self.orderfood[dat]._orderId, _orderLastUpdate: self.orderfood[dat]._orderLastUpdate, _orderStatus: self.orderfood[dat]._orderStatus, _orderTax: self.orderfood[dat]._orderTax, _orderTotalPrice: self.orderfood[dat]._orderTotalPrice, _orderedFoodName: self.orderfood[dat]._orderfoodname, _userID: self.orderfood[dat]._userID))
+                }
+              
+                               convertedArray.sort { $0._orderDate1 > $1._orderDate1 }
+                
+                 self.orderfood.removeAll()
+                var sorted:[OrderFood]=[]
+                
+                
+                let sortedArray = convertedArray.sorted {
+                    $0._orderDate1 > $1._orderDate1
+                }
+
+                
+                
+                print(convertedArray)
+                
+                for i in 0...convertedArray.count-1{
+                    let date1 = dateFormatter.string(from: convertedArray[i]._orderDate1)
+                    print(date1)
+                    
+                    
+                    self.orderfood.append(OrderFood(_orderDate: date1, _orderId:convertedArray[i]._orderId, _orderLastUpdate: convertedArray[i]._orderLastUpdate, _orderStatus:convertedArray[i]._orderStatus, _orderTax: convertedArray[i]._orderTax, _orderTotalPrice: convertedArray[i]._orderTotalPrice, _orderedFoodName:convertedArray[i]._orderfoodname, _userID: convertedArray[i]._userID))
+                }
+                
+                print(self.orderfood)
+                
                 self.tborder.dataSource=self
                 self.tborder.delegate=self
                 self.tborder.reloadData()
@@ -675,6 +736,40 @@ print(self.orderedfood)
         
         
     }
+    
+    func showActivityIndicator() {
+        
+        
+        
+        // DispatchQueue.main.async {
+        self.loadingView = UIView()
+        self.loadingView.frame = CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0)
+        self.loadingView.center = self.view.center
+        self.loadingView.backgroundColor = UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1)
+        self.loadingView.alpha = 0.7
+        self.loadingView.clipsToBounds = true
+        self.loadingView.layer.cornerRadius = 10
+        
+        self.spinner = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        self.spinner.frame = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 80.0)
+        self.spinner.center = CGPoint(x:self.loadingView.bounds.size.width / 2, y:self.loadingView.bounds.size.height / 2)
+        
+        self.loadingView.addSubview(self.spinner)
+        self.view.addSubview(self.loadingView)
+        self.spinner.startAnimating()
+        
+        
+        
+    }
+    func hideActivityIndicator() {
+        
+        // DispatchQueue.main.async {
+        loadingView.backgroundColor=UIColor.clear
+        self.spinner.stopAnimating()
+        self.loadingView.removeFromSuperview()
+        //}
+    }
+
     @IBOutlet weak var backclick: UIBarButtonItem!
     /*
     // MARK: - Navigation

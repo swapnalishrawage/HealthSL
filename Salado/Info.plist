@@ -44,6 +44,13 @@
 			</array>
 		</dict>
 	</array>
+    
+    
+    
+
+    
+    
+    
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookAppID</key>
@@ -81,5 +88,6 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+    
 </dict>
 </plist>

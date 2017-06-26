@@ -116,7 +116,7 @@ class DetailVC: UIViewController {
         
         btnbookappoint.layer.cornerRadius=5
         txtdetaildescription.scrollRangeToVisible(NSMakeRange(0, 0))
-      scview.contentSize = CGSize(width: scview.bounds.width, height: self.view3.frame.height+700     )//
+      scview.contentSize = CGSize(width: scview.bounds.width, height: self.view3.frame.height+800    )//
         scview.contentSize = CGSize(width: self.scview.bounds.width, height: self.scview.bounds.height)
             view3.layer.cornerRadius=5
         view1.layer.cornerRadius=5

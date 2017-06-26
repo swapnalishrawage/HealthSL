@@ -79,6 +79,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate  {
         
         
         
+        FBSDKLoginButton.classForCoder()
+        
+                
+        
         
         
         
@@ -288,9 +292,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate  {
 
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        
+        
+             print("Done login")
+        
+      
+       
+//        let mainstorybord:UIStoryboard=UIStoryboard(name: "Main", bundle: nil)
+//        let des=mainstorybord.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+//          let protectedPageNav = UINavigationController(rootViewController: des)
+//        protectedPageNav.navigationBar.tintColor=UIColor.white
+//        protectedPageNav.navigationBar.barTintColor=UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1)
+//        protectedPageNav.pushViewController(des, animated: true)
+//        
+        
+        
+        
+       
+        
+        //self.window?.rootViewController = protectedPageNav
+        
+        
+        
+
         return GIDSignIn.sharedInstance().handle(url as URL!,
                                                           sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
                                                            annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+        
+        
+  
     }
     
     
@@ -312,6 +343,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate  {
     
        // MARK: - Core Data stack
 
+    @available(iOS 10.0, *)
     lazy var persistentContainer: NSPersistentContainer = {
         /*
          The persistent container for the application. This implementation

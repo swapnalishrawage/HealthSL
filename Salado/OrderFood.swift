@@ -17,8 +17,18 @@ class OrderFood{
     private var orderedFood:[OrderedFood]!
     private var userID:String!
     private var orderfoodname:String!
+     private var orderDate1:Date!
     
-    
+    var _orderDate1:Date{
+        get{
+            
+            return orderDate1
+            
+        }
+        set{
+            orderDate1=newValue
+        }
+    }
     var _orderfoodname:String{
         get{
             
@@ -138,6 +148,23 @@ class OrderFood{
         orderTax=_orderTax
         orderTotalPrice=_orderTotalPrice
       orderfoodname=_orderedFoodName
+        userID=_userID
+        
+        
+        
+    }
+    
+    
+    init(_orderDate:Date,_orderId:String,_orderLastUpdate:String,_orderStatus:String,_orderTax:String,_orderTotalPrice:String,_orderedFoodName:String,_userID:String)
+    {
+        
+        orderDate1=_orderDate
+        orderId=_orderId
+        orderLastUpdate=_orderLastUpdate
+        orderStatus=_orderStatus
+        orderTax=_orderTax
+        orderTotalPrice=_orderTotalPrice
+        orderfoodname=_orderedFoodName
         userID=_userID
         
         

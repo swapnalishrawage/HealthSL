@@ -55,15 +55,25 @@ class ViewController: UIViewController,FBSDKLoginButtonDelegate,GIDSignInDelegat
     var dataref: FIRDatabaseReference!
     @IBOutlet weak var btnfb: FBSDKLoginButton!
     var obj:User!
+    let login: FBSDKLoginManager = FBSDKLoginManager()
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
 
+        self.btnfb.delegate = self
+        
+        if (FBSDKAccessToken.current() != nil)
+        {
+            //performSegueWithIdentifier("unwindToViewOtherController", sender: self)
+        }
+        else
+        {
+            btnfb.readPermissions = ["public_profile", "email", "user_friends"]
+        }
         
         
-        
-        
+       
        txtuname.backgroundColor=UIColor.clear
         txtuname.layer.borderColor=UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1).cgColor
         txtuname.layer.borderWidth=2
@@ -89,7 +99,7 @@ class ViewController: UIViewController,FBSDKLoginButtonDelegate,GIDSignInDelegat
         
         
         
-        //GIDSignIn.sharedInstance().signIn()
+//        GIDSignIn.sharedInstance().signIn()
    
         GIDSignIn.sharedInstance().delegate=self
          // GIDSignIn.sharedInstance().uiDelegate = self
@@ -160,7 +170,131 @@ class ViewController: UIViewController,FBSDKLoginButtonDelegate,GIDSignInDelegat
         
         
         
+        btnfb.addTarget(self, action: #selector(handleCustomFBLogin), for: UIControlEvents.touchUpInside)
     }
+    
+        func handleCustomFBLogin(){
+            
+            //  FBSDKLoginManager().logIn(withReadPermissions: ["email","public_profile"], from: self)
+            //   { (result, error) -> Void in
+            //  if error != nil {
+            //   print("custom FB Login Failed",error)
+            //       }
+            //}
+            //signInWithFacebook()
+          self.showEmail()
+            print(123)
+        }
+    func logInToBackendServerAuthIdToken(){
+        let user = GIDSignIn.sharedInstance().currentUser
+       // print(user!) // fatal error: unexpectedly found nil
+    }
+    func signInWithFacebook()
+    {
+        if (FBSDKAccessToken.current() != nil)
+        {
+            // User is already logged in, do work such as go to next view controller.
+            print("already logged in ")
+            self.returnUserData()
+            
+            return
+        }
+        let faceBookLoginManger = FBSDKLoginManager()
+        faceBookLoginManger.logIn(withReadPermissions: ["public_profile", "email", "user_friends"], handler: { (result, error)-> Void in
+            //result is FBSDKLoginManagerLoginResult
+            if (error != nil)
+            {
+                print("error is \(error)")
+            }
+            if (result?.isCancelled)!
+            {
+                //handle cancelations
+            }
+            if (result?.grantedPermissions.contains("email"))!
+            {
+                self.returnUserData()
+            }
+        })
+    }
+    
+    func returnUserData()
+    {
+        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
+        graphRequest.start(completionHandler: { (connection, result, error) -> Void in
+            
+            if ((error) != nil)
+            {
+                // Process error
+                print("Error: \(error)")
+            }
+            else
+            {
+                print("the access token is \(FBSDKAccessToken.current().tokenString)")
+                
+                var accessToken = FBSDKAccessToken.current().tokenString
+                
+               // var userID = result. //result.valueForKey("id") as! AnyObject
+                //var facebookProfileUrl = "http://graph.facebook.com/\(userID)/picture?type=large"
+                
+                
+                
+                print("fetched user: \(result)")
+                
+                
+            }
+        })
+    }
+    
+        func showEmail()
+        {
+            
+            
+            login.logIn(withReadPermissions: ["email", "public_profile"], from: self, handler: {(result, error) -> Void in
+                
+                if error != nil {
+                    // Handle Error
+                    NSLog("Process error")
+                } else if (result?.isCancelled)! {
+                    // If process is cancel
+                    NSLog("Cancelled")
+                }
+                else {
+                    // Parameters for Graph Request
+                    let parameters = ["fields": "email, name"]
+                    
+                    FBSDKGraphRequest(graphPath: "me", parameters: parameters).start {(connection, result, error) -> Void in
+                        if error != nil {
+                            NSLog(error.debugDescription)
+                            return
+                        }
+                        
+                        // Result
+                        print("Result: \(result)")
+                        
+                        // Handle vars
+                        if let result = result as? [String:String],
+                            let email: String = result["email"],
+                            let fbId: String = result["id"] {
+                            print("Email: \(email)")
+                            print("fbID: \(fbId)")
+                        }
+                    }
+                }
+            })
+            
+//            FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "email, id, name"]).start {
+//                (connection, result, err) in
+//                if(err == nil)
+//                {
+//                    print("result \(result)")
+//                }
+//                else
+//                {
+//                    print("error \(err)")
+//                }
+//            }
+            
+        }
 
     func sign(inWillDispatch signIn: GIDSignIn!, error: Error!) {
         //myActivityIndicator.stopAnimating()
@@ -170,9 +304,58 @@ class ViewController: UIViewController,FBSDKLoginButtonDelegate,GIDSignInDelegat
     func sign(_ signIn: GIDSignIn!,
               present viewController: UIViewController!) {
         self.present(viewController, animated: true, completion: nil)
-        
+        logInToBackendServerAuthIdToken()
         print("Sign in presented")
         
+    }
+    
+    
+    
+    func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!,
+                withError error: NSError!) {
+        if (error == nil) {
+            // Perform any operations on signed in user here.
+            let userId = user.userID                  // For client-side use only!
+            let idToken = user.authentication.idToken // Safe to send to the server
+            let name = user.profile.name
+            let email = user.profile.email
+            
+            let url = NSURL(string:  "https://www.googleapis.com/oauth2/v3/userinfo?access_token=\(user.authentication.accessToken)")
+            let session = URLSession.shared
+            session.dataTask(with: url! as URL) {(data, response, error) -> Void in
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                do {
+                    let userData = try JSONSerialization.jsonObject(with: data!, options:[]) as? [String:AnyObject]
+                    /*
+                     Get the account information you want here from the dictionary
+                     Possible values are
+                     "id": "...",
+                     "email": "...",
+                     "verified_email": ...,
+                     "name": "...",
+                     "given_name": "...",
+                     "family_name": "...",
+                     "link": "https://plus.google.com/...",
+                     "picture": "https://lh5.googleuserco...",
+                     "gender": "...",
+                     "locale": "..."
+                     
+                     so in my case:
+                     */
+                    let gender = userData!["gender"] as! String
+                    let locale = userData!["locale"] as! String
+                    
+                    
+                    
+                    print(gender)
+                } catch {
+                    NSLog("Account Information could not be loaded")
+                }
+            }
+            
+        } else {
+            print("\(error.localizedDescription)")
+        }
     }
     
     // Dismiss the "Sign in with Google" view
@@ -182,6 +365,8 @@ class ViewController: UIViewController,FBSDKLoginButtonDelegate,GIDSignInDelegat
         
         print("Sign in dismissed")
     }
+    
+    
 
     
     
@@ -307,7 +492,26 @@ class ViewController: UIViewController,FBSDKLoginButtonDelegate,GIDSignInDelegat
     btnfb.delegate = self
     }
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!)
-    {}
+    {
+    
+    
+        if ((error) != nil)
+        {
+            // Process error
+        }
+        else if result.isCancelled {
+            // Handle cancellations
+        }
+        else {
+            // If you ask for multiple permissions at once, you
+            // should check if specific permissions missing
+            if result.grantedPermissions.contains("email")
+            {
+                // Do work
+            }
+        }
+    
+    }
     
     
     
@@ -316,7 +520,9 @@ class ViewController: UIViewController,FBSDKLoginButtonDelegate,GIDSignInDelegat
     }
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        FBSDKGraphRequest.init(graphPath: "me", parameters: ["fields":"first_name, last_name, picture.type(large)"]).start { (connection, result, error) -> Void in
+        FBSDKGraphRequest.init(graphPath: "me", parameters: ["fields":"first_name, last_name"]).start { (connection, result, error) -> Void in
+            print(result!)
+            
 
     }
     }

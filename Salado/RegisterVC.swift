@@ -11,7 +11,12 @@ import Firebase
 import FirebaseDatabase
 import FontAwesome_swift
 
-class RegisterVC: UIViewController {
+class RegisterVC: UIViewController, UITextFieldDelegate {
+    
+    var datePickerView:UIDatePicker!
+    var keybord:Bool=false
+    var viewnew:UIView!
+   var viewnewshow:Bool=false
     @IBOutlet weak var imgclose: UIImageView!
     @IBOutlet weak var viewgender: UIView!
     @IBOutlet weak var lblemailid: UITextField!
@@ -25,6 +30,7 @@ class RegisterVC: UIViewController {
     var category:String!
     var gender:String!
     var isradio1Chk:Bool!
+    var otherthandob:Bool=false
      var iscatChk:Bool!
     @IBOutlet weak var imgf: UIImageView!
     
@@ -37,7 +43,25 @@ class RegisterVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+ viewnew=UIView(frame: CGRect(x: 0, y:view.bounds.height-200, width: view.bounds.width, height: 200))
+        viewnew.layer.cornerRadius=5
+        viewnew.layer.borderColor=UIColor.lightGray.cgColor
+        viewnew.layer.borderWidth=2
+        
+       
+      
+        NotificationCenter.default.addObserver(self, selector: #selector(RegisterVC.keyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(RegisterVC.keyboardWillHide(sender:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
+        
+        
+        
+        datePickerView = UIDatePicker(frame: CGRect(x: 0, y: 0, width: viewnew.frame.width, height: viewnew.frame.height)) //UIDatePicker(x: 0, y:, width: view.bounds.width, height: 200)
+       
+        datePickerView.backgroundColor = UIColor(red: 198/255, green: 212/255, blue: 193/255, alpha: 1)
+        datePickerView.datePickerMode = .date
+        viewnew.addSubview(datePickerView)
+        
+        
         viewcategory.layer.cornerRadius=5
         viewcategory.layer.borderWidth=2
         viewcategory.layer.borderColor=UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1).cgColor
@@ -93,6 +117,39 @@ class RegisterVC: UIViewController {
         lbllname.layer.borderWidth=2
         lbllname.layer.cornerRadius=5
 
+        
+        
+         lblbirthdate.inputView = datePickerView
+        lblbirthdate.inputView = viewnew
+
+        
+        
+        
+//        let singleTap3 = UITapGestureRecognizer(target: self, action: #selector(RegisterVC.birthdate))
+//        singleTap3.numberOfTapsRequired = 1 // you can change this value
+//       viewnew.isUserInteractionEnabled = true
+//        viewnew.addGestureRecognizer(singleTap3)
+        
+
+        
+        
+        
+        datePickerView.addTarget(self, action: #selector(RegisterVC.datePickerValueChanged(sender:)), for: UIControlEvents.valueChanged)
+       
+        datePickerView.maximumDate=NSDate() as Date
+        
+        
+        
+        lblbirthdate.backgroundColor=UIColor.clear
+        lblbirthdate.layer.borderColor=UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1).cgColor
+        lblbirthdate.layer.borderWidth=2
+        lblbirthdate.layer.cornerRadius=5
+        lblbirthdate.delegate=self
+        
+
+   
+        
+        
         
         
         
@@ -167,8 +224,129 @@ class RegisterVC: UIViewController {
         
         
         
+        let tap1: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(RegisterVC.dismissKeyboard))
+        
+        
+        lblbirthdate.addGestureRecognizer(tap1)
 
         // Do any additional setup after loading the view.
+    }
+    
+    func keyboardWillShow(sender: NSNotification) {
+       // self.view.frame.origin.y = -150 // Move view 150 points upward
+        keybord=true
+    }
+    
+    func keyboardWillHide(sender: NSNotification) {
+        self.view.frame.origin.y = 0 // Move view to original position
+          keybord=false
+    }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+       
+   //dismissKeyboard()
+        
+        if textField == lblbirthdate {
+            //lblbirthdate.text=" "
+        
+            
+//            lblbirthdate.resignFirstResponder()
+//            txtmobile.resignFirstResponder()
+//            lblfname.resignFirstResponder()
+//            lbllname.resignFirstResponder()
+//            lblemailid.resignFirstResponder()
+//            view.endEditing(true)
+
+            
+            
+            
+        if(keybord==false)
+        {
+            viewnewshow=true
+            lblbirthdate.placeholder="Birth Date"
+            
+            print("okk")
+            view.addSubview(viewnew)
+            viewnew.isHidden=false
+            datePickerView.isHidden=false
+            view.endEditing(true)
+            }
+        else if(keybord==true){
+              viewnewshow=false
+               view.endEditing(true)
+            dismissKeyboard()
+         
+            }
+            
+            //view.isUserInteractionEnabled=false
+           // myTextField was touched
+        }
+//        else{
+//            
+//            otherthandob=true
+//            if(keybord==true)
+//            {
+//               dismissKeyboard()
+//            }
+//            //dismissKeyboard()
+//        }
+
+    }
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        if textField == lblbirthdate {
+//        
+//        viewnew.isHidden=false
+//        
+//        }
+//    
+//        
+//    }
+//    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+//        if textField == lblbirthdate {
+//            
+//           viewnewshow=false
+//            
+//        }
+//
+//    }
+    
+    
+    
+//    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+//        if textField == lblbirthdate {
+//            dismissKeyboard()
+//            print("okk")
+//      
+//             view.addSubview(viewnew
+//            // myTextField was touched
+//        }
+//return true
+//    }
+   
+           func datePickerValueChanged(sender:UIDatePicker) {
+        lblbirthdate.placeholder="Birth Date"
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+          dateFormatter.dateFormat="dd MMM yyyy"
+            print(dateFormatter.string(from: sender.date))
+            
+   let m = dateFormatter.string(from: sender.date)
+      lblbirthdate.text = m.replacingOccurrences(of: ",", with: "")
+
+           //view.isUserInteractionEnabled=true
+        
+        datePickerView.isHidden=true
+            viewnew.isHidden=true
+    }
+    func birthdate()
+    {
+        print("ohhh")
+       performSegue(withIdentifier: "squedate", sender: nil)
+        
+        
+        
     }
     
     func imgfclick()
@@ -198,7 +376,7 @@ class RegisterVC: UIViewController {
     
     func imgmclick()
     {
-        
+       
     }
     
     func didTapRadio1() {
@@ -378,11 +556,38 @@ class RegisterVC: UIViewController {
         
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+         lblbirthdate.resignFirstResponder()
+        view.endEditing(true)
+        if(viewnewshow==true)
+        {
+            
+        }
+     return true
+    }
+    
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        //lblbirthdate.resignFirstResponder()
+//        view.endEditing(true)
+//    }
     func dismissKeyboard() {
         
-        
-        
+   //lblbirthdate.resignFirstResponder()
+        if(viewnewshow==true)
+        {
+           viewnew.isHidden=true
+            viewnewshow=false
+           //view.endEditing(true)
+        }
+        else{
+       // viewnew.isHidden=true
         view.endEditing(true)
+        }
+//        if(keybord==true)
+//        {
+//            
+//             view.endEditing(true)
+//        }
         
         //textmsg.resignFirstResponder()
         
@@ -468,14 +673,39 @@ class RegisterVC: UIViewController {
         print(category)
         
         let uname:String=lblfname.text!+" "+lbllname.text!
-                let register:[String:AnyObject]=["active":true as AnyObject ,"emailId":lblemailid.text! as AnyObject ,"firstLogin":true as AnyObject  ,"gender":gender as AnyObject,"isActive":true as AnyObject  ,"isFirstLogin":true as AnyObject,"mobileNo":txtmobile.text! as AnyObject, "password":"123456" as AnyObject ,"userDietType":category as AnyObject,"userId":uid as AnyObject,"userLoginID":lblemailid.text! as AnyObject, "userName":uname as AnyObject, "userType":"customer" as AnyObject]
+        
+        var m:[String:AnyObject]!
+        
+        
+            
+            m=["0":"  A-601 Mega Center,Hadpsar,pune 411028" as AnyObject]
+            
+     
+
+        
+        
+        let register:[String:AnyObject]=["active":true as AnyObject ,"birthday":lblbirthdate.text! as AnyObject,"emailId":lblemailid.text! as AnyObject ,"firstLogin":true as AnyObject  ,"gender":gender as AnyObject,"isActive":true as AnyObject  ,"isFirstLogin":true as AnyObject,"mobileNo":txtmobile.text! as AnyObject, "password":"123456" as AnyObject ,"userAddress":m as AnyObject,"userDietType":category as AnyObject,"userId":uid as AnyObject,"userLoginID":lblemailid.text! as AnyObject, "userName":uname as AnyObject, "userType":"customer" as AnyObject]
         
         
         
         
-        if(lbllname.text == "" || lbllname.text == "" || lblemailid.text == ""   || txtmobile.text == "")
+        
+      
+        
+        let selectedDate=lblbirthdate.text!
+        print(selectedDate)
+        
+        let d = NSDate()
+        print(d)
+        let dateFormatter1 = DateFormatter()
+        dateFormatter1.dateFormat = "dd MMM yyyy"
+        let dateString = dateFormatter1.string(from: d as Date)
+        print(dateString)
+        
+        
+        if(lblfname.text == "" && lbllname.text == "" && lblemailid.text == ""   && txtmobile.text == "" && lblbirthdate.text == "")
         {
-            let register1 = UIAlertController(title: "Error!", message: "Please Enter all Information", preferredStyle: .alert)
+            let register1 = UIAlertController(title: "Error", message: "Please Enter all Information", preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "Ok", style: .default, handler:{
                 action in
                 
@@ -491,13 +721,13 @@ class RegisterVC: UIViewController {
             self.present(register1, animated: true, completion: {  })
 
         }
-        else{
+        else if(lblfname.text == "" || lbllname.text == "" || lblemailid.text == ""   || txtmobile.text == "" || lblbirthdate.text == ""){
             let mb=txtmobile.text
             
-            if(lbllname.text=="")
+            if(lblfname.text=="")
             {
                 
-                let register1 = UIAlertController(title: "Error!", message: "Please Enter First Name", preferredStyle: .alert)
+                let register1 = UIAlertController(title: "Error", message: "Please Enter First Name", preferredStyle: .alert)
                 let cancelAction = UIAlertAction(title: "Ok", style: .default, handler:{
                     action in
                     
@@ -515,7 +745,7 @@ class RegisterVC: UIViewController {
             else if(lbllname.text=="")
             {
                 
-                let register1 = UIAlertController(title: "Error!", message: "Please enter all Information ", preferredStyle: .alert)
+                let register1 = UIAlertController(title: "Error", message: "Please Enter Last Name ", preferredStyle: .alert)
                 let cancelAction = UIAlertAction(title: "Ok", style: .default, handler:{
                     action in
                     
@@ -530,9 +760,8 @@ class RegisterVC: UIViewController {
                 
                 self.present(register1, animated: true, completion: {  })
             }
-            else if(lblemailid.text=="")
-            {
-                let register1 = UIAlertController(title: "Error!", message: "Please Email ID ", preferredStyle: .alert)
+            else if(lblbirthdate.text==""){
+                let register1 = UIAlertController(title: "Error", message: "Please Enter Birth Date ", preferredStyle: .alert)
                 let cancelAction = UIAlertAction(title: "Ok", style: .default, handler:{
                     action in
                     
@@ -546,10 +775,22 @@ class RegisterVC: UIViewController {
                 register1.addAction(cancelAction)
                 
                 self.present(register1, animated: true, completion: {  })
+            }
+            else if(selectedDate==dateString)
+            {
+                let check = UIAlertController(title: "Error", message: "Please enter Date of Birth", preferredStyle: .alert )
+                let okAction = UIAlertAction(title: "Ok", style: .cancel, handler:nil)
+                
+                
+                check.addAction(okAction)
+                
+                present(check, animated: true, completion: {  })
+                
+                
             }
             else if(txtmobile.text=="")
             {
-                let register1 = UIAlertController(title: "Error!", message: "Please Enter Mobile Number ", preferredStyle: .alert)
+                let register1 = UIAlertController(title: "Error", message: "Please Enter Mobile Number ", preferredStyle: .alert)
                 let cancelAction = UIAlertAction(title: "Ok", style: .default, handler:{
                     action in
                     
@@ -564,22 +805,6 @@ class RegisterVC: UIViewController {
                 
                 self.present(register1, animated: true, completion: {  })
             }
-//            else if(lblbirthdate.text==""){
-//                let register1 = UIAlertController(title: "Error!", message: "Please Enter Birth Date ", preferredStyle: .alert)
-//                let cancelAction = UIAlertAction(title: "Ok", style: .default, handler:{
-//                    action in
-//                    
-//                    //self.dismiss(animated: true, completion: nil)
-//                    
-//                    
-//                })
-//                
-//                
-//                
-//                register1.addAction(cancelAction)
-//                
-//                self.present(register1, animated: true, completion: {  })
-//            }
             else  if( (txtmobile.text?.characters.count)! < 10 || (txtmobile.text?.characters.count)! > 10 || !((mb?.containsNumbers())!) ||  (mb?.containsCharacters())!)
             {
                 let check = UIAlertController(title: "Error", message: "Please enter Mobile Number with 10 digit", preferredStyle: .alert )
@@ -590,7 +815,25 @@ class RegisterVC: UIViewController {
                 
                 present(check, animated: true, completion: {  })
             }
-            else if (!isValidEmail(testStr:lblemailid.text!)) {
+
+            else if(lblemailid.text=="")
+            {
+                let register1 = UIAlertController(title: "Error", message: "Please Email ID ", preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: "Ok", style: .default, handler:{
+                    action in
+                    
+                    //self.dismiss(animated: true, completion: nil)
+                    
+                    
+                })
+                
+                
+                
+                register1.addAction(cancelAction)
+                
+                self.present(register1, animated: true, completion: {  })
+            }
+                        else if (!isValidEmail(testStr:lblemailid.text!)) {
                 
                 
                 let emailBtn = UIAlertController(title: "Verify Email", message: "Incorrect Email", preferredStyle: .alert )
@@ -608,13 +851,13 @@ class RegisterVC: UIViewController {
                 
             }
 
-            else{
-                registreruser(values: register)
-            }
+            
             
 
         }
-        
+        else{
+            registreruser(values: register)
+        }
         
         
         

@@ -19,7 +19,10 @@ class orderDetail: UIViewController,UITableViewDelegate,UITableViewDataSource {
     var dataref: FIRDatabaseReference!
     private var   _ordermenu:[OrderedFood]!
     var pg:String = UserDefaults.standard.value(forKey: "Click") as! String
+    var spinner = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+    var loadingView: UIView = UIView()
     
+
     var  OrderMenu : [OrderedFood]{
         get {
             return _ordermenu
@@ -39,15 +42,20 @@ var price0=[Int]()
     override func viewDidLoad() {
         super.viewDidLoad()
         print(pg)
-        
+       
          self.navigationItem.title="CONFIRM ORDER"
         print(OrderMenu.count)
         
         
         print(OrderMenu)
         view1.layer.cornerRadius=5
-        
-        let totalprice:String=UserDefaults.standard.value(forKey: "TotalPrice") as! String
+         var totalprice:String!
+        if(pg=="D"){
+        totalprice=UserDefaults.standard.value(forKey: "TotalPrice") as! String
+        }
+        else{
+            totalprice="0"
+        }
         
         //
         for i in 0...OrderMenu.count-1{
@@ -66,6 +74,7 @@ var price0=[Int]()
         }
         if(pg=="VD")
         {
+            
             p.removeAll()
             tbordermenu.isUserInteractionEnabled=false
             btnpay.isUserInteractionEnabled=false
@@ -97,34 +106,26 @@ var price0=[Int]()
         alreadytotal=total
         
         lblprice.text=totalprice
-
+        if(pg=="D"){
         let m=totalprice.components(separatedBy: " ")[1]
         
         let i:Int=Int(m)!
         print(i)
         let m0:Int=67+i
         lbltotalgrand.text="GrandTotal:₹ \(String(m0)) "
-        
+        }
         
         
         
         if(pg=="VD" || pg=="RO")
         {
-            lblprice.text=String(total)
+            
+            lblprice.text="₹ "+String(total)
             lbltotalgrand.text="GrandTotal:₹ \(String(total+67)) "
+            
+            
+            
         }
-//        var o1=orderitem(Name: "Roasted Vegetables Medley", Category: "V", Image: "", Price: "Rs 300")
-//        
-//         var o2=orderitem(Name: "Herbed Chicken", Category: "NV", Image: "", Price: "Rs 200")
-//        
-//        var o3=orderitem(Name: "Pork Chops", Category: "NV", Image: "", Price: "Rs 400")
-//        var o4=orderitem(Name: "Biryani", Category: "V", Image: "", Price: "Rs 400")
-//        
-//        order.append(o1)
-//        order.append(o2)
-//        order.append(o3)
-//        order.append(o4)
-        
         
                 UserDefaults.standard.set("1", forKey: "Move")
         tbordermenu.delegate=self
@@ -257,7 +258,15 @@ var price0=[Int]()
         let total:String=lblprice.text!
         
         print(total)
-        let orderfooddata:[String:AnyObject]=["orderDate":d as AnyObject ,"orderId":orderid as AnyObject ,"orderLastUpdate":d as AnyObject  ,"orderStatus":"ordered" as AnyObject  ,"orderTax":"67" as AnyObject,"orderTotalPrice":total as AnyObject, "orderedFood":myArray as AnyObject ,"userID":uid as AnyObject]
+       var mt:String!
+        if(total.contains("₹")==true){
+            mt=total.components(separatedBy: "₹ ")[1]
+        }
+        else{
+            mt=total
+        }
+        let t=Int(mt)!+67
+        let orderfooddata:[String:AnyObject]=["orderDate":d as AnyObject ,"orderId":orderid as AnyObject ,"orderLastUpdate":d as AnyObject  ,"orderStatus":"ordered" as AnyObject  ,"orderTax":"67" as AnyObject,"orderTotalPrice":String(t) as AnyObject, "orderedFood":myArray as AnyObject ,"userID":uid as AnyObject]
         
         if(total=="0")
         {
@@ -438,6 +447,39 @@ var price0=[Int]()
     
         
     }
+    func showActivityIndicator() {
+        
+        
+        
+        // DispatchQueue.main.async {
+        self.loadingView = UIView()
+        self.loadingView.frame = CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0)
+        self.loadingView.center = self.view.center
+        self.loadingView.backgroundColor = UIColor(red: 134/255, green: 166/255, blue: 94/255, alpha: 1)
+        self.loadingView.alpha = 0.7
+        self.loadingView.clipsToBounds = true
+        self.loadingView.layer.cornerRadius = 10
+        
+        self.spinner = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        self.spinner.frame = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 80.0)
+        self.spinner.center = CGPoint(x:self.loadingView.bounds.size.width / 2, y:self.loadingView.bounds.size.height / 2)
+        
+        self.loadingView.addSubview(self.spinner)
+        self.view.addSubview(self.loadingView)
+        self.spinner.startAnimating()
+        
+        
+        
+    }
+    func hideActivityIndicator() {
+        
+        // DispatchQueue.main.async {
+        loadingView.backgroundColor=UIColor.clear
+        self.spinner.stopAnimating()
+        self.loadingView.removeFromSuperview()
+        //}
+    }
+
     @IBOutlet weak var proceedclick: UIButton!
     /*
     // MARK: - Navigation

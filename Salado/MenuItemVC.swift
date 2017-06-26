@@ -380,6 +380,9 @@ print(order)
 //        }
         else{
             
+            
+            self.showActivityIndicator()
+             UserDefaults.standard.set("D", forKey: "Click")
             performSegue(withIdentifier: "squeorderclick", sender: order)
         }
         

@@ -8,7 +8,7 @@ target 'Salado' do
   # Pods for Salado
 
 
-
+ pod "TextFieldEffects"
 pod 'Google/SignIn'
 pod 'Firebase/Core'
 pod 'Firebase/Messaging’
